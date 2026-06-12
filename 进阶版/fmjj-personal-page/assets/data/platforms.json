@@ -1,0 +1,86 @@
+[
+  {
+    "name":"Bilibili",
+    "label":"官方空间 / UID 1467772",
+    "url":"https://space.bilibili.com/1467772",
+    "type":"视频与音乐投稿",
+    "note":"已排除搜索结果中的高仿账号 UID 286524992。"
+  },
+  {
+    "name":"微博",
+    "label":"@封茗囧菌 / UID 3056354293",
+    "url":"https://weibo.com/u/3056354293",
+    "type":"动态、活动、照片",
+    "note":"公开主页与资讯站均指向该账号。"
+  },
+  {
+    "name":"抖音",
+    "label":"抖音号 mandisasa / 认证音乐人",
+    "url":"https://www.douyin.com/user/MS4wLjABAAAA0Wk4gxp3AYFnqoqo-IBF6lbdLnrxgjy__DdhPBNBkws",
+    "type":"短视频与音乐人主页",
+    "note":"采集时显示粉丝 400.0 万、获赞 8400.0 万。"
+  },
+  {
+    "name":"5Sing 原创音乐",
+    "label":"封茗囧菌音乐空间",
+    "url":"https://5sing.kugou.com/mondai/default.html",
+    "type":"原创 / 翻唱 / 热门歌曲",
+    "note":"页面显示音乐人等认证标识。"
+  },
+  {
+    "name":"QQ 音乐",
+    "label":"歌手页 002QQzkl3o3nx1",
+    "url":"https://y.qq.com/n/ryqq/singer/002QQzkl3o3nx1",
+    "type":"正版音乐平台",
+    "note":"由 QQ 音乐歌曲页内歌手链接反查。"
+  },
+  {
+    "name":"酷狗音乐",
+    "label":"酷狗音乐人",
+    "url":"https://www.kugou.com/singer/info/5NQUK0F36CC0A",
+    "type":"正版音乐平台",
+    "note":"页面简介含“一个爱唱歌的家伙 / 微博@封茗囧菌”。"
+  },
+  {
+    "name":"酷我音乐",
+    "label":"歌手页 260226",
+    "url":"https://www.kuwo.cn/singer_detail/260226",
+    "type":"正版音乐平台",
+    "note":"采集时显示单曲 1069、专辑 247、MV 30。"
+  },
+  {
+    "name":"Apple Music",
+    "label":"中国区艺人页",
+    "url":"https://music.apple.com/cn/artist/%E5%B0%81%E8%8C%97%E5%9B%A7%E8%8F%8C/1146504168",
+    "type":"海外 / 流媒体",
+    "note":"页面显示出生日期、歌曲排行与单曲 EP。"
+  },
+  {
+    "name":"Spotify",
+    "label":"艺人页 2m07aN6r33ypqUFpJYvTrv",
+    "url":"https://open.spotify.com/artist/2m07aN6r33ypqUFpJYvTrv",
+    "type":"海外 / 流媒体",
+    "note":"搜索结果显示月听众约 45.4k。"
+  },
+  {
+    "name":"YouTube Music",
+    "label":"频道 UC_1otkScsiWiJCM5BvWp-Jw",
+    "url":"https://music.youtube.com/channel/UC_1otkScsiWiJCM5BvWp-Jw",
+    "type":"海外 / 音乐频道",
+    "note":"搜索结果显示 Top songs 与播放量。"
+  },
+  {
+    "name":"LINE MUSIC",
+    "label":"封茗囧菌 | 音藥配方",
+    "url":"https://music-tw.line.me/artist/1612841",
+    "type":"海外 / 音乐平台",
+    "note":"页面收录《旧颜》等铃声与专辑入口。"
+  },
+  {
+    "name":"网易云音乐",
+    "label":"搜索入口：封茗囧菌",
+    "url":"https://music.163.com/#/search/m/?s=%E5%B0%81%E8%8C%97%E5%9B%A7%E8%8F%8C&type=100",
+    "type":"正版音乐平台 / 待核验歌手 ID",
+    "note":"未能可靠锁定官方 artist id，因此仅保留搜索入口。"
+  }
+]

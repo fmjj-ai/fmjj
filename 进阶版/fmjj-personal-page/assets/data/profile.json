@@ -1,0 +1,30 @@
+{
+  "name": "封茗囧菌",
+  "englishName": "Mandi Sa",
+  "nicknames": ["囧菌", "馒头"],
+  "birthday": "1998-06-07",
+  "zodiac": "双子座",
+  "roles": ["国语流行 / 国风歌手", "音乐博主", "Bilibili 音乐 UP 主", "抖音认证音乐人"],
+  "tagline": "慵懒少女音 × 国风叙事 × 二次元能量",
+  "fanSlogan": "只愿菌心似我心，定不负相思意！",
+  "bio": "封茗囧菌是活跃于 Bilibili、微博、抖音、5Sing、QQ 音乐、酷狗、酷我、Apple Music、Spotify、YouTube Music 等平台的华语音乐人。资料采集优先采用官方主页、官方/资讯站公告与主流音乐平台页面，低可信或无法交叉验证的身高、体重、居住地等信息未放入主页展示。",
+  "confidenceNote": "Bilibili 搜索中存在名称近似的高仿账号；本项目采用 UID 1467772 的官方空间。网易云音乐未能可靠锁定歌手 ID，因此只保留搜索入口，不伪造歌手页或音源。",
+  "counts": [
+    {"label":"抖音粉丝", "value":"400.0 万", "asOf":"2026-06-11 采集", "source":"抖音主页搜索结果"},
+    {"label":"抖音获赞", "value":"8400.0 万", "asOf":"2026-06-11 采集", "source":"抖音主页搜索结果"},
+    {"label":"微博粉丝", "value":"126.5 万", "asOf":"2026-06-11 采集", "source":"微博个人主页公开信息"},
+    {"label":"酷我单曲", "value":"1069", "asOf":"2026-06-11 采集", "source":"酷我歌手页"},
+    {"label":"酷我专辑", "value":"247", "asOf":"2026-06-11 采集", "source":"酷我歌手页"},
+    {"label":"Spotify 月听众", "value":"45.4k+", "asOf":"搜索结果采集", "source":"Spotify 艺人页"}
+  ],
+  "representativeWorks": ["芳华慢", "桃花庵", "安娜的橱窗", "东京不太热", "霜雪千年", "越来越不懂", "影子小姐", "半抹烟熏", "南瓜灯与高脚杯", "慢镜头"],
+  "styleKeywords": ["国风", "二次元", "甜妹感", "轻快", "古风叙事", "暗黑童话", "翻唱", "原创", "慵懒少女音"],
+  "sources": [
+    "https://space.bilibili.com/1467772",
+    "https://weibo.com/u/3056354293",
+    "https://www.douyin.com/user/MS4wLjABAAAA0Wk4gxp3AYFnqoqo-IBF6lbdLnrxgjy__DdhPBNBkws",
+    "https://music.apple.com/cn/artist/%E5%B0%81%E8%8C%97%E5%9B%A7%E8%8F%8C/1146504168",
+    "https://open.spotify.com/artist/2m07aN6r33ypqUFpJYvTrv",
+    "https://5sing.kugou.com/mondai/default.html"
+  ]
+}

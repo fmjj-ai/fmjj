@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>封茗囧菌 · Mandi Sa | 个人音乐主页</title>
+  <meta name="description" content="封茗囧菌 Mandi Sa 的资料、代表作品、平台主页与音乐时间线。" />
+  <link rel="icon" href="./assets/icons/favicon.svg" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="回到顶部">
+      <span class="brand-mark">囧</span>
+      <span>Fengmingjiongjun</span>
+    </a>
+    <nav>
+      <a href="#about">资料</a>
+      <a href="#songs">曲目</a>
+      <a href="#platforms">平台</a>
+      <a href="#timeline">时间线</a>
+      <a href="#sources">来源</a>
+    </nav>
+    <button id="themeToggle" class="ghost-btn" type="button" aria-label="切换主题">☾</button>
+  </header>
+
+  <main id="top">
+    <section class="hero panel">
+      <div class="hero-copy">
+        <p class="eyebrow">Singer · Cover Artist · Creator</p>
+        <h1>封茗囧菌<br><span>Mandi Sa</span></h1>
+        <p class="lead">创作型歌手、翻唱歌手、Bilibili UP主。以慵懒少女音、中英双语切换和国风 / 二次元音乐作品被乐迷熟悉。</p>
+        <div class="hero-actions">
+          <a class="primary-btn" href="#songs">查看热门曲目</a>
+          <a class="secondary-btn" href="#platforms">打开平台主页</a>
+        </div>
+        <div class="quote-card">
+          <span>应援语</span>
+          <strong>只愿菌心似我心，定不负相思意！</strong>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="portrait-frame">
+          <img src="https://m.media-amazon.com/images/I/41PhS1GMf6L._SX354_SY354_BL0_QL100__UXNaN_FMjpg_QL85_.jpg" alt="封茗囧菌相关音乐视觉图" onerror="this.src='./assets/images/avatar-placeholder.svg'" />
+        </div>
+        <div class="floating-card fc-one"><b>2013</b><span>开始活跃</span></div>
+        <div class="floating-card fc-two"><b>乳酸菌</b><span>粉丝称呼</span></div>
+      </div>
+    </section>
+
+    <section class="stats-grid" aria-label="关键信息">
+      <article><span>英文名</span><b id="englishName"></b></article>
+      <article><span>生日</span><b>6月7日</b></article>
+      <article><span>活跃时期</span><b>2013 至今</b></article>
+      <article><span>代表气质</span><b>国风 / 二次元 / 流行</b></article>
+    </section>
+
+    <section id="about" class="section-grid">
+      <div class="section-title">
+        <p class="eyebrow">Profile</p>
+        <h2>个人信息</h2>
+        <p>首页只展示可交叉核验或风险较低的信息。身高、体重、民族、居住地等虽然在部分页面出现，但为避免过度个人化和误传，默认不放进网页主视觉。</p>
+      </div>
+      <div class="about-card panel">
+        <div id="roleTags" class="tag-list"></div>
+        <p id="profileText"></p>
+        <dl class="info-list">
+          <div><dt>昵称</dt><dd id="aliasText"></dd></div>
+          <div><dt>粉丝称呼</dt><dd id="fanName"></dd></div>
+          <div><dt>音乐风格</dt><dd id="styleText"></dd></div>
+          <div><dt>资料原则</dt><dd id="verifiedNote"></dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section id="songs" class="panel music-section">
+      <div class="section-heading-row">
+        <div>
+          <p class="eyebrow">Tracks</p>
+          <h2>热门 / 代表曲目</h2>
+        </div>
+        <label class="search-box">搜索歌曲 <input id="songSearch" type="search" placeholder="例如：桃花庵 / 旧颜" /></label>
+      </div>
+      <div id="songGrid" class="song-grid"></div>
+    </section>
+
+    <section id="platforms" class="section-grid platforms-layout">
+      <div class="section-title">
+        <p class="eyebrow">Links</p>
+        <h2>各平台主页</h2>
+        <p>直链只放入已经能从搜索结果、平台页面或资料页交叉定位的入口；未能核验的同ID平台用“站内搜索”说明，避免跳错人。</p>
+      </div>
+      <div id="platformGrid" class="platform-grid"></div>
+    </section>
+
+    <section class="gallery panel" aria-label="图片与视觉素材">
+      <div class="section-heading-row">
+        <div>
+          <p class="eyebrow">Visuals</p>
+          <h2>照片 / 封面视觉</h2>
+        </div>
+        <p class="mini-note">为避免版权二次分发，图片采用外链展示；无法加载时显示本地占位图。</p>
+      </div>
+      <div id="imageGrid" class="image-grid"></div>
+    </section>
+
+    <section id="timeline" class="panel timeline-section">
+      <p class="eyebrow">Timeline</p>
+      <h2>音乐时间线</h2>
+      <div id="timelineList" class="timeline"></div>
+    </section>
+
+    <section id="sources" class="panel sources-section">
+      <div class="section-heading-row">
+        <div>
+          <p class="eyebrow">Verification</p>
+          <h2>资料来源与核验说明</h2>
+        </div>
+      </div>
+      <p>本页不是官方网页，是基于公开资料制作的个人展示页。音乐平台的“热门曲目”排序会随地区和时间变化，后续应定期复查。</p>
+      <div id="sourceList" class="source-list"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Fan-made profile page · 数据整理日期：2026-06-08 · Design by ChatGPT</p>
+  </footer>
+
+  <script src="./data.js"></script>
+  <script src="./script.js"></script>
+</body>
+</html>

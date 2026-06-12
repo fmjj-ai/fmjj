@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">封茗囧菌网页标识</title>
+  <desc id="desc">以月亮、音符和双子星为灵感的装饰标识。</desc>
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#ffe8a3"/>
+      <stop offset="0.46" stop-color="#ffc7dc"/>
+      <stop offset="1" stop-color="#b7f2df"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#b66d85" flood-opacity=".28"/>
+    </filter>
+  </defs>
+  <circle cx="256" cy="256" r="222" fill="url(#g)" filter="url(#shadow)"/>
+  <path d="M319 116c-52 10-91 56-91 111 0 62 50 112 112 112 16 0 31-3 45-9-21 41-64 69-113 69-70 0-126-56-126-126 0-73 62-131 134-126 13 1 26 4 39 9z" fill="#fff7de" opacity=".82"/>
+  <path d="M174 184c21-33 64-45 96-28 35 18 49 62 31 98-19 36-63 50-99 31-22-11-36-31-41-54" fill="none" stroke="#422f48" stroke-width="20" stroke-linecap="round" opacity=".82"/>
+  <path d="M322 173v126c0 31-24 57-55 57-25 0-45-16-45-36 0-23 24-40 53-35 7 1 14 3 20 6V152c0-8 8-14 16-12l72 18c6 2 10 7 10 13v18c0 9-8 15-17 13z" fill="#422f48"/>
+  <g fill="#fff">
+    <path d="M128 131l9 19 21 3-15 15 4 21-19-10-19 10 4-21-15-15 21-3z"/>
+    <path d="M390 332l7 14 16 2-12 11 3 16-14-8-14 8 3-16-12-11 16-2z"/>
+    <circle cx="365" cy="120" r="8"/>
+    <circle cx="127" cy="345" r="6"/>
+  </g>
+</svg>

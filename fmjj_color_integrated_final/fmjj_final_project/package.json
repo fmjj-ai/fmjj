@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "start": "python3 server.py"
+  },
+  "private": true,
+  "name": "fengming-jiongjun-site-full",
+  "version": "1.0.0"
+}

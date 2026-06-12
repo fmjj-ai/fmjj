@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-label="芳华慢 visual card">
+    <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f5c47f"/><stop offset="1" stop-color="#fffaf2"/></linearGradient></defs>
+    <rect width="800" height="800" rx="90" fill="url(#g)"/>
+    <circle cx="160" cy="160" r="110" fill="#fff" opacity=".35"/><circle cx="640" cy="580" r="150" fill="#fff" opacity=".25"/>
+    <path d="M230 540c126-68 140-278 258-304 82-18 158 37 180 121" stroke="#a24d36" stroke-width="24" stroke-linecap="round" opacity=".75"/>
+    <path d="M340 190v254c0 42-40 76-90 76-43 0-77-23-77-54 0-34 36-60 79-60 23 0 42 7 57 18V210h118v-20H340Z" fill="#a24d36" opacity=".86"/>
+    <text x="400" y="642" text-anchor="middle" font-family="serif" font-size="90" fill="#a24d36" font-weight="700">芳华慢</text>
+    <text x="400" y="704" text-anchor="middle" font-family="Arial" font-size="32" fill="#a24d36" opacity=".8" letter-spacing="8">花影慢慢</text>
+    </svg>

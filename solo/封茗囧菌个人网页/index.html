@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=1280" name="viewport"/>
+<title>封茗囧菌 | 慵懒少女音 · 创作型歌手</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700;900&amp;family=ZCOOL+XiaoWei&amp;family=Ma+Shan+Zheng&amp;display=swap" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/>
+</head>
+<body>
+<canvas id="webgl-bg"></canvas>
+<!-- 导航 -->
+<nav class="navbar" id="navbar">
+<div class="nav-brand"><span class="nav-title">封茗囧菌</span></div>
+<div class="nav-links">
+<a class="nav-link active" href="#home">首页</a>
+<a class="nav-link" href="#about">关于</a>
+<a class="nav-link" href="#music">音乐</a>
+<a class="nav-link" href="#timeline">历程</a>
+<a class="nav-link" href="#gallery">相册</a>
+<a class="nav-link" href="#platforms">平台</a>
+</div>
+<div class="music-btn" id="musicBtn" title="背景音乐：伞下铭">
+<div class="music-icon" id="musicIcon"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
+</div>
+</nav>
+<audio id="bgm" loop preload="auto" src="audio/bgm.mp3"></audio>
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+<div class="hero-content">
+<div class="hero-avatar-wrap" id="heroAvatarWrap">
+<canvas class="spectrum-canvas" id="spectrumCanvas"></canvas>
+<div class="avatar-ring" id="avatarRing"></div>
+<img alt="封茗囧菌" class="hero-avatar" id="heroAvatar" src="images/photo_head1.png"/>
+</div>
+<h1 class="hero-name">封茗囧菌</h1>
+<p class="hero-subtitle">慵懒少女音 · 创作型歌手</p>
+<p class="hero-tagline">"清澈干净的歌声甜而不腻，听起来空灵又温暖"</p>
+<div class="hero-tags">
+<span class="htag">🎤 双语歌手</span>
+<span class="htag">🎵 创作才女</span>
+<span class="htag">🌸 国风人气</span>
+<span class="htag">✨ VTuber</span>
+</div>
+<div class="scroll-hint"><span>向下探索</span><div class="scroll-arrow"></div></div>
+</div>
+<div class="hero-petals">
+<div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div>
+<div class="petal p4"></div><div class="petal p5"></div><div class="petal p6"></div>
+<div class="petal p7"></div><div class="petal p8"></div>
+</div>
+</section>
+<!-- ===== 关于 - 不对称双栏 ===== -->
+<section class="section about" id="about">
+<div class="container-wide">
+<!-- 左列：头像+签名 偏移 -->
+<div class="about-col-left reveal">
+<div class="about-avatar-card tilt-left">
+<img alt="封茗囧菌" class="about-avatar" src="images/photo_head1.png"/>
+<div class="about-avatar-name">封茗囧菌</div>
+<div class="about-avatar-en">Mandy Sa</div>
+</div>
+<div class="photo-card tilt-right reveal">
+<img alt="封茗囧菌写真" class="photo-card-img" src="images/about-photo.jpg"/>
+<div class="photo-card-caption">✨ 个人写真</div>
+</div>
+<div class="sign-card tilt-right">
+<div class="sign-label">✍️ 亲笔签名</div>
+<img alt="签名" class="sign-img" src="images/signature.png"/>
+</div>
+<div class="fan-card tilt-left">
+<div class="fan-main">
+<div class="fan-label">粉丝昵称</div>
+<div class="fan-name">乳 酸 菌</div>
+</div>
+<div class="fan-quote">"只愿菌心似我心，定不负相思意！"</div>
+<div class="fan-contact">📧 fmjjwork@qq.com</div>
+</div>
+</div>
+<!-- 右列：信息+标签 错落排列 -->
+<div class="about-col-right">
+<div class="info-card tilt-right reveal">
+<h3 class="card-title">📋 基本信息</h3>
+<div class="info-grid">
+<div class="info-row"><span class="il">艺名</span><span class="iv">封茗囧菌</span></div>
+<div class="info-row"><span class="il">本名</span><span class="iv">撒曼迪（Mandy Sa）</span></div>
+<div class="info-row"><span class="il">生日</span><span class="iv">1998年6月7日</span></div>
+<div class="info-row"><span class="il">星座</span><span class="iv">♊ 双子座</span></div>
+<div class="info-row"><span class="il">身高</span><span class="iv">158cm</span></div>
+<div class="info-row"><span class="il">民族</span><span class="iv">回族</span></div>
+<div class="info-row"><span class="il">所在地</span><span class="iv">江苏省</span></div>
+<div class="info-row"><span class="il">语言</span><span class="iv">汉语 / English</span></div>
+<div class="info-row"><span class="il">血型</span><span class="iv">B型</span></div>
+<div class="info-row"><span class="il">爱好</span><span class="iv">唱歌 · 游戏 · 手工</span></div>
+<div class="info-row"><span class="il">喜欢颜色</span><span class="iv">💛 淡黄色 · 💗 淡粉色</span></div>
+<div class="info-row"><span class="il">音乐风格</span><span class="iv">Hip-hop · Blues · Jazz</span></div>
+<div class="info-row"><span class="il">经纪人</span><span class="iv">千月兔</span></div>
+<div class="info-row"><span class="il">昵称</span><span class="iv">囧菌 · 阿囧 · 馒头 · 曼迪</span></div>
+</div>
+</div>
+<div class="tags-card tilt-left reveal">
+<h3 class="card-title">🏷️ 人设标签</h3>
+<div class="tags-wrap">
+<span class="tag big">慵懒少女音</span>
+<span class="tag">中英双语</span>
+<span class="tag big">甜美治愈</span>
+<span class="tag">国风歌手</span>
+<span class="tag">创作才女</span>
+<span class="tag">暗黑风</span>
+<span class="tag">清秀可爱</span>
+<span class="tag">笑起来没眼睛</span>
+<span class="tag">低调不炒作</span>
+<span class="tag">尊重原创</span>
+<span class="tag">正能量</span>
+<span class="tag">虚拟主播</span>
+<span class="tag">B站UP主</span>
+<span class="tag">软糯清甜</span>
+<span class="tag">空灵温暖</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ===== 音乐 - 双列错落 ===== -->
+<section class="section music" id="music">
+<div class="container-wide">
+<div class="sec-header reveal">
+<span class="sec-tag">✦ 音乐 ✦</span>
+<h2 class="sec-title">音乐作品</h2>
+<div class="sec-line"></div>
+<p class="sec-desc">从2013年至今，从翻唱到原创，囧菌用歌声陪伴了无数人</p>
+</div>
+<div class="music-tabs reveal">
+<button class="mtab active" data-tab="original">原创代表作</button>
+<button class="mtab" data-tab="cover">翻唱代表作</button>
+<button class="mtab" data-tab="album">专辑</button>
+<button class="mtab" data-tab="songwriter">词曲作品</button>
+</div>
+<div class="mpanel active" id="panel-original">
+<div class="song-columns">
+<div class="song-col">
+<div class="song-item featured reveal"><div class="song-rank">#1</div><div class="song-body"><h4>安娜的橱窗</h4><p class="song-meta">2018 · 原创单曲</p><p class="song-desc">暗黑风代表作，引爆短视频BGM热潮</p></div><button class="song-play-btn" data-ne163="537470060" data-song="安娜的橱窗" title="播放"><span class="play-icon">▶</span></button><span class="song-badge hot">🔥 最热</span></div>
+<div class="song-item featured reveal"><div class="song-rank">#2</div><div class="song-body"><h4>芳华慢</h4><p class="song-meta">2018 · 国风单曲</p><p class="song-desc">国风经典之作，酷我热门单曲第2名</p></div><button class="song-play-btn" data-ne163="35345243" data-song="芳华慢" title="播放"><span class="play-icon">▶</span></button><span class="song-badge gufeng">🌸 国风</span></div>
+<div class="song-item reveal"><div class="song-rank">#4</div><div class="song-body"><h4>半抹烟熏</h4><p class="song-meta">2020 · 词曲: 徐良</p><p class="song-desc">与徐良合作，代表作之一</p></div><button class="song-play-btn" data-ne163="1465242381" data-song="半抹烟熏" title="播放"><span class="play-icon">▶</span></button></div>
+<div class="song-item reveal"><div class="song-rank">#6</div><div class="song-body"><h4>第几个我</h4><p class="song-meta">2018 · 原创单曲</p><p class="song-desc">早期原创代表作</p></div><button class="song-play-btn" data-ne163="2703883176" data-song="第几个我" title="播放"><span class="play-icon">▶</span></button></div>
+<div class="song-item reveal"><div class="song-rank">#8</div><div class="song-body"><h4>春色难哄</h4><p class="song-meta">2023 · 单曲</p><p class="song-desc">温柔抒情风格</p></div><button class="song-play-btn" data-ne163="2032714368" data-song="春色难哄" title="播放"><span class="play-icon">▶</span></button></div>
+<div class="song-item reveal"><div class="song-rank">#10</div><div class="song-body"><h4>百战成诗2024</h4><p class="song-meta">2024 · 群星</p><p class="song-desc">《王者荣耀》117英雄群像献礼歌</p></div><button class="song-play-btn" data-ne163="2124726657" data-song="百战成诗2024" title="播放"><span class="play-icon">▶</span></button><span class="song-badge game">🎮 游戏</span></div>
+<div class="song-item reveal"><div class="song-rank">#12</div><div class="song-body"><h4>笛月</h4><p class="song-meta">2017 · 原创国风</p><p class="song-desc">早期国风原创单曲</p></div><button class="song-play-btn" data-ne163="500224267" data-song="笛月" title="播放"><span class="play-icon">▶</span></button></div>
+<div class="song-item reveal"><div class="song-rank">#14</div><div class="song-body"><h4>北平昙花局</h4><p class="song-meta">2023 · 单曲</p><p class="song-desc">国风新作</p></div><button class="song-play-btn" data-ne163="2160813055" data-song="北平昙花局" title="播放"><span class="play-icon">▶</span></button></div>
+<div class="song-item reveal"><div class="song-rank">#16</div><div class="song-body"><h4>快来找我呀</h4><p class="song-meta">2018 · 首个词曲作品</p><p class="song-desc">开启创作之路的里程碑</p></div><button class="song-play-btn" data-ne163="1457567596" data-song="快来找我呀" title="播放"><span class="play-icon">▶</span></button><span class="song-badge milestone">⭐ 首作</span></div>
+</div>
+<div class="song-col offset">
+<div class="song-item featured reveal"><div class="song-rank">#3</div><div class="song-body"><h4>桃花庵</h4><p class="song-meta">2019 · ft. 音阙诗听</p><p class="song-desc">QQ音乐MV播放超381万</p></div><button class="song-play-btn" data-ne163="1355197518" data-song="桃花庵" title="播放"><span class="play-icon">▶</span></button><span class="song-badge gufeng">🌸 国风</span></div>
+<div class="song-item reveal"><div class="song-rank">#5</div><div class="song-body"><h4>最人间</h4><p class="song-meta">2020 · ft. 徐良</p><p class="song-desc">与徐良合作原创单曲</p></div><button class="song-play-btn" data-ne163="1458222575" data-song="最人间" title="播放"><span class="play-icon">▶</span></button></div>
+<div class="song-item reveal"><div class="song-rank">#7</div><div class="song-body"><h4>宅日梦</h4><p class="song-meta">2021 · 单曲</p><p class="song-desc">轻快风格，词曲唱全包</p></div><button class="song-play-btn" data-ne163="1988921731" data-song="宅日梦" title="播放"><span class="play-icon">▶</span></button></div>
+<div class="song-item reveal"><div class="song-rank">#9</div><div class="song-body"><h4>旧颜</h4><p class="song-meta">2024 · ft. 音药配方</p><p class="song-desc">影视剧《虚颜》片尾曲</p></div><button class="song-play-btn" data-ne163="1968993121" data-song="旧颜" title="播放"><span class="play-icon">▶</span></button><span class="song-badge ost">🎬 OST</span></div>
+<div class="song-item reveal"><div class="song-rank">#11</div><div class="song-body"><h4>风月迟迟来</h4><p class="song-meta">2020 · ft. 天涯未晚</p><p class="song-desc">流行风格单曲</p></div><button class="song-play-btn" data-ne163="1322229006" data-song="风月迟迟来" title="播放"><span class="play-icon">▶</span></button></div>
+<div class="song-item reveal"><div class="song-rank">#13</div><div class="song-body"><h4>最珍贵的礼物</h4><p class="song-meta">2023 · 单曲</p><p class="song-desc">影视剧《101次抢婚》插曲</p></div><button class="song-play-btn" data-ne163="2028295191" data-song="最珍贵的礼物" title="播放"><span class="play-icon">▶</span></button><span class="song-badge ost">🎬 OST</span></div>
+<div class="song-item reveal"><div class="song-rank">#15</div><div class="song-body"><h4>一生入画</h4><p class="song-meta">2023 · 单曲</p><p class="song-desc">国风抒情</p></div><button class="song-play-btn" data-ne163="2140307522" data-song="一生入画" title="播放"><span class="play-icon">▶</span></button></div>
+</div>
+</div>
+</div>
+<div class="mpanel" id="panel-cover">
+<div class="song-columns">
+<div class="song-col">
+<div class="song-item featured reveal"><div class="song-rank">#1</div><div class="song-body"><h4>有何不可</h4><p class="song-meta">2014 · Cover</p><p class="song-desc">B站翻唱成名作，YouTube播放量突破2500万</p></div><button class="song-play-btn" data-ne163="465449105" data-song="有何不可" title="播放"><span class="play-icon">▶</span></button><span class="song-badge hot">🔥 传奇</span></div>
+<div class="song-item featured reveal"><div class="song-rank">#3</div><div class="song-body"><h4>霜雪千年</h4><p class="song-meta">2016 · ft. 双笙</p><p class="song-desc">与双笙合唱，酷我热门单曲第1名</p></div><button class="song-play-btn" data-ne163="409650851" data-song="霜雪千年" title="播放"><span class="play-icon">▶</span></button><span class="song-badge gufeng">🌸 经典</span></div>
+<div class="song-item reveal"><div class="song-rank">#5</div><div class="song-body"><h4>We Don't Talk Anymore</h4><p class="song-meta">2016 · ft. 双笙</p><p class="song-desc">英文合唱翻唱</p></div><button class="song-play-btn" data-ne163="410042104" data-song="We Don't Talk Anymore" title="播放"><span class="play-icon">▶</span></button></div>
+<div class="song-item reveal"><div class="song-rank">#7</div><div class="song-body"><h4>童话镇（暗黑童话版）</h4><p class="song-meta">Cover</p><p class="song-desc">酷我热门单曲第4名</p></div><button class="song-play-btn" data-ne163="447655918" data-song="童话镇（暗黑童话版）" title="播放"><span class="play-icon">▶</span></button></div>
+<div class="song-item reveal"><div class="song-rank">#9</div><div class="song-body"><h4>胭脂妆</h4><p class="song-meta">ft. 洛少爷</p><p class="song-desc">合唱翻唱，酷我热门单曲</p></div><button class="song-play-btn" data-ne163="532539923" data-song="胭脂妆" title="播放"><span class="play-icon">▶</span></button></div>
+<div class="song-item reveal"><div class="song-rank">#11</div><div class="song-body"><h4>爱的魔法</h4><p class="song-meta">Cover 金莎</p><p class="song-desc">酷我热门单曲</p></div><button class="song-play-btn" data-ne163="498494345" data-song="爱的魔法" title="播放"><span class="play-icon">▶</span></button></div>
+</div>
+<div class="song-col offset">
+<div class="song-item featured reveal"><div class="song-rank">#2</div><div class="song-body"><h4>干物女</h4><p class="song-meta">2015 · Cover</p><p class="song-desc">经典翻唱，评论数过百万</p></div><button class="song-play-btn" data-ne163="35345243" data-song="干物女" title="播放"><span class="play-icon">▶</span></button><span class="song-badge hot">🔥 百万评论</span></div>
+<div class="song-item reveal"><div class="song-rank">#4</div><div class="song-body"><h4>东京不太热</h4><p class="song-meta">2015 · Cover</p><p class="song-desc">早期成名翻唱，极高传唱度</p></div><button class="song-play-btn" data-ne163="34723470" data-song="东京不太热" title="播放"><span class="play-icon">▶</span></button></div>
+<div class="song-item reveal"><div class="song-rank">#6</div><div class="song-body"><h4>越来越不懂</h4><p class="song-meta">Cover</p><p class="song-desc">评论数过百万，酷我热门第9名</p></div><button class="song-play-btn" data-ne163="1321382356" data-song="越来越不懂" title="播放"><span class="play-icon">▶</span></button></div>
+<div class="song-item reveal"><div class="song-rank">#8</div><div class="song-body"><h4>stay</h4><p class="song-meta">2021 · Cover · 首次露脸</p><p class="song-desc">首个露脸翻唱视频，短时间突破200万点击</p></div><button class="song-play-btn" data-ne163="1407112865" data-song="stay" title="播放"><span class="play-icon">▶</span></button><span class="song-badge milestone">⭐ 首次露脸</span></div>
+<div class="song-item reveal"><div class="song-rank">#10</div><div class="song-body"><h4>恋我癖</h4><p class="song-meta">2019 · Cover</p><p class="song-desc">热门翻唱作品</p></div><button class="song-play-btn" data-ne163="525518056" data-song="恋我癖" title="播放"><span class="play-icon">▶</span></button></div>
+<div class="song-item reveal"><div class="song-rank">#12</div><div class="song-body"><h4>静悄悄</h4><p class="song-meta">Cover</p><p class="song-desc">酷我热门单曲第10名</p></div><button class="song-play-btn" data-ne163="1318141433" data-song="静悄悄" title="播放"><span class="play-icon">▶</span></button></div>
+</div>
+</div>
+</div>
+<div class="mpanel" id="panel-album">
+<div class="album-card reveal">
+<div class="album-cover"><div class="album-cover-inner"><span class="album-emoji">🌕</span><span class="album-emoji-sm">🥟</span></div></div>
+<div class="album-body">
+<h3 class="album-title">月老馒不懂</h3>
+<p class="album-meta">2024年12月22日发行 · 首张实体专辑 · 共16首曲目</p>
+<p class="album-desc">封茗囧菌首张正式个人专辑，全部由本人参与作词作曲。专辑名取"月老+馒头"之意，主题围绕对美好恋爱的憧憬。</p>
+<div class="track-list">
+<div class="track"><span class="tn">01</span>童话般的桃花运 <span class="tt">主打曲</span></div>
+<div class="track"><span class="tn">02</span>时间逆流过</div>
+<div class="track"><span class="tn">03</span>企鹅肉</div>
+<div class="track"><span class="tn">04</span>君心</div>
+<div class="track"><span class="tn">05</span>删除所有的内容</div>
+<div class="track"><span class="tn">06</span>乙女游戏</div>
+<div class="track"><span class="tn">07</span>漫步月光下</div>
+<div class="track"><span class="tn">08</span>目标锁定你</div>
+<div class="track"><span class="tn">09-16</span>以上8首伴奏版</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mpanel" id="panel-songwriter">
+<div class="song-columns">
+<div class="song-col">
+<div class="song-item featured reveal"><div class="song-rank">✍️</div><div class="song-body"><h4>快来找我呀</h4><p class="song-meta">2018年11月1日</p><p class="song-desc">首个词曲作品，开启创作之路</p></div><button class="song-play-btn" data-ne163="1457567596" data-song="快来找我呀" title="播放"><span class="play-icon">▶</span></button><span class="song-badge milestone">⭐ 首个词曲</span></div>
+<div class="song-item reveal"><div class="song-rank">✍️</div><div class="song-body"><h4>普通的病</h4><p class="song-meta">2021年</p><p class="song-desc">"双向喜爱"系列，词曲唱全包</p></div><button class="song-play-btn" data-ne163="2085798597" data-song="普通的病" title="播放"><span class="play-icon">▶</span></button><span class="song-badge milestone">📝 全包</span></div>
+<div class="song-item reveal"><div class="song-rank">✍️</div><div class="song-body"><h4>骂什么脏</h4><p class="song-meta">2021年</p><p class="song-desc">词曲唱全包作品</p></div><button class="song-play-btn" data-ne163="1462028458" data-song="骂什么脏" title="播放"><span class="play-icon">▶</span></button><span class="song-badge milestone">📝 全包</span></div>
+</div>
+<div class="song-col offset">
+<div class="song-item reveal"><div class="song-rank">✍️</div><div class="song-body"><h4>占有欲</h4><p class="song-meta">2019年11月16日</p><p class="song-desc">自作词曲</p></div><button class="song-play-btn" data-ne163="1458255882" data-song="占有欲" title="播放"><span class="play-icon">▶</span></button></div>
+<div class="song-item reveal"><div class="song-rank">✍️</div><div class="song-body"><h4>母单花</h4><p class="song-meta">2021年4月29日</p><p class="song-desc">"双向喜爱"系列，词曲唱全包</p></div><button class="song-play-btn" data-ne163="2712224909" data-song="母单花" title="播放"><span class="play-icon">▶</span></button><span class="song-badge milestone">📝 全包</span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ===== 时间线 - DNA 双螺旋 ===== -->
+<section class="section timeline-sec" id="timeline">
+<div class="container-wide">
+<div class="sec-header reveal">
+<span class="sec-tag">✦ 历程 ✦</span>
+<h2 class="sec-title">音乐之路</h2>
+<div class="sec-line"></div>
+</div>
+<div class="dna-helix" id="dnaHelix">
+<div class="dna-perspective">
+<div class="dna-rotator" id="dnaRotator">
+<div class="dna-node left" style="--y-pos:0;--theta:0deg"><div class="dna-card"><span class="dna-year">2013</span><h4>音乐起点</h4><p>8月14日，发布第一首英文翻唱《Somebody That I Used to Know》</p></div></div>
+<div class="dna-rung" style="--y-pos:0;--theta:0deg"></div>
+<div class="dna-node right" style="--y-pos:0;--theta:0deg"><div class="dna-card"><span class="dna-year">2014</span><h4>入驻B站</h4><p>翻唱《有何不可》快速传播，YouTube播放量突破2500万</p></div></div>
+<div class="dna-node left" style="--y-pos:1;--theta:55deg"><div class="dna-card"><span class="dna-year">2015</span><h4>人气急升</h4><p>发布《东京不太热》《干物女》，评论数过百万</p></div></div>
+<div class="dna-rung" style="--y-pos:1;--theta:55deg"></div>
+<div class="dna-node right highlight" style="--y-pos:1;--theta:55deg"><div class="dna-card"><span class="dna-year">2016</span><h4>经典合唱</h4><p>与双笙合唱《霜雪千年》，成为古风圈经典</p></div></div>
+<div class="dna-node left" style="--y-pos:2;--theta:110deg"><div class="dna-card"><span class="dna-year">2017</span><h4>国风创作</h4><p>发布原创国风单曲《笛月》，参与《阴阳师》周年纪念歌</p></div></div>
+<div class="dna-rung" style="--y-pos:2;--theta:110deg"></div>
+<div class="dna-node right highlight" style="--y-pos:2;--theta:110deg"><div class="dna-card"><span class="dna-year">2018</span><h4>原创爆发</h4><p>《安娜的橱窗》引爆暗黑风潮；《芳华慢》成为国风经典；首个词曲作品诞生</p></div></div>
+<div class="dna-node left" style="--y-pos:3;--theta:165deg"><div class="dna-card"><span class="dna-year">2019</span><h4>国风巅峰</h4><p>与音阙诗听合作《桃花庵》，MV播放超381万</p></div></div>
+<div class="dna-rung" style="--y-pos:3;--theta:165deg"></div>
+<div class="dna-node right" style="--y-pos:3;--theta:165deg"><div class="dna-card"><span class="dna-year">2020</span><h4>强强联手</h4><p>与徐良合作《最人间》《半抹烟熏》；参与抗疫公益歌曲</p></div></div>
+<div class="dna-node left highlight" style="--y-pos:4;--theta:220deg"><div class="dna-card"><span class="dna-year">2021</span><h4>全新突破</h4><p>词曲唱全包系列发布；首个露脸翻唱《stay》突破200万点击</p></div></div>
+<div class="dna-rung" style="--y-pos:4;--theta:220deg"></div>
+<div class="dna-node right" style="--y-pos:4;--theta:220deg"><div class="dna-card"><span class="dna-year">2023</span><h4>影视OST</h4><p>发行《春色难哄》《北平昙花局》等；为影视剧演唱插曲</p></div></div>
+<div class="dna-node left highlight" style="--y-pos:5;--theta:275deg"><div class="dna-card"><span class="dna-year">2024</span><h4>首张专辑</h4><p>发行实体专辑《月老馒不懂》；举办个唱二巡</p></div></div>
+<div class="dna-rung" style="--y-pos:5;--theta:275deg"></div>
+<div class="dna-node right" style="--y-pos:5;--theta:275deg"><div class="dna-card"><span class="dna-year">2025</span><h4>巡回演唱会</h4><p>"镜像双子"巡回演唱会（合肥、南京、杭州、广州等）</p></div></div>
+<div class="dna-node left current" style="--y-pos:6;--theta:330deg"><div class="dna-card"><span class="dna-year">2026</span><h4>继续前行 ✨</h4><p>发行《随心走》《心字拼图》等新单曲</p></div></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ===== 相册 - 卷轴环绕旋转 ===== -->
+<section class="section gallery-sec" id="gallery">
+<div class="container-wide">
+<div class="sec-header reveal">
+<span class="sec-tag">✦ 相册 ✦</span>
+<h2 class="sec-title">囧菌相册</h2>
+<div class="sec-line"></div>
+</div>
+<div class="scroll-gallery" id="scrollGallery">
+<div class="scroll-carousel" id="scrollCarousel">
+<div class="scroll-item" style="--i:0"><div class="scroll-rod scroll-rod-top"></div><div class="scroll-paper"><img alt="旅行随拍" loading="lazy" src="images/photo_real.jpg"/><div class="scroll-label"><span>旅行随拍</span><small>2022年7月 · 西安</small></div></div><div class="scroll-rod scroll-rod-bottom"></div></div>
+<div class="scroll-item" style="--i:1"><div class="scroll-rod scroll-rod-top"></div><div class="scroll-paper"><img alt="近照" loading="lazy" src="images/photo_baike3.jpg"/><div class="scroll-label"><span>近期照片</span><small>活动/日常</small></div></div><div class="scroll-rod scroll-rod-bottom"></div></div>
+<div class="scroll-item" style="--i:2"><div class="scroll-rod scroll-rod-top"></div><div class="scroll-paper"><img alt="黑白童子" loading="lazy" src="images/photo_heibai.jpg"/><div class="scroll-label"><span>《黑白童子》</span><small>与洛少爷合唱</small></div></div><div class="scroll-rod scroll-rod-bottom"></div></div>
+<div class="scroll-item" style="--i:3"><div class="scroll-rod scroll-rod-top"></div><div class="scroll-paper"><img alt="旅行记录" loading="lazy" src="images/photo_real2.jpg"/><div class="scroll-label"><span>旅行记录</span><small>2022年 · 西安行</small></div></div><div class="scroll-rod scroll-rod-bottom"></div></div>
+<div class="scroll-item" style="--i:4"><div class="scroll-rod scroll-rod-top"></div><div class="scroll-paper"><img alt="壁纸" loading="lazy" src="images/photo_wallpaper.png"/><div class="scroll-label"><span>粉丝壁纸</span><small>粉丝创作</small></div></div><div class="scroll-rod scroll-rod-bottom"></div></div>
+<div class="scroll-item" style="--i:5"><div class="scroll-rod scroll-rod-top"></div><div class="scroll-paper"><img alt="可爱日常" loading="lazy" src="images/photo_cute1.jpg"/><div class="scroll-label"><span>可爱日常</span><small>粉丝收藏</small></div></div><div class="scroll-rod scroll-rod-bottom"></div></div>
+<div class="scroll-item" style="--i:6"><div class="scroll-rod scroll-rod-top"></div><div class="scroll-paper"><img alt="萌照" loading="lazy" src="images/photo_cute2.jpg"/><div class="scroll-label"><span>萌照</span><small>考古发现</small></div></div><div class="scroll-rod scroll-rod-bottom"></div></div>
+<div class="scroll-item" style="--i:7"><div class="scroll-rod scroll-rod-top"></div><div class="scroll-paper"><img alt="今日份可爱" loading="lazy" src="images/photo_daily1.jpg"/><div class="scroll-label"><span>今日份可爱</span><small>粉丝分享</small></div></div><div class="scroll-rod scroll-rod-bottom"></div></div>
+<div class="scroll-item" style="--i:8"><div class="scroll-rod scroll-rod-top"></div><div class="scroll-paper"><img alt="日常" loading="lazy" src="images/photo_daily2.jpg"/><div class="scroll-label"><span>日常分享</span><small>B站动态</small></div></div><div class="scroll-rod scroll-rod-bottom"></div></div>
+<div class="scroll-item" style="--i:9"><div class="scroll-rod scroll-rod-top"></div><div class="scroll-paper"><img alt="菌菌" loading="lazy" src="images/photo_daily3.jpg"/><div class="scroll-label"><span>可爱菌菌</span><small>粉丝分享</small></div></div><div class="scroll-rod scroll-rod-bottom"></div></div>
+<div class="scroll-item" style="--i:10"><div class="scroll-rod scroll-rod-top"></div><div class="scroll-paper"><img alt="表情包" loading="lazy" src="images/photo_emoji.png"/><div class="scroll-label"><span>表情包</span><small>动态截图</small></div></div><div class="scroll-rod scroll-rod-bottom"></div></div>
+<div class="scroll-item" style="--i:11"><div class="scroll-rod scroll-rod-top"></div><div class="scroll-paper"><img alt="头像" loading="lazy" src="images/photo_head1.png"/><div class="scroll-label"><span>常用头像</span><small>粉丝收藏</small></div></div><div class="scroll-rod scroll-rod-bottom"></div></div>
+<div class="scroll-item" style="--i:12"><div class="scroll-rod scroll-rod-top"></div><div class="scroll-paper"><img alt="签名" loading="lazy" src="images/signature.png"/><div class="scroll-label"><span>亲笔签名</span><small>Mandy Sa</small></div></div><div class="scroll-rod scroll-rod-bottom"></div></div>
+<div class="scroll-item" style="--i:13"><div class="scroll-rod scroll-rod-top"></div><div class="scroll-paper"><img alt="写真照片" loading="lazy" src="images/gallery-1.jpg"/><div class="scroll-label"><span>写真照片</span><small>个人写真</small></div></div><div class="scroll-rod scroll-rod-bottom"></div></div>
+<div class="scroll-item" style="--i:14"><div class="scroll-rod scroll-rod-top"></div><div class="scroll-paper"><img alt="活动照片" loading="lazy" src="images/gallery-2.png"/><div class="scroll-label"><span>活动照片</span><small>演出记录</small></div></div><div class="scroll-rod scroll-rod-bottom"></div></div>
+<div class="scroll-item" style="--i:15"><div class="scroll-rod scroll-rod-top"></div><div class="scroll-paper"><img alt="日常照片" loading="lazy" src="images/gallery-3.jpeg"/><div class="scroll-label"><span>日常照片</span><small>生活记录</small></div></div><div class="scroll-rod scroll-rod-bottom"></div></div>
+</div>
+</div>
+<p class="gallery-note reveal">💡 更多照片前往 <a href="https://space.bilibili.com/1467772" rel="noopener" target="_blank">B站</a>、<a href="https://weibo.com/p/1005053056354293/" rel="noopener" target="_blank">微博</a>、<a href="https://www.douyin.com/user/mandisasa" rel="noopener" target="_blank">抖音</a> 查看</p>
+</div>
+</section>
+<!-- ===== 平台 - 不规则散布 ===== -->
+<section class="section platforms-sec" id="platforms">
+<div class="container-wide">
+<div class="sec-header reveal">
+<span class="sec-tag">✦ 平台 ✦</span>
+<h2 class="sec-title">各大平台</h2>
+<div class="sec-line"></div>
+</div>
+<div class="plat-scatter">
+<a class="plat-card reveal" href="https://space.bilibili.com/1467772" rel="noopener" style="--c:#FB7299;--w:320px" target="_blank"><div class="plat-icon">B</div><div class="plat-info"><h4>Bilibili</h4><p>哔哩哔哩 · 音乐UP主</p><small>UID: 1467772</small></div><span class="plat-arrow">→</span></a>
+<a class="plat-card reveal" href="https://music.163.com/artist?id=12172529" rel="noopener" style="--c:#E60026;--w:280px" target="_blank"><div class="plat-icon">云</div><div class="plat-info"><h4>网易云音乐</h4><p>独立音乐人</p><small>封茗囧菌</small></div><span class="plat-arrow">→</span></a>
+<a class="plat-card reveal" href="https://y.qq.com/n/ryqq/singer/002QQzkl3o3nx1" rel="noopener" style="--c:#31C27C;--w:300px" target="_blank"><div class="plat-icon">Q</div><div class="plat-info"><h4>QQ音乐</h4><p>官方歌手主页</p><small>封茗囧菌</small></div><span class="plat-arrow">→</span></a>
+<a class="plat-card reveal" href="https://weibo.com/p/1005053056354293/" rel="noopener" style="--c:#E6162D;--w:260px" target="_blank"><div class="plat-icon">微</div><div class="plat-info"><h4>微博</h4><p>日常动态</p><small>@封茗囧菌</small></div><span class="plat-arrow">→</span></a>
+<a class="plat-card reveal" href="https://www.douyin.com/user/mandisasa" rel="noopener" style="--c:#161823;--w:340px" target="_blank"><div class="plat-icon">抖</div><div class="plat-info"><h4>抖音</h4><p>短视频 · 粉丝479万+</p><small>mandisasa</small></div><span class="plat-arrow">→</span></a>
+<a class="plat-card reveal" href="https://www.kugou.com/singer/188254.html" rel="noopener" style="--c:#2CA2F9;--w:290px" target="_blank"><div class="plat-icon">酷</div><div class="plat-info"><h4>酷狗音乐</h4><p>古风圈重要平台</p><small>封茗囧菌</small></div><span class="plat-arrow">→</span></a>
+<a class="plat-card reveal" href="https://bd.kuwo.cn/singer_detail/260226" rel="noopener" style="--c:#FFCE00;--w:310px" target="_blank"><div class="plat-icon">我</div><div class="plat-info"><h4>酷我音乐</h4><p>1070+首收录</p><small>封茗囧菌</small></div><span class="plat-arrow">→</span></a>
+<a class="plat-card reveal" href="https://m.missevan.com/127026" rel="noopener" style="--c:#FF6B8A;--w:270px" target="_blank"><div class="plat-icon">猫</div><div class="plat-info"><h4>猫耳FM</h4><p>广播剧 · 有声作品</p><small>封茗囧菌</small></div><span class="plat-arrow">→</span></a>
+<a class="plat-card reveal" href="http://5sing.kugou.com/mondai/default.html" rel="noopener" style="--c:#FF8FAA;--w:300px" target="_blank"><div class="plat-icon">5</div><div class="plat-info"><h4>5Sing</h4><p>早期翻唱平台</p><small>封茗囧菌</small></div><span class="plat-arrow">→</span></a>
+</div>
+</div>
+</section>
+<!-- 音乐播放器弹窗 -->
+<div class="player-overlay" id="playerOverlay">
+<div class="player-modal">
+<button class="player-minimize" id="playerMinimize" title="最小化">—</button>
+            <button class="player-close" id="playerClose" title="关闭">✕</button>
+<div class="player-header">
+<div class="player-disc" id="playerDisc">
+<img alt="封面" class="player-disc-img" src="images/photo_head1.png"/>
+</div>
+<div class="player-info">
+<h3 class="player-song-name" id="playerSongName">--</h3>
+<p class="player-artist">封茗囧菌</p>
+</div>
+</div>
+<div class="player-body" id="playerBody">
+<!-- QQ音乐iframe 或 本地audio 将动态插入 -->
+</div>
+<div class="player-local" id="playerLocal" style="display:none">
+<audio controls="" id="playerAudio" preload="auto"></audio>
+</div>
+<div class="player-tip" id="playerTip">
+<span>💡 提示：将mp3文件放入 <code>audio/</code> 文件夹，以歌曲名命名（如 <code>安娜的橱窗.mp3</code>）即可本地播放</span>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="footer">
+<div class="container-wide">
+<div class="footer-top">
+<div class="footer-brand"><h3>封茗囧菌</h3><p>慵懒少女音 · 创作型歌手</p><p class="footer-quote">"只愿菌心似我心，定不负相思意！"</p></div>
+<div class="footer-links"><h4>快速链接</h4><a href="https://space.bilibili.com/1467772" target="_blank">B站</a><a href="https://music.163.com/artist?id=12172529" target="_blank">网易云</a><a href="https://weibo.com/p/1005053056354293/" target="_blank">微博</a><a href="https://www.douyin.com/user/mandisasa" target="_blank">抖音</a></div>
+<div class="footer-contact"><h4>商务合作</h4><p>📧 fmjjwork@qq.com</p></div>
+</div>
+<div class="footer-bottom"><p>🌸 本页面为粉丝制作的非官方个人网页，仅供欣赏与交流</p><p class="made-with">Made with 💗 by 乳酸菌</p></div>
+</div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>

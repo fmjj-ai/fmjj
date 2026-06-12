@@ -1,0 +1,115 @@
+[
+  {
+    "title":"芳华慢",
+    "year":"2018",
+    "kind":"原创 / 国风",
+    "why":"Apple Music 中国区歌曲排行第 1；官方资讯站列为代表作。",
+    "bvid":"BV1Tt41197NS",
+    "embed":"https://player.bilibili.com/player.html?bvid=BV1Tt41197NS&autoplay=0&high_quality=1",
+    "sourceUrl":"https://www.bilibili.com/video/BV1Tt41197NS/",
+    "appleUrl":"https://music.apple.com/cn/album/%E8%8A%B3%E5%8D%8E%E6%85%A2-single/1631797330",
+    "tags":["国风", "戏腔", "代表作"],
+    "palette":"warm"
+  },
+  {
+    "title":"桃花庵",
+    "year":"2019",
+    "kind":"合唱 / 国风",
+    "why":"与音阙诗听合作；YouTube Music 搜索结果显示播放量 5.2M；Apple Music 中国区歌曲排行靠前。",
+    "bvid":"BV1Kb411x7Ld",
+    "embed":"https://player.bilibili.com/player.html?bvid=BV1Kb411x7Ld&autoplay=0&high_quality=1",
+    "sourceUrl":"https://www.bilibili.com/video/BV1Kb411x7Ld/",
+    "appleUrl":"https://music.apple.com/cn/album/%E6%A1%83%E8%8A%B1%E5%BA%B5-single/1473105231",
+    "tags":["音阙诗听", "国风", "高传唱"],
+    "palette":"spring"
+  },
+  {
+    "title":"安娜的橱窗",
+    "year":"2018",
+    "kind":"原创 / 暗黑童话",
+    "why":"官方资讯站列为代表作；5Sing 热门歌曲列表收录。",
+    "bvid":"BV15W411E7Qh",
+    "embed":"https://player.bilibili.com/player.html?bvid=BV15W411E7Qh&autoplay=0&high_quality=1",
+    "sourceUrl":"https://www.bilibili.com/video/BV15W411E7Qh/",
+    "tags":["半木生", "暗黑童话", "短视频 BGM"],
+    "palette":"midnight"
+  },
+  {
+    "title":"东京不太热",
+    "year":"2015 / 2023 重发版本常见",
+    "kind":"翻唱 / 流行",
+    "why":"YouTube Music 搜索结果列为 Top songs；5Sing 热门歌曲列表收录。",
+    "bvid":"BV1as411D7rn",
+    "embed":"https://player.bilibili.com/player.html?bvid=BV1as411D7rn&autoplay=0&high_quality=1",
+    "sourceUrl":"https://www.bilibili.com/video/BV1as411D7rn/",
+    "youtubeUrl":"https://www.youtube.com/watch?v=-CeP3aVvSDA",
+    "tags":["翻唱", "青春感", "代表翻唱"],
+    "palette":"city"
+  },
+  {
+    "title":"霜雪千年",
+    "year":"2016",
+    "kind":"合唱 / 翻唱",
+    "why":"与双笙合作；5Sing 与 Bilibili 公开数据均显示高人气。",
+    "bvid":"BV1zs411X7n8",
+    "embed":"https://player.bilibili.com/player.html?bvid=BV1zs411X7n8&autoplay=0&high_quality=1",
+    "sourceUrl":"https://www.bilibili.com/video/BV1zs411X7n8/",
+    "tags":["双笙", "古风", "高传唱"],
+    "palette":"snow"
+  },
+  {
+    "title":"越来越不懂",
+    "year":"2019",
+    "kind":"翻唱 / 流行",
+    "why":"Apple Music 中国区歌曲排行靠前；官方/粉丝常提及的代表翻唱之一。",
+    "bvid":"BV1n4411Z7Mv",
+    "embed":"https://player.bilibili.com/player.html?bvid=BV1n4411Z7Mv&autoplay=0&high_quality=1",
+    "sourceUrl":"https://www.bilibili.com/video/BV1n4411Z7Mv/",
+    "tags":["翻唱", "全新编曲", "情绪线"],
+    "palette":"rain"
+  },
+  {
+    "title":"影子小姐",
+    "year":"2018",
+    "kind":"原创 / 剧情歌",
+    "why":"Apple Music 中国区歌曲排行靠前；YouTube Music 视频结果有高播放量版本。",
+    "bvid":"",
+    "embed":"",
+    "sourceUrl":"https://music.apple.com/cn/artist/%E5%B0%81%E8%8C%97%E5%9B%A7%E8%8F%8C/1146504168",
+    "tags":["剧情歌", "暗色系", "排行曲"],
+    "palette":"shadow"
+  },
+  {
+    "title":"半抹烟熏",
+    "year":"2020",
+    "kind":"原创 / MV",
+    "why":"Apple Music 中国区歌曲排行收录；QQ 音乐有官方 MV 页面。",
+    "bvid":"",
+    "embed":"",
+    "sourceUrl":"https://y.qq.com/n/ryqq/mv/u0033p8s97e",
+    "tags":["MV", "剧情感", "排行曲"],
+    "palette":"smoke"
+  },
+  {
+    "title":"最喜江南岸",
+    "year":"2021",
+    "kind":"原创 / 国风",
+    "why":"Bilibili 官方视频与百科主要作品列表均有收录。",
+    "bvid":"BV1UQ4y127NT",
+    "embed":"https://player.bilibili.com/player.html?bvid=BV1UQ4y127NT&autoplay=0&high_quality=1",
+    "sourceUrl":"https://www.bilibili.com/video/BV1UQ4y127NT/",
+    "tags":["江南", "国风", "原创"],
+    "palette":"jiangnan"
+  },
+  {
+    "title":"风象双子",
+    "year":"2025",
+    "kind":"原创 / 巡演相关",
+    "why":"Bilibili 官方列表中出现，并在 2025 镜像双子巡演歌单中出现。",
+    "bvid":"BV172hGzbErB",
+    "embed":"https://player.bilibili.com/player.html?bvid=BV172hGzbErB&autoplay=0&high_quality=1",
+    "sourceUrl":"https://www.bilibili.com/list/1467772?bvid=BV172hGzbErB",
+    "tags":["双子座", "巡演", "新作"],
+    "palette":"gemini"
+  }
+]

@@ -1,0 +1,164 @@
+{
+  "images": [
+    {
+      "id": "img01",
+      "title": "photo 360 baike",
+      "description": "资料图：360百科图册原图，来源页标注为“封茗囧菌”。",
+      "source_name": "360百科图册",
+      "source_url": "https://baike.so.com/gallery/list?eid=26266861&ghid=first&pic_idx=1&sid=32370289",
+      "original_file": "assets/images/originals/photo_360_baike.png",
+      "web_file": "assets/images/gallery/photo_360_baike.webp",
+      "thumb_file": "assets/images/gallery/photo_360_baike_thumb.webp",
+      "rights_note": "仅作为本项目本地资料包/个人网页演示素材收录；请保留来源说明，公开发布前建议向权利方确认授权。人物身份仅按来源页标题/上下文标注，不做额外人脸识别判断。"
+    },
+    {
+      "id": "img02",
+      "title": "bili fengxiangshuangzi cover",
+      "description": "B站收藏集主视觉图：风象双子/封茗囧菌收藏集。",
+      "source_name": "Bilibili收藏集图文",
+      "source_url": "https://www.bilibili.com/opus/1037162966231810051",
+      "original_file": "assets/images/originals/bili_fengxiangshuangzi_cover.png",
+      "web_file": "assets/images/gallery/bili_fengxiangshuangzi_cover.webp",
+      "thumb_file": "assets/images/gallery/bili_fengxiangshuangzi_cover_thumb.webp",
+      "rights_note": "仅作为本项目本地资料包/个人网页演示素材收录；请保留来源说明，公开发布前建议向权利方确认授权。人物身份仅按来源页标题/上下文标注，不做额外人脸识别判断。"
+    },
+    {
+      "id": "img03",
+      "title": "bili illustration stage",
+      "description": "B站收藏集插画图：舞台人设/虚拟形象风格。",
+      "source_name": "Bilibili收藏集图文",
+      "source_url": "https://www.bilibili.com/opus/1037162966231810051",
+      "original_file": "assets/images/originals/bili_illustration_stage.png",
+      "web_file": "assets/images/gallery/bili_illustration_stage.webp",
+      "thumb_file": "assets/images/gallery/bili_illustration_stage_thumb.webp",
+      "rights_note": "仅作为本项目本地资料包/个人网页演示素材收录；请保留来源说明，公开发布前建议向权利方确认授权。人物身份仅按来源页标题/上下文标注，不做额外人脸识别判断。"
+    },
+    {
+      "id": "img04",
+      "title": "bili photo teal costume",
+      "description": "B站收藏集写真图：来源页标注为收藏集卡面素材。",
+      "source_name": "Bilibili收藏集图文",
+      "source_url": "https://www.bilibili.com/opus/1037162966231810051",
+      "original_file": "assets/images/originals/bili_photo_teal_costume.png",
+      "web_file": "assets/images/gallery/bili_photo_teal_costume.webp",
+      "thumb_file": "assets/images/gallery/bili_photo_teal_costume_thumb.webp",
+      "rights_note": "仅作为本项目本地资料包/个人网页演示素材收录；请保留来源说明，公开发布前建议向权利方确认授权。人物身份仅按来源页标题/上下文标注，不做额外人脸识别判断。"
+    },
+    {
+      "id": "img05",
+      "title": "bili photo yellow flower close",
+      "description": "B站收藏集写真图：黄色花系近景。",
+      "source_name": "Bilibili收藏集图文",
+      "source_url": "https://www.bilibili.com/opus/1037162966231810051",
+      "original_file": "assets/images/originals/bili_photo_yellow_flower_close.png",
+      "web_file": "assets/images/gallery/bili_photo_yellow_flower_close.webp",
+      "thumb_file": "assets/images/gallery/bili_photo_yellow_flower_close_thumb.webp",
+      "rights_note": "仅作为本项目本地资料包/个人网页演示素材收录；请保留来源说明，公开发布前建议向权利方确认授权。人物身份仅按来源页标题/上下文标注，不做额外人脸识别判断。"
+    },
+    {
+      "id": "img06",
+      "title": "bili photo roses close",
+      "description": "B站收藏集写真图：玫瑰近景。",
+      "source_name": "Bilibili收藏集图文",
+      "source_url": "https://www.bilibili.com/opus/1037162966231810051",
+      "original_file": "assets/images/originals/bili_photo_roses_close.png",
+      "web_file": "assets/images/gallery/bili_photo_roses_close.webp",
+      "thumb_file": "assets/images/gallery/bili_photo_roses_close_thumb.webp",
+      "rights_note": "仅作为本项目本地资料包/个人网页演示素材收录；请保留来源说明，公开发布前建议向权利方确认授权。人物身份仅按来源页标题/上下文标注，不做额外人脸识别判断。"
+    },
+    {
+      "id": "img07",
+      "title": "bili photo aquarium",
+      "description": "B站收藏集写真图：水族箱/镜面构图。",
+      "source_name": "Bilibili收藏集图文",
+      "source_url": "https://www.bilibili.com/opus/1037162966231810051",
+      "original_file": "assets/images/originals/bili_photo_aquarium.png",
+      "web_file": "assets/images/gallery/bili_photo_aquarium.webp",
+      "thumb_file": "assets/images/gallery/bili_photo_aquarium_thumb.webp",
+      "rights_note": "仅作为本项目本地资料包/个人网页演示素材收录；请保留来源说明，公开发布前建议向权利方确认授权。人物身份仅按来源页标题/上下文标注，不做额外人脸识别判断。"
+    },
+    {
+      "id": "img08",
+      "title": "bili photo yellow full",
+      "description": "B站收藏集写真图：黄裙全身。",
+      "source_name": "Bilibili收藏集图文",
+      "source_url": "https://www.bilibili.com/opus/1037162966231810051",
+      "original_file": "assets/images/originals/bili_photo_yellow_full.png",
+      "web_file": "assets/images/gallery/bili_photo_yellow_full.webp",
+      "thumb_file": "assets/images/gallery/bili_photo_yellow_full_thumb.webp",
+      "rights_note": "仅作为本项目本地资料包/个人网页演示素材收录；请保留来源说明，公开发布前建议向权利方确认授权。人物身份仅按来源页标题/上下文标注，不做额外人脸识别判断。"
+    },
+    {
+      "id": "img09",
+      "title": "bili photo white fan",
+      "description": "B站收藏集写真图：白裙扇子。",
+      "source_name": "Bilibili收藏集图文",
+      "source_url": "https://www.bilibili.com/opus/1037162966231810051",
+      "original_file": "assets/images/originals/bili_photo_white_fan.png",
+      "web_file": "assets/images/gallery/bili_photo_white_fan.webp",
+      "thumb_file": "assets/images/gallery/bili_photo_white_fan_thumb.webp",
+      "rights_note": "仅作为本项目本地资料包/个人网页演示素材收录；请保留来源说明，公开发布前建议向权利方确认授权。人物身份仅按来源页标题/上下文标注，不做额外人脸识别判断。"
+    },
+    {
+      "id": "wind-cover-01",
+      "title": "风象双子封面（封面版第一张）",
+      "description": "来自风象双子封面版 imageCards 的第一张封面图；作为相册补充展示。",
+      "source_name": "Amazon Music / 风象双子封面版资料",
+      "source_url": "https://music.amazon.co.jp/artists/B01KV3U04G/%E5%B0%81%E8%8C%97%E5%9B%A7%E8%8F%8C",
+      "original_file": "",
+      "web_file": "https://m.media-amazon.com/images/I/41PhS1GMf6L._SX354_SY354_BL0_QL100__UXNaN_FMjpg_QL85_.jpg",
+      "thumb_file": "https://m.media-amazon.com/images/I/41PhS1GMf6L._SX354_SY354_BL0_QL100__UXNaN_FMjpg_QL85_.jpg",
+      "rights_note": "外链展示，不在本包内二次分发；若公开部署请保留来源说明。"
+    }
+  ],
+  "solo_gallery": [
+    {
+      "title": "旅行随拍",
+      "subtitle": "2022年7月 · 西安",
+      "src": "assets/images/solo_gallery/photo_real.jpg",
+      "source": "solo 囧菌相册"
+    },
+    {
+      "title": "旅行记录",
+      "subtitle": "2022年 · 西安行",
+      "src": "assets/images/solo_gallery/photo_real2.jpg",
+      "source": "solo 囧菌相册"
+    },
+    {
+      "title": "萌照",
+      "subtitle": "考古发现",
+      "src": "assets/images/solo_gallery/photo_cute2.jpg",
+      "source": "solo 囧菌相册"
+    },
+    {
+      "title": "表情包",
+      "subtitle": "动态截图",
+      "src": "assets/images/solo_gallery/photo_emoji.png",
+      "source": "solo 囧菌相册"
+    },
+    {
+      "title": "常用头像",
+      "subtitle": "粉丝收藏",
+      "src": "assets/images/solo_gallery/photo_head1.png",
+      "source": "solo 囧菌相册"
+    },
+    {
+      "title": "亲笔签名",
+      "subtitle": "Mandy Sa",
+      "src": "assets/images/solo_gallery/signature.png",
+      "source": "solo 囧菌相册"
+    },
+    {
+      "title": "写真照片",
+      "subtitle": "个人写真",
+      "src": "assets/images/solo_gallery/gallery-1.jpg",
+      "source": "solo 囧菌相册"
+    },
+    {
+      "title": "活动照片",
+      "subtitle": "演出记录",
+      "src": "assets/images/solo_gallery/gallery-2.png",
+      "source": "solo 囧菌相册"
+    }
+  ]
+}

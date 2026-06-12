@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" role="img" aria-label="封茗囧菌粉丝页本地占位视觉图">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFE8A8"/><stop offset=".45" stop-color="#FFC9D7"/><stop offset="1" stop-color="#B8F1E5"/></linearGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="30"/></filter>
+  </defs>
+  <rect width="900" height="1200" fill="url(#bg)"/>
+  <circle cx="180" cy="190" r="120" fill="#fffdf5" opacity=".5" filter="url(#blur)"/>
+  <circle cx="740" cy="280" r="180" fill="#fffdf5" opacity=".38" filter="url(#blur)"/>
+  <circle cx="520" cy="910" r="240" fill="#fffdf5" opacity=".42" filter="url(#blur)"/>
+  <g fill="none" stroke="#fffdf5" stroke-width="7" opacity=".72">
+    <path d="M450 188 C630 250 718 378 718 560 C718 774 590 940 450 940 C310 940 182 774 182 560 C182 378 270 250 450 188Z"/>
+    <path d="M328 306 C370 276 424 264 450 264 C506 264 590 298 634 378"/>
+    <path d="M330 670 C390 722 508 732 576 670" stroke-linecap="round"/>
+  </g>
+  <text x="450" y="540" font-size="164" text-anchor="middle" fill="#5B3A36" font-family="Arial, sans-serif" font-weight="900">囧</text>
+  <text x="450" y="615" font-size="42" text-anchor="middle" fill="#5B3A36" font-family="Arial, sans-serif" font-weight="800">封茗囧菌 / Mandi Sa</text>
+  <text x="450" y="694" font-size="30" text-anchor="middle" fill="#8D5D54" font-family="Arial, sans-serif">非官方粉丝页占位图</text>
+  <g font-family="Arial, sans-serif" font-weight="900" fill="#8D78C9" opacity=".78">
+    <text x="190" y="410" font-size="62">♪</text>
+    <text x="680" y="520" font-size="58">♡</text>
+    <text x="254" y="820" font-size="54">✦</text>
+  </g>
+</svg>

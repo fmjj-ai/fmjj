@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="封茗囧菌 Mandi Sa 个人资料、热门曲目、平台主页、照片墙与在线试听聚合页。" />
+  <meta name="theme-color" content="#fff1c9" />
+  <title>封茗囧菌 Mandi Sa | 个人音乐网页</title>
+  <link rel="icon" href="assets/svg/fmjj-mark.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script defer src="assets/js/data.js"></script>
+  <script defer src="assets/js/app.js"></script>
+</head>
+<body>
+  <div class="sky" aria-hidden="true">
+    <span class="float-note note-a">♪</span>
+    <span class="float-note note-b">双子</span>
+    <span class="float-note note-c">菌</span>
+    <span class="float-note note-d">✦</span>
+    <span class="orb orb-one"></span>
+    <span class="orb orb-two"></span>
+    <span class="orb orb-three"></span>
+  </div>
+
+  <header class="site-header" id="top">
+    <a class="brand" href="#top" aria-label="回到顶部">
+      <img src="assets/svg/fmjj-mark.svg" alt="" />
+      <span>
+        <strong>封茗囧菌</strong>
+        <small>Mandi Sa fan info page</small>
+      </span>
+    </a>
+    <nav class="nav-links" aria-label="页面导航">
+      <a href="#profile">资料</a>
+      <a href="#music">音乐</a>
+      <a href="#platforms">平台</a>
+      <a href="#photos">照片</a>
+      <a href="#tour">活动</a>
+      <a href="#sources">核验</a>
+    </nav>
+    <button class="theme-toggle" type="button" aria-label="切换夜间模式" data-theme-toggle>月光</button>
+  </header>
+
+  <main>
+    <section class="hero section-shell">
+      <div class="hero-copy reveal">
+        <p class="eyebrow">Mandi Sa · 国风 / 流行 / 二次元音乐人</p>
+        <h1>封茗囧菌的<br /><span>糖霜月光音乐档案</span></h1>
+        <p class="hero-text" id="heroBio">资料正在加载中……</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#music">进入在线试听</a>
+          <a class="button ghost" href="#platforms">查看平台矩阵</a>
+        </div>
+        <div class="micro-tags" id="styleTags" aria-label="风格标签"></div>
+      </div>
+
+      <aside class="hero-card reveal" aria-label="核心信息卡">
+        <div class="record-card">
+          <div class="record-ring" aria-hidden="true">
+            <img src="assets/images/photos/thumbs/bilibili-card-fengxiang-twins-thumb.jpg" alt="封茗囧菌风象双子视觉图" />
+          </div>
+          <div class="record-meta">
+            <span class="pill">官方资料优先</span>
+            <h2 id="artistName">封茗囧菌</h2>
+            <p id="artistTagline">慵懒少女音 × 国风叙事 × 二次元能量</p>
+          </div>
+        </div>
+        <div class="identity-grid" id="identityGrid"></div>
+        <p class="confidence-note" id="confidenceNote"></p>
+      </aside>
+    </section>
+
+    <section class="section-shell stats-panel reveal" aria-labelledby="statsTitle">
+      <div class="section-heading compact">
+        <p class="eyebrow">public stats snapshot</p>
+        <h2 id="statsTitle">公开平台快照</h2>
+      </div>
+      <div class="stats-grid" id="statsGrid"></div>
+    </section>
+
+    <section class="section-shell profile-section" id="profile" aria-labelledby="profileTitle">
+      <div class="section-heading reveal">
+        <p class="eyebrow">profile card</p>
+        <h2 id="profileTitle">个人信息与风格定位</h2>
+        <p>尽量采用官方主页、资讯站和主流音乐平台信息；无法稳定交叉验证的信息不会放到主视觉里。</p>
+      </div>
+      <div class="profile-layout">
+        <article class="glass-card reveal">
+          <h3>基础资料</h3>
+          <dl class="fact-list" id="factList"></dl>
+        </article>
+        <article class="glass-card reveal">
+          <h3>代表作</h3>
+          <div class="work-cloud" id="workCloud"></div>
+        </article>
+        <article class="glass-card reveal">
+          <h3>网页设计方向</h3>
+          <p>色系使用奶油黄、桃粉、薄荷绿、月光紫与墨蓝，呼应甜感声线、国风叙事和二次元标签。</p>
+          <ul class="design-list">
+            <li>Hero 使用唱片、月亮、音符、双子星动效。</li>
+            <li>播放器留在页面内，以官方 Bilibili iframe 嵌入播放。</li>
+            <li>照片已下载进 assets/images/photos，页面调用本地缩略图；点击可看本地大图，并保留来源链接供核验。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="music-section" id="music" aria-labelledby="musicTitle">
+      <div class="section-shell">
+        <div class="section-heading reveal">
+          <p class="eyebrow">in-page player</p>
+          <h2 id="musicTitle">热门曲目与网页内播放</h2>
+          <p>点击曲目卡片后会在下方播放器中载入官方平台嵌入页；部分平台不允许跨站嵌入时，会提供来源按钮。</p>
+        </div>
+
+        <div class="player-layout">
+          <aside class="track-list reveal" id="trackList" aria-label="曲目列表"></aside>
+          <article class="player-card reveal">
+            <div class="player-topline">
+              <span class="pill">Now Loading</span>
+              <strong id="currentTrackName">选择一首歌</strong>
+            </div>
+            <div class="iframe-wrap" id="playerFrameWrap">
+              <iframe id="musicFrame" title="封茗囧菌在线试听播放器" src="about:blank" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe>
+              <div class="player-placeholder" id="playerPlaceholder">
+                <span>♪</span>
+                <p>点击左侧歌曲卡片，开始网页内播放。</p>
+              </div>
+            </div>
+            <div class="player-actions" id="playerActions"></div>
+            <p class="player-note">为避免版权风险，项目不抓取、不缓存、不重新分发音频文件；播放依赖官方平台嵌入服务与网络可用性。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-shell charts-section" aria-labelledby="chartsTitle">
+      <div class="section-heading reveal">
+        <p class="eyebrow">song discovery</p>
+        <h2 id="chartsTitle">多平台热门曲目线索</h2>
+        <p>不同平台的排序和播放量口径并不相同，这里保留为“发现线索”，不强行合并成单一排名。</p>
+      </div>
+      <div class="charts-grid">
+        <article class="chart-card reveal">
+          <h3>Apple Music 中国区 Top Songs</h3>
+          <ol id="appleTopSongs"></ol>
+        </article>
+        <article class="chart-card reveal">
+          <h3>YouTube Music Top Songs</h3>
+          <div id="youtubeBars" class="bars"></div>
+        </article>
+        <article class="chart-card reveal">
+          <h3>5Sing 热门歌曲</h3>
+          <div id="fiveSingBars" class="bars"></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="platform-section section-shell" id="platforms" aria-labelledby="platformTitle">
+      <div class="section-heading reveal">
+        <p class="eyebrow">official links</p>
+        <h2 id="platformTitle">各大平台主页</h2>
+        <p>已经标注核验程度；网易云未稳定锁定歌手 ID，所以只放搜索入口，不冒充官方主页。</p>
+      </div>
+      <div class="platform-grid" id="platformGrid"></div>
+    </section>
+
+    <section class="section-shell photo-section" id="photos" aria-labelledby="photoTitle">
+      <div class="section-heading reveal">
+        <p class="eyebrow">photo wall</p>
+        <h2 id="photoTitle">照片墙与来源说明</h2>
+        <p>照片已全部本地化到项目文件夹内，不再把图片 src 指向站外；来源按钮仅用于核验原页面。</p>
+      </div>
+      <div class="photo-wall" id="photoWall"></div>
+    </section>
+
+    <section class="section-shell tour-section" id="tour" aria-labelledby="tourTitle">
+      <div class="section-heading reveal">
+        <p class="eyebrow">live schedule</p>
+        <h2 id="tourTitle">生日会与巡演线索</h2>
+        <p>保留公开票务页可见的活动信息，便于后续维护。</p>
+      </div>
+      <div class="timeline" id="tourTimeline"></div>
+    </section>
+
+    <section class="section-shell source-section" id="sources" aria-labelledby="sourceTitle">
+      <div class="section-heading reveal">
+        <p class="eyebrow">verification notes</p>
+        <h2 id="sourceTitle">资料核验与维护建议</h2>
+      </div>
+      <div class="source-layout">
+        <article class="glass-card reveal">
+          <h3>本项目采用的原则</h3>
+          <ul class="design-list">
+            <li>优先官方空间、官方/资讯站资料帖、主流音乐平台、票务平台。</li>
+            <li>不把高仿账号、无法验证的个人隐私、未经授权音源写入页面。</li>
+            <li>平台粉丝数、活动排期和热门歌曲会变化，建议发布前重新核对。</li>
+          </ul>
+        </article>
+        <article class="glass-card reveal">
+          <h3>维护入口</h3>
+          <p>页面数据集中在 <code>assets/js/data.js</code>，原始结构化数据在 <code>assets/data/</code>。修改 JSON 后可重新生成 data.js，或直接编辑 data.js。</p>
+          <p>部署到 GitHub Pages、Netlify、Cloudflare Pages 时，直接上传整个文件夹即可。</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Fan-made information page · 资料采集日期：2026-06-11 · 音源与图片版权归原权利方所有。</p>
+    <a href="#top">返回顶部 ↑</a>
+  </footer>
+
+  <noscript>
+    <div class="noscript">需要启用 JavaScript 才能渲染曲目、平台和照片墙。</div>
+  </noscript>
+</body>
+</html>

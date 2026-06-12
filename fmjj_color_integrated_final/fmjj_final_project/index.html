@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="封茗囧菌 / Mandi Sa 个人资料、平台入口、热门曲目、图片素材与网页内嵌播放器资料包。">
+  <title>封茗囧菌 Mandi Sa | 个人音乐网页资料包</title>
+  <link rel="icon" href="assets/images/brand/mandi-badge.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script defer src="assets/js/site-data.js"></script>
+  <script defer src="assets/js/app.js"></script>
+</head>
+<body>
+  <div class="soft-bg"><div class="orb orb-a"></div><div class="orb orb-b"></div><div class="orb orb-c"></div></div><div class="grain"></div><div class="cursor-glow"></div>
+  <header class="site-header">
+    <a class="brand magnetic" href="#top"><img src="assets/images/brand/mandi-badge.svg" alt="封茗囧菌视觉徽章"><span>封茗囧菌 · Mandi Sa</span></a>
+    <nav class="nav" aria-label="页面导航"><a href="#profile">信息</a><a href="#music">曲目播放</a><a href="#platforms">平台</a><a href="#music-map">热度线索</a><a href="#timeline-section">历程</a><a href="#gallery">相册</a><a href="#sources">来源</a></nav>
+    <button class="bgm-toggle" id="musicBtn" type="button" aria-label="播放或暂停背景音乐" title="背景音乐：solo 版 mp3">
+      <span class="music-icon" aria-hidden="true"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span></span>
+    </button>
+  </header>
+  <audio id="bgm" loop preload="auto" src="audio/bgm.mp3"></audio>
+  <main id="top">
+    <section class="hero">
+      <div>
+        <span class="eyebrow">创作型音乐人 / 唱见 / Bilibili 音乐 UP 主</span>
+        <h1><span class="gradient-text">封茗囧菌</span><br><span style="font-size:.58em;letter-spacing:-.04em">Mandi Sa</span></h1>
+        <p class="subtitle">淡黄、淡粉与薄荷青交织的音乐资料页：把个人信息、热门歌曲、平台入口、图片素材和网页内嵌播放器整理在一起。</p>
+        <p class="hero-copy" id="profileLead">资料加载中……</p>
+        <div class="cta-row"><a class="btn primary" href="#music">▶ 直接听代表曲</a><a class="btn secondary" href="#gallery">✦ 查看本地图片素材</a><a class="btn secondary" href="data/site_data_full.json" target="_blank">{} 打开完整数据 JSON</a></div>
+        <div class="hero-meta"><div class="mini-card reveal"><b>06·07</b><span>公开生日 / 双子座</span></div><div class="mini-card reveal"><b>3+</b><span>核心代表作：芳华慢、桃花庵、安娜的橱窗</span></div><div class="mini-card reveal"><b>多平台</b><span>微博、B站、5sing、Apple、Spotify、YouTube Music 等</span></div></div>
+      </div>
+      <div class="visual-card">
+        <div class="portrait-stack">
+          <div class="portrait-main"><img src="assets/images/gallery/bili_fengxiangshuangzi_cover.webp" alt="来源页标注为封茗囧菌收藏集的资料图"></div>
+          <div class="music-note n1">♪</div><div class="music-note n2">♫</div><div class="music-note n3">✧</div>
+          <div class="floating-badge"><b>资料完整包已本地化</b><span>页面图片使用 assets/images 内的本地文件；JSON、来源、设计提示词、部署说明都在压缩包内。</span></div>
+          <div class="wave-notes"><img src="assets/images/brand/wave-notes.svg" alt="装饰音符曲线"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="marquee" aria-label="关键词滚动">
+      <div class="marquee-track" id="tagMarquee"></div>
+    </section>
+
+    <section class="section" id="profile">
+      <div class="section-head"><div><div class="section-kicker">Profile</div><h2>个人信息与风格关键词</h2></div><p class="lead">用彩色版的玻璃卡片保留基础视觉，把内容改为公开个人信息、平台身份、联系方式与风格关键词；偏二级资料的项目会在卡片里标注。</p></div>
+      <div class="facts-grid">
+        <div class="panel fact-list" id="factList"></div>
+        <div class="panel source-note card-floatable"><h3>风格关键词</h3><div class="pill-row" id="stylePills"></div><h3>整理原则</h3><p class="lead" style="margin:0">保留淡黄、淡粉、薄荷青的彩色版风格；音乐和平台接口优先使用原版本已有 iframe 与公开入口，网易云候选 ID 只进核对表，避免错播。</p></div>
+      </div>
+    </section>
+
+    <section class="section music-stage" id="music">
+      <div class="section-head"><div><div class="section-kicker">Music Player</div><h2>热门曲目与网页内播放</h2></div><p class="lead">这里采用进阶版的曲目列表 + 大播放器布局，同时保留彩色版已有的 Apple Music / Spotify 音乐 iframe、Bilibili / YouTube 视频 iframe 和外部搜索入口。网易云候选 ID 不默认直播，详见 data/audio_interface_audit.json。</p></div>
+      <div class="music-player-layout">
+        <aside class="track-list panel reveal" id="trackList" aria-label="曲目列表"></aside>
+        <article class="player-card panel reveal" id="playerPanel" aria-live="polite">
+          <div class="player-topline">
+            <span class="pill">Now Playing</span>
+            <strong id="currentTrackName">选择一首歌</strong>
+          </div>
+          <p id="currentTrackMeta" class="lead player-desc">点击左侧曲目卡片，播放器会在这里加载。</p>
+          <div class="player-tabs" id="playerTabs"></div>
+          <div class="iframe-wrap" id="playerFrameWrap">
+            <iframe id="musicFrame" title="封茗囧菌在线试听播放器" src="about:blank" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            <div class="player-placeholder" id="playerPlaceholder"><span>♪</span><p>点击左侧歌曲卡片，开始网页内播放。</p></div>
+          </div>
+          <div class="player-actions" id="playerActions"></div>
+          <p class="player-note">说明：本包不下载、不缓存、不重新分发受版权保护的曲目音频；播放器依赖第三方平台 iframe 或搜索入口。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="platforms">
+      <div class="section-head"><div><div class="section-kicker">Platforms</div><h2>各大平台主页</h2></div><p class="lead">已核验或由官方资料列出的平台入口。部分国内 App 的网页会要求登录、验证码或 App 内打开，属于平台限制。</p></div>
+      <div class="platform-grid" id="platformGrid"></div>
+    </section>
+
+    <section class="section" id="music-map">
+      <div class="section-head"><div><div class="section-kicker">Popularity Map</div><h2>多平台热门曲目线索</h2></div><p class="lead">参考进阶版的多平台热门曲目线索，但继续使用彩色版原有列表卡片风格；不同平台统计口径不同，不混成绝对排名。</p></div>
+      <div class="music-maps" id="musicMaps"></div>
+    </section>
+
+    <section class="section" id="timeline-section">
+      <div class="section-head"><div><div class="section-kicker">Timeline</div><h2>从翻唱到原创 / 唱跳 / 专辑</h2></div><p class="lead">参考整合版的阶段划分，但改成交错式居中时间线：左、右轮换展示，方便后续继续添加节点。</p></div>
+      <div class="timeline" id="timeline"></div>
+    </section>
+
+    <section class="section" id="gallery">
+      <div class="section-head"><div><div class="section-kicker">Local Gallery</div><h2>双模式相册</h2></div><p class="lead">保留彩色版原有照片墙；另按 solo 的“囧菌相册”思路新增卷轴相册模式。整合版图片没有复制；solo 里不需要的近期照片、粉丝壁纸、可爱日常、日常照片、黑白童子等没有加入。</p></div>
+      <div class="gallery-tabs" role="tablist" aria-label="相册模式">
+        <button class="gallery-mode active" type="button" data-gallery-mode="color" role="tab" aria-selected="true">彩色版照片墙</button>
+        <button class="gallery-mode" type="button" data-gallery-mode="scroll" role="tab" aria-selected="false">卷轴相册</button>
+      </div>
+      <div class="gallery-pane active" id="galleryPaneColor" data-gallery-pane="color">
+        <div class="gallery-grid" id="galleryGrid"></div>
+      </div>
+      <div class="gallery-pane" id="galleryPaneScroll" data-gallery-pane="scroll">
+        <div class="scroll-gallery" id="scrollGallery">
+          <div class="scroll-carousel" id="scrollCarousel"></div>
+        </div>
+        <p class="gallery-note reveal">卷轴相册支持自动旋转、悬停暂停和滚轮缩放；仅保留本次指定允许的 solo 相册素材。</p>
+      </div>
+    </section>
+
+    <section class="section" id="sources">
+      <div class="section-head"><div><div class="section-kicker">Sources & Data</div><h2>资料来源与文件结构</h2></div><p class="lead">参考 solo 平台区的金色卡片气质，给来源与文件结构补上对应图标；完整数据和音源核对表可在 data/ 与 docs/ 中查看。</p></div>
+      <div class="sources-grid" id="sourcesGrid"></div>
+    </section>
+
+    <footer class="footer">© <span id="year"></span> Personal fan-style static page demo. 本项目为个人资料整理与网页设计演示，不代表艺人官方站点；音乐由第三方平台 iframe / 搜索入口提供，素材来源见 data/images_manifest.json，音源接口核对见 data/audio_interface_audit.json 与 docs/AUDIO_INTERFACE_AUDIT.md。</footer>
+  </main>
+  <div class="lightbox" id="lightbox" aria-modal="true" role="dialog"><button class="close-lightbox" id="closeLightbox" aria-label="关闭">×</button><div class="lightbox-card"><img id="lightboxImg" alt="图片预览"><div class="lightbox-info"><b id="lightboxTitle"></b><p id="lightboxDesc"></p></div></div></div>
+</body>
+</html>

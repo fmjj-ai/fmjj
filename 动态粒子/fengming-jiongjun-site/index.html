@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="封茗囧菌 Mandi Sa 非官方个人资料页：个人信息、代表作品、平台主页、站内嵌入播放、公开图源与资料来源。" />
+  <meta name="theme-color" content="#FFE8A8" />
+  <title>封茗囧菌 Mandi Sa | 非官方个人资料页</title>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://embed.music.apple.com" />
+  <link rel="preconnect" href="https://player.bilibili.com" />
+  <link rel="preconnect" href="https://www.youtube-nocookie.com" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <div class="bg-aurora" aria-hidden="true">
+    <span class="blob blob-a"></span>
+    <span class="blob blob-b"></span>
+    <span class="blob blob-c"></span>
+    <span class="grain"></span>
+  </div>
+
+  <header class="site-header" data-glass>
+    <a class="brand magnetic" href="#top" aria-label="回到首页">
+      <span class="brand-mark">囧</span>
+      <span class="brand-text">封茗囧菌</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-label="展开导航" aria-expanded="false">☰</button>
+    <nav class="site-nav" aria-label="主导航">
+      <a href="#profile">资料</a>
+      <a href="#music">曲目</a>
+      <a href="#platforms">平台</a>
+      <a href="#gallery">照片</a>
+      <a href="#timeline">时间线</a>
+      <a href="#sources">来源</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section id="top" class="hero section-pad">
+      <div class="hero-copy">
+        <p class="eyebrow reveal">非官方资料页 · Fan-made profile site</p>
+        <h1 class="hero-title reveal" data-split>封茗囧菌 <span>Mandi Sa</span></h1>
+        <p class="hero-line reveal">一个爱唱歌的家伙 · 只愿菌心似我心，定不负相思意</p>
+        <p class="hero-intro reveal" id="heroIntro"></p>
+        <div class="hero-actions reveal">
+          <a class="btn btn-primary magnetic" href="#music">开始听歌</a>
+          <a class="btn btn-soft magnetic" href="#sources">查看资料来源</a>
+        </div>
+        <div class="notice-pill reveal">不打包音频/照片文件，站内播放来自平台官方嵌入</div>
+      </div>
+      <div class="hero-card reveal" data-parallax>
+        <div class="orbital">
+          <span class="orbit orbit-1"></span>
+          <span class="orbit orbit-2"></span>
+          <span class="orbit orbit-3"></span>
+          <span class="note note-1">♪</span>
+          <span class="note note-2">✦</span>
+          <span class="note note-3">♡</span>
+        </div>
+        <div class="portrait-frame">
+          <img id="heroImage" src="assets/img/portrait-fallback.svg" alt="封茗囧菌公开视觉图展示" />
+        </div>
+        <div class="hero-card-footer">
+          <strong>乳酸菌小宇宙</strong>
+          <span>奶油黄 / 蜜桃粉 / 薄荷青</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="marquee" aria-label="关键词滚动">
+      <div class="marquee-track" id="tagMarquee"></div>
+    </section>
+
+    <section id="profile" class="section-pad profile-section">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Profile</p>
+        <h2>个人信息与风格关键词</h2>
+        <p>以公开页面核验后的信息为主；偏好、昵称等补充资料会标注来源。</p>
+      </div>
+      <div class="profile-grid">
+        <article class="glass-card bio-card reveal">
+          <h3>简介</h3>
+          <p id="bioText"></p>
+          <div class="tag-cloud" id="tagCloud"></div>
+        </article>
+        <div class="stats-grid" id="statsGrid"></div>
+      </div>
+      <div class="facts-grid" id="factsGrid"></div>
+    </section>
+
+    <section id="music" class="section-pad music-section">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Music Player</p>
+        <h2>热门曲目与站内播放</h2>
+        <p>点击曲目卡片即可把 Apple Music / Bilibili / YouTube 嵌入播放器载入到页面内。部分平台仅提供预览或需登录，属于平台规则。</p>
+      </div>
+      <div class="player-layout">
+        <aside class="player-panel reveal" aria-live="polite">
+          <div class="player-title-row">
+            <div>
+              <span class="mini-label">Now playing</span>
+              <h3 id="playerTitle">选择一首歌</h3>
+            </div>
+            <button class="tiny-btn" id="clearPlayer" type="button">清空</button>
+          </div>
+          <p id="playerMeta">点击右侧曲目卡片，站内播放器会在这里加载。</p>
+          <div class="source-tabs" id="sourceTabs"></div>
+          <div class="embed-frame empty" id="embedFrameWrap">
+            <div class="empty-player">
+              <span>♪</span>
+              <p>这里会出现平台播放器</p>
+            </div>
+          </div>
+          <p class="player-note">提示：Apple Music 通常为试听片段；B站/YouTube 为 iframe 视频或音频播放。本站不保存歌曲文件。</p>
+        </aside>
+        <div class="tracks-grid" id="tracksGrid"></div>
+      </div>
+    </section>
+
+    <section id="platforms" class="section-pad platforms-section">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Platforms</p>
+        <h2>各大平台主页</h2>
+        <p>已核验直达链接会显示“打开主页”；仅确认 ID 但未核验唯一 URL 的平台会标注为“待补直链”。</p>
+      </div>
+      <div class="platform-grid" id="platformGrid"></div>
+    </section>
+
+    <section id="gallery" class="section-pad gallery-section">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Gallery</p>
+        <h2>公开视觉图与照片墙</h2>
+        <p>图片来自公开图源远程链接，不随项目打包。用于粉丝页展示；商用或二次发布请自行确认授权。</p>
+      </div>
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </section>
+
+    <section id="timeline" class="section-pad timeline-section">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Timeline</p>
+        <h2>从翻唱到原创/唱跳</h2>
+        <p>简要时间线方便网页展示，更多条目可在 RESEARCH.md 或 data.js 继续扩充。</p>
+      </div>
+      <div class="timeline" id="timelineList"></div>
+    </section>
+
+    <section id="design" class="section-pad design-section">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Design System</p>
+        <h2>页面布局与色系</h2>
+        <p>整体视觉基于淡黄色、淡粉色、乳酸白、薄荷青，并用夜樱紫点缀暗黑/戏剧风作品。</p>
+      </div>
+      <div class="palette-grid" id="paletteGrid"></div>
+      <div class="layout-notes reveal glass-card">
+        <h3>布局提示词摘要</h3>
+        <p>少女感音乐人个人页；奶油黄与蜜桃粉柔光背景；玻璃拟态卡片；曲目播放器常驻；平台入口卡片；照片墙用圆角瀑布流；GSAP ScrollTrigger 做渐入、错位、视差、磁吸按钮、音符粒子。</p>
+      </div>
+    </section>
+
+    <section id="sources" class="section-pad source-section">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Sources & Rights</p>
+        <h2>资料来源与版权说明</h2>
+        <p>每一项资料都保留来源入口。关键身份、平台与作品信息优先采用官方或平台页面；百科类资料仅作补充。</p>
+      </div>
+      <div class="warnings glass-card reveal" id="warningsList"></div>
+      <div class="source-list" id="sourceList"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Fan-made page for 封茗囧菌 / Mandi Sa. Built as a static site. Updated <span id="updatedDate"></span>.</p>
+    <a href="#top" class="back-top magnetic">回到顶部 ↑</a>
+  </footer>
+
+  <script src="assets/js/data.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

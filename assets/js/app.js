@@ -616,20 +616,59 @@
     });
   }
 
+  let unlockBgm = null;
+  let bgmUnlocked = false;
+
   function initBgm(){
     const btn = $('#musicBtn');
     const audio = $('#bgm');
     if(!btn || !audio) return;
     audio.volume = 0.36;
+
     function setState(playing){
       btn.classList.toggle('playing', playing);
       btn.setAttribute('aria-pressed', playing ? 'true' : 'false');
       const label = btn.querySelector('.music-label');
       if(label) label.textContent = playing ? 'BGM ON' : 'BGM';
     }
-    btn.addEventListener('click', () => {
+
+    async function tryPlay(){
+      try{
+        await audio.play();
+        setState(true);
+        return true;
+      }catch{
+        setState(false);
+        return false;
+      }
+    }
+
+    function removeUnlockListeners(){
+      const events = ['click', 'pointerdown', 'keydown', 'touchstart', 'touchend'];
+      events.forEach(evt => document.removeEventListener(evt, onFirstGesture, true));
+    }
+
+    async function onFirstGesture(){
+      if(bgmUnlocked) return;
+      audio.muted = false;
       if(audio.paused){
-        audio.play().then(() => setState(true)).catch(() => setState(false));
+        const ok = await tryPlay();
+        if(!ok) return;
+      } else {
+        setState(true);
+      }
+      bgmUnlocked = true;
+      removeUnlockListeners();
+    }
+
+    unlockBgm = onFirstGesture;
+
+    btn.addEventListener('click', () => {
+      bgmUnlocked = true;
+      removeUnlockListeners();
+      if(audio.paused){
+        audio.muted = false;
+        tryPlay();
       } else {
         audio.pause();
         setState(false);
@@ -638,6 +677,31 @@
     audio.addEventListener('ended', () => setState(false));
     audio.addEventListener('pause', () => setState(false));
     audio.addEventListener('play', () => setState(true));
+
+    async function bootBgm(){
+      // 先尝试直接播放（少数浏览器允许）
+      audio.muted = false;
+      const played = await tryPlay();
+      if(played){
+        bgmUnlocked = true;
+        removeUnlockListeners();
+        return;
+      }
+      // 退而求其次：静音播放，等待首次交互后解锁
+      audio.muted = true;
+      try{
+        await audio.play();
+        setState(false);
+      }catch{
+        audio.load();
+      }
+      // 注册用户激活事件（仅限真正授予 user activation 的事件类型）
+      const events = ['click', 'pointerdown', 'keydown', 'touchstart', 'touchend'];
+      events.forEach(evt => document.addEventListener(evt, onFirstGesture, {capture:true, once:false}));
+    }
+
+    if(audio.readyState >= 2) bootBgm();
+    else audio.addEventListener('canplay', bootBgm, {once:true});
   }
 
   function initFloatingCards(){
@@ -733,6 +797,7 @@
         if(heroPlayed) return;
         if(!force && window.scrollY < 48) return;
         heroPlayed = true;
+        unlockBgm?.();
         heroReveal.play();
         window.removeEventListener('scroll', onHeroScroll);
         window.removeEventListener('wheel', onHeroWheel);
@@ -775,6 +840,7 @@
         if(heroShown) return;
         if(!force && window.scrollY < 48) return;
         heroShown = true;
+        unlockBgm?.();
         revealHeroFallback();
         window.removeEventListener('scroll', onFallbackScroll);
         window.removeEventListener('wheel', onFallbackWheel);

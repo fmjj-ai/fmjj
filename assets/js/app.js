@@ -968,7 +968,11 @@
           width: 0.5 + Math.random() * 2.2,
           progress: 0,
           speed: 0.008 + Math.random() * 0.012,
-          delay: Math.random() * 0.4
+          delay: Math.random() * 0.4,
+          perpAngle,
+          windFreq: 0.8 + Math.random() * 1.2,
+          windAmp: 15 + Math.random() * 30,
+          windPhase: Math.random() * Math.PI * 2
         });
       }
     }
@@ -978,6 +982,7 @@
       if(!ctx || !canvasRunning) return;
       ctx.clearRect(0, 0, W, H);
 
+      const time = now * 0.001;
       const elapsed = converging ? (now - convergeStart) / convergeDuration : 0;
       const globalProgress = converging ? Math.min(elapsed, 1) : 0;
 
@@ -998,14 +1003,31 @@
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
         ctx.beginPath();
-        ctx.moveTo(t.pts[0].x, t.pts[0].y);
+
+        const windOffset = (j) => {
+          const segT = j / t.pts.length;
+          // 靠近中心（segT接近1）不动，靠近外端（segT接近0）飘动大
+          return Math.sin(time * t.windFreq + segT * 4 + t.windPhase) * t.windAmp * (1 - segT);
+        };
+
+        const px0 = t.pts[0].x + Math.cos(t.perpAngle) * windOffset(0);
+        const py0 = t.pts[0].y + Math.sin(t.perpAngle) * windOffset(0);
+        ctx.moveTo(px0, py0);
+
         for(let j = 1; j < drawLen - 1; j++){
-          const xc = (t.pts[j].x + t.pts[j + 1].x) / 2;
-          const yc = (t.pts[j].y + t.pts[j + 1].y) / 2;
-          ctx.quadraticCurveTo(t.pts[j].x, t.pts[j].y, xc, yc);
+          const wo = windOffset(j);
+          const woNext = windOffset(j + 1);
+          const pxJ = t.pts[j].x + Math.cos(t.perpAngle) * wo;
+          const pyJ = t.pts[j].y + Math.sin(t.perpAngle) * wo;
+          const pxNext = t.pts[j+1].x + Math.cos(t.perpAngle) * woNext;
+          const pyNext = t.pts[j+1].y + Math.sin(t.perpAngle) * woNext;
+          const xc = (pxJ + pxNext) / 2;
+          const yc = (pyJ + pyNext) / 2;
+          ctx.quadraticCurveTo(pxJ, pyJ, xc, yc);
         }
         const last = t.pts[drawLen - 1];
-        ctx.lineTo(last.x, last.y);
+        const woLast = windOffset(drawLen - 1);
+        ctx.lineTo(last.x + Math.cos(t.perpAngle) * woLast, last.y + Math.sin(t.perpAngle) * woLast);
         ctx.stroke();
         ctx.restore();
       });
@@ -1108,23 +1130,20 @@
         const fadeAlpha = newProgress < 0.15 ? newProgress / 0.15 : 1;
         img.style.opacity = String(fadeAlpha);
         img.style.transition = 'none';
-        img.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(${scale}) rotate(${st.rotate + st.theta * 3}deg)`;
+        const rotateAngle = st.rotate + st.theta * 8 + (1 - newProgress) * 360;
+        img.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(${scale}) rotate(${rotateAngle}deg)`;
       });
 
       if(allDone){
         spiralAnimRunning = false;
-        converging = true;
-        convergeStart = performance.now();
-        setTimeout(() => {
-          enterBtn.style.display = 'flex';
-          enterBtn.style.opacity = '0';
-          enterBtn.style.transform = 'scale(0.6)';
-          requestAnimationFrame(() => {
-            enterBtn.style.transition = 'opacity 500ms ease, transform 500ms cubic-bezier(.2,.8,.2,1)';
-            enterBtn.style.opacity = '1';
-            enterBtn.style.transform = 'scale(1)';
-          });
-        }, 200);
+        enterBtn.style.display = 'flex';
+        enterBtn.style.opacity = '0';
+        enterBtn.style.transform = 'scale(0.3)';
+        requestAnimationFrame(() => {
+          enterBtn.style.transition = 'opacity 600ms ease, transform 600ms cubic-bezier(.2,.8,.2,1)';
+          enterBtn.style.opacity = '1';
+          enterBtn.style.transform = 'scale(1)';
+        });
       } else {
         requestAnimationFrame(animateSpiral);
       }

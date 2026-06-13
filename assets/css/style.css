@@ -36,7 +36,8 @@ body.hero-revealed .hero .eyebrow,body.hero-revealed .hero h1,body.hero-revealed
 .intro-spiral .spiral-trail{position:absolute;left:50%;top:50%;pointer-events:none;border-radius:50%;opacity:0;will-change:transform,opacity}
 .intro-enter{position:relative;z-index:2;display:flex;align-items:center;justify-content:center}
 .intro-card{position:relative;display:flex;flex-direction:column;align-items:center;gap:24px;padding:56px 72px 44px;border-radius:40px;background:rgba(255,255,255,.72);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.85);box-shadow:0 24px 72px rgba(80,59,90,.18);animation:introCardFloat 3s ease-in-out infinite}
-.intro-avatar{width:110px;height:110px;border-radius:50%;object-fit:cover;border:4px solid #fff;box-shadow:0 12px 36px rgba(80,59,90,.18);position:relative;z-index:2}
+.intro-avatar{width:110px;height:110px;border-radius:50%;object-fit:cover;border:4px solid #fff;box-shadow:0 12px 36px rgba(80,59,90,.18);position:relative;z-index:2;animation:introAvatarSpin 8s linear infinite}
+@keyframes introAvatarSpin{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
 .intro-ripples{position:absolute;top:56px;left:50%;transform:translateX(-50%);width:110px;height:110px;pointer-events:none}
 .intro-ripple{position:absolute;inset:-16px;border-radius:50%;border:1.5px solid transparent;animation:introRipple 3s ease-out infinite}
 .intro-ripple:nth-child(1){border-color:rgba(241,138,180,.5);animation-delay:0s}

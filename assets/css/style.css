@@ -30,3 +30,22 @@ body.hero-revealed .hero .eyebrow,body.hero-revealed .hero h1,body.hero-revealed
 /* Final integration fixes */
 .track-option{display:grid;grid-template-columns:58px 1fr;align-items:center;gap:12px}.track-option img{width:58px;height:58px;border-radius:16px;object-fit:cover;background:#fff;box-shadow:0 10px 24px rgba(80,59,90,.09)}.track-option .track-info{min-width:0}.track-option .track-info b{display:block;font-size:1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.track-option .track-info em{display:block;margin-top:3px;color:#bd7c9a;font-size:.76rem;font-style:normal;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.player-placeholder.hidden{opacity:0;visibility:hidden}.player-placeholder.no-embed,.player-placeholder.show{opacity:1;visibility:visible;z-index:2}.player-placeholder .btn{margin-top:14px}.player-link.active{background:linear-gradient(135deg,var(--yellow),var(--pink))}.player-tab small{margin-left:6px;padding:1px 6px;border-radius:999px;background:rgba(255,255,255,.62);font-size:10px;color:#9b6c83}.source-icon.small{display:inline-grid;width:28px;height:28px;border-radius:10px;margin-right:8px;font-size:.72rem;vertical-align:middle}.source-card b,.source-card span,.source-card em,.source-card a{grid-column:2}.source-card em{font-size:12px;color:#9b879e;font-style:normal;line-height:1.55}.iframe-wrap iframe.is-empty{opacity:0}
 @media (max-width:780px){.track-option{grid-template-columns:52px 1fr}.track-option img{width:52px;height:52px}.music-player-layout{grid-template-columns:1fr}.track-list,.player-card{position:relative;top:auto;max-height:none}}
+
+/* ===== Intro Overlay ===== */
+.intro-overlay{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 50%,#fffaf2 0%,#fff3fa 40%,#ede4ff 100%);transition:opacity .8s ease,visibility .8s ease;overflow:hidden}.intro-overlay.dismissed{opacity:0;visibility:hidden;pointer-events:none}.intro-spiral{position:absolute;inset:0;pointer-events:none}.intro-spiral .spiral-img{position:absolute;left:50%;top:50%;border-radius:20px;object-fit:cover;box-shadow:0 16px 48px rgba(80,59,90,.28),0 0 0 3px rgba(255,255,255,.9);opacity:0;transform:translate(-50%,-50%) scale(0);will-change:transform,opacity;pointer-events:none}
+.intro-spiral .spiral-trail{position:absolute;left:50%;top:50%;pointer-events:none;border-radius:50%;opacity:0;will-change:transform,opacity}
+.intro-enter{position:relative;z-index:2;display:flex;align-items:center;justify-content:center}
+.intro-card{position:relative;display:flex;flex-direction:column;align-items:center;gap:24px;padding:56px 72px 44px;border-radius:40px;background:rgba(255,255,255,.72);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.85);box-shadow:0 24px 72px rgba(80,59,90,.18);animation:introCardFloat 3s ease-in-out infinite}
+.intro-avatar{width:110px;height:110px;border-radius:50%;object-fit:cover;border:4px solid #fff;box-shadow:0 12px 36px rgba(80,59,90,.18);position:relative;z-index:2}
+.intro-ripples{position:absolute;top:56px;left:50%;transform:translateX(-50%);width:110px;height:110px;pointer-events:none}
+.intro-ripple{position:absolute;inset:-16px;border-radius:50%;border:1.5px solid transparent;animation:introRipple 3s ease-out infinite}
+.intro-ripple:nth-child(1){border-color:rgba(241,138,180,.5);animation-delay:0s}
+.intro-ripple:nth-child(2){border-color:rgba(132,231,212,.5);animation-delay:1s}
+.intro-ripple:nth-child(3){border-color:rgba(255,233,133,.5);animation-delay:2s}
+.intro-card-title{font-size:22px;font-weight:800;color:#503b5a;letter-spacing:.02em;white-space:nowrap}
+.intro-card-btn{border:none;padding:16px 40px;border-radius:999px;background:linear-gradient(135deg,#ffe985,#ffd8e7,#c8fff1);font-size:18px;font-weight:900;color:#503b5a;cursor:pointer;box-shadow:0 10px 30px rgba(80,59,90,.14);transition:transform .25s ease,box-shadow .25s ease}
+.intro-card-btn:hover{transform:translateY(-2px) scale(1.04);box-shadow:0 14px 40px rgba(241,138,180,.24)}
+@keyframes introCardFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes introRipple{0%{transform:scale(1);opacity:.7}100%{transform:scale(2.8);opacity:0}}
+body.intro-active{overflow:hidden}
+.intro-canvas{position:absolute;inset:0;pointer-events:none;z-index:0}

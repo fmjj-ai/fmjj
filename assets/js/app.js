@@ -648,12 +648,15 @@
       events.forEach(evt => document.removeEventListener(evt, onFirstGesture, true));
     }
 
+    let unlocking = false;
+
     async function onFirstGesture(){
-      if(bgmUnlocked) return;
+      if(bgmUnlocked || unlocking) return;
+      unlocking = true;
       audio.muted = false;
       if(audio.paused){
         const ok = await tryPlay();
-        if(!ok) return;
+        if(!ok){ unlocking = false; return; }
       } else {
         setState(true);
       }
@@ -880,6 +883,275 @@
     }
   }
 
+  function collectIntroImages(){
+    const seen = new Set();
+    const imgs = [];
+    const push = src => {
+      if(!src || seen.has(src)) return;
+      seen.add(src);
+      imgs.push(src);
+    };
+    (data.images || []).forEach(img => push(img.thumb_file || img.web_file));
+    (data.solo_gallery || []).forEach(img => push(img.src));
+    return imgs;
+  }
+
+  function initIntro(onDone){
+    const overlay = $('#introOverlay');
+    const spiral = $('#introSpiral');
+    const enterBtn = $('#introEnter');
+    const canvas = $('#introCanvas');
+    if(!overlay || !spiral || !enterBtn){
+      onDone();
+      return;
+    }
+
+    document.body.classList.add('intro-active');
+    const images = collectIntroImages();
+    if(!images.length){
+      overlay.classList.add('dismissed');
+      document.body.classList.remove('intro-active');
+      onDone();
+      return;
+    }
+
+    const W = window.innerWidth;
+    const H = window.innerHeight;
+    const cx = W / 2;
+    const cy = H / 2;
+
+    // canvas 丝线
+    const ctx = canvas ? canvas.getContext('2d') : null;
+    let canvasRunning = true;
+    if(canvas){ canvas.width = W; canvas.height = H; }
+    const threadColors = [
+      '#f18ab4', '#84e7d4', '#ffe985', '#ede4ff',
+      '#bd7c9a', '#c8fff1', '#ffd8e7', '#6b4a78'
+    ];
+    const threads = [];
+    let converging = false;
+    let convergeStart = 0;
+    const convergeDuration = 1200;
+
+    function spawnThreads(){
+      const count = 36 + Math.floor(Math.random() * 18);
+      for(let i = 0; i < count; i++){
+        const angle = Math.random() * Math.PI * 2;
+        const dist = Math.max(cx, cy) * (0.7 + Math.random() * 0.55);
+        const sx = cx + Math.cos(angle) * dist;
+        const sy = cy + Math.sin(angle) * dist;
+        const segments = 80 + Math.floor(Math.random() * 40);
+        const pts = [];
+        // 用正弦波叠加生成丝滑曲线
+        const freqA = 1.5 + Math.random() * 2;
+        const freqB = 3 + Math.random() * 3;
+        const ampA = 50 + Math.random() * 80;
+        const ampB = 20 + Math.random() * 40;
+        const phaseA = Math.random() * Math.PI * 2;
+        const phaseB = Math.random() * Math.PI * 2;
+        const perpAngle = angle + Math.PI / 2;
+
+        for(let j = 0; j <= segments; j++){
+          const t = j / segments;
+          const baseX = sx + (cx - sx) * t;
+          const baseY = sy + (cy - sy) * t;
+          const wave = Math.sin(t * freqA * Math.PI + phaseA) * ampA * (1 - t)
+                     + Math.sin(t * freqB * Math.PI + phaseB) * ampB * (1 - t * t);
+          pts.push({
+            x: baseX + Math.cos(perpAngle) * wave,
+            y: baseY + Math.sin(perpAngle) * wave
+          });
+        }
+        threads.push({
+          pts,
+          color: threadColors[Math.floor(Math.random() * threadColors.length)],
+          width: 0.5 + Math.random() * 2.2,
+          progress: 0,
+          speed: 0.008 + Math.random() * 0.012,
+          delay: Math.random() * 0.4
+        });
+      }
+    }
+    spawnThreads();
+
+    function drawThreads(now){
+      if(!ctx || !canvasRunning) return;
+      ctx.clearRect(0, 0, W, H);
+
+      const elapsed = converging ? (now - convergeStart) / convergeDuration : 0;
+      const globalProgress = converging ? Math.min(elapsed, 1) : 0;
+
+      threads.forEach(t => {
+        if(converging){
+          t.progress = Math.min(1, globalProgress + t.delay * 0.4);
+        } else {
+          t.progress = Math.min(1, t.progress + t.speed);
+        }
+        const drawLen = Math.floor(t.pts.length * t.progress);
+        if(drawLen < 3) return;
+
+        const alpha = converging ? Math.max(0, 1 - globalProgress * 0.7) : 0.75;
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.strokeStyle = t.color;
+        ctx.lineWidth = t.width;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.beginPath();
+        ctx.moveTo(t.pts[0].x, t.pts[0].y);
+        for(let j = 1; j < drawLen - 1; j++){
+          const xc = (t.pts[j].x + t.pts[j + 1].x) / 2;
+          const yc = (t.pts[j].y + t.pts[j + 1].y) / 2;
+          ctx.quadraticCurveTo(t.pts[j].x, t.pts[j].y, xc, yc);
+        }
+        const last = t.pts[drawLen - 1];
+        ctx.lineTo(last.x, last.y);
+        ctx.stroke();
+        ctx.restore();
+      });
+
+      if(canvasRunning) requestAnimationFrame(drawThreads);
+    }
+    requestAnimationFrame(drawThreads);
+
+    // 图片：阿基米德螺线铺满屏幕
+    const total = images.length;
+    const maxRadius = Math.hypot(cx, cy) * 0.92;
+    const spiralTurns = 2.5;
+    const maxTheta = spiralTurns * 2 * Math.PI;
+
+    const els = [];
+    const appearDelay = 140;
+    const appearDuration = 450;
+    const baseSize = Math.min(380, Math.max(cx, cy) * 0.55);
+
+    // 每张图片的螺线状态
+    const imgStates = [];
+
+    images.forEach((src, i) => {
+      const img = document.createElement('img');
+      img.className = 'spiral-img';
+      img.src = src;
+      img.alt = '';
+      img.loading = 'eager';
+
+      // 初始位置按螺线从外到内分布（和原来一样）
+      const startTheta = (i / (total - 1 || 1)) * maxTheta;
+      const scale = 0.5 + 0.5 * (1 - i / total);
+      const size = baseSize * scale;
+
+      img.style.width = `${size}px`;
+      img.style.height = `${size}px`;
+
+      spiral.appendChild(img);
+      els.push(img);
+      imgStates.push({
+        theta: startTheta,
+        appeared: false,
+        done: false,
+        rotate: (Math.random() - 0.5) * 14,
+        spinSpeed: 0.5 + Math.random() * 0.3
+      });
+    });
+
+    // 螺线位置：theta 越小半径越大（外圈）
+    function spiralPos(theta){
+      const r = maxRadius * Math.max(0, 1 - theta / maxTheta);
+      return { x: Math.cos(theta) * r, y: Math.sin(theta) * r, r };
+    }
+
+    // 逐个出现（淡入到螺线起始位置）
+    els.forEach((img, i) => {
+      const delay = i * appearDelay;
+      const { x, y } = spiralPos(imgStates[i].theta);
+      const progress = imgStates[i].theta / maxTheta;
+      const scale = 0.5 + 0.5 * (1 - progress);
+      setTimeout(() => {
+        imgStates[i].appeared = true;
+        img.style.transition = `opacity ${appearDuration}ms ease`;
+        img.style.opacity = '1';
+        img.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(${scale}) rotate(${imgStates[i].rotate}deg)`;
+      }, delay);
+    });
+
+    // 全部出现后开始螺线运动（向外扩散）
+    const allAppearTime = total * appearDelay + appearDuration + 200;
+    let spiralAnimRunning = false;
+    let spiralStartTime = 0;
+
+    function animateSpiral(now){
+      if(!spiralAnimRunning) return;
+      if(!spiralStartTime) spiralStartTime = now;
+
+      let allDone = true;
+      els.forEach((img, i) => {
+        const st = imgStates[i];
+        if(st.done || !st.appeared) return;
+        allDone = false;
+
+        const progress = st.theta / maxTheta;
+        const accel = 1 + (1 - progress) * 1.5;
+        // theta 减小 → 半径增大 → 向外运动
+        st.theta -= st.spinSpeed * 0.06 * accel;
+
+        const { x, y, r } = spiralPos(st.theta);
+        const newProgress = st.theta / maxTheta;
+        const scale = 0.5 + 0.5 * (1 - newProgress);
+
+        if(st.theta <= 0){
+          st.done = true;
+          img.style.opacity = '0';
+          img.style.transition = 'opacity 300ms ease';
+          return;
+        }
+
+        const fadeAlpha = newProgress < 0.15 ? newProgress / 0.15 : 1;
+        img.style.opacity = String(fadeAlpha);
+        img.style.transition = 'none';
+        img.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(${scale}) rotate(${st.rotate + st.theta * 3}deg)`;
+      });
+
+      if(allDone){
+        spiralAnimRunning = false;
+        converging = true;
+        convergeStart = performance.now();
+        setTimeout(() => {
+          enterBtn.style.display = 'flex';
+          enterBtn.style.opacity = '0';
+          enterBtn.style.transform = 'scale(0.6)';
+          requestAnimationFrame(() => {
+            enterBtn.style.transition = 'opacity 500ms ease, transform 500ms cubic-bezier(.2,.8,.2,1)';
+            enterBtn.style.opacity = '1';
+            enterBtn.style.transform = 'scale(1)';
+          });
+        }, 200);
+      } else {
+        requestAnimationFrame(animateSpiral);
+      }
+    }
+
+    setTimeout(() => {
+      spiralAnimRunning = true;
+      requestAnimationFrame(animateSpiral);
+    }, allAppearTime);
+
+    enterBtn.addEventListener('click', () => {
+      canvasRunning = false;
+      spiralAnimRunning = false;
+      overlay.classList.add('dismissed');
+      document.body.classList.remove('intro-active');
+      onDone();
+    });
+    const innerBtn = enterBtn.querySelector('.intro-card-btn');
+    if(innerBtn) innerBtn.addEventListener('click', () => {
+      canvasRunning = false;
+      spiralAnimRunning = false;
+      overlay.classList.add('dismissed');
+      document.body.classList.remove('intro-active');
+      onDone();
+    });
+  }
+
   function boot(){
     initFacts();
     initMarquee();
@@ -890,7 +1162,6 @@
     initGallery();
     initSources();
     initCursor();
-    initBgm();
     initScrollGallery();
     initFloatingCards();
     initAnimations();
@@ -898,9 +1169,17 @@
     if(year) year.textContent = new Date().getFullYear();
   }
 
+  function start(){
+    initBgm();
+    initIntro(() => {
+      unlockBgm?.();
+      boot();
+    });
+  }
+
   if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', boot);
+    document.addEventListener('DOMContentLoaded', start);
   } else {
-    boot();
+    start();
   }
 })();

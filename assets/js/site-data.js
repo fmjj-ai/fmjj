@@ -2,7 +2,7 @@ window.FMJJ_DATA = {
   "generated_at": "2026-06-11",
   "profile": {
     "name": "封茗囧菌",
-    "english_name": "Mandi Sa",
+    "english_name": "Mandy Sa",
     "also_seen_as": [
       "Mandy Sa",
       "Enclosure fungus（Apple Music个别地区机器翻译）"
@@ -44,8 +44,7 @@ window.FMJJ_DATA = {
       "暗黑童话",
       "唱跳 MV",
       "Bilibili UP 主",
-      "乳酸菌",
-      "淡黄 · 淡粉 · 薄荷青"
+      "乳酸菌"
     ],
     "fan_name_secondary": "乳酸菌",
     "favorite_colors_secondary": [
@@ -60,7 +59,7 @@ window.FMJJ_DATA = {
       },
       {
         "label": "英文名",
-        "value": "Mandi Sa / Mandy Sa"
+        "value": "Mandy Sa"
       },
       {
         "label": "公开生日",

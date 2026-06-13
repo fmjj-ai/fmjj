@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="封茗囧菌 / Mandi Sa 个人资料、平台入口、热门曲目、图片素材与网页内嵌播放器资料包。">
-  <title>封茗囧菌 Mandi Sa | 个人音乐网页资料包</title>
+  <meta name="description" content="封茗囧菌 / Mandy Sa 个人资料、平台入口、热门曲目、图片素材与网页内嵌播放器资料包。">
+  <title>封茗囧菌 Mandy Sa | 个人音乐网页资料包</title>
   <link rel="icon" href="assets/images/brand/mandi-badge.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/css/style.css">
   <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
@@ -15,7 +15,7 @@
 <body>
   <div class="soft-bg"><div class="orb orb-a"></div><div class="orb orb-b"></div><div class="orb orb-c"></div></div><div class="grain"></div><div class="cursor-glow"></div>
   <header class="site-header">
-    <a class="brand magnetic" href="#top"><img src="assets/images/brand/mandi-badge.svg" alt="封茗囧菌视觉徽章"><span>封茗囧菌 · Mandi Sa</span></a>
+    <a class="brand magnetic" href="#top"><img src="assets/images/brand/mandi-badge.svg" alt="封茗囧菌视觉徽章"><span>封茗囧菌 · Mandy Sa</span></a>
     <nav class="nav" aria-label="页面导航"><a href="#profile">信息</a><a href="#music">曲目播放</a><a href="#platforms">平台</a><a href="#music-map">热度线索</a><a href="#timeline-section">历程</a><a href="#gallery">相册</a></nav>
     <button class="bgm-toggle" id="musicBtn" type="button" aria-label="播放或暂停背景音乐" title="背景音乐：solo 版 mp3">
       <span class="music-icon" aria-hidden="true"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span></span>
@@ -23,16 +23,16 @@
   </header>
   <audio id="bgm" loop preload="auto" src="audio/bgm.mp3"></audio>
   <main id="top">
-    <section class="hero">
-      <div>
-        <span class="eyebrow">创作型音乐人 / 唱见 / Bilibili 音乐 UP 主</span>
-        <h1><span class="gradient-text">封茗囧菌</span><br><span style="font-size:.58em;letter-spacing:-.04em">Mandi Sa</span></h1>
-        <p class="subtitle">淡黄、淡粉与薄荷青交织的音乐资料页：把个人信息、热门歌曲、平台入口、图片素材和网页内嵌播放器整理在一起。</p>
-        <p class="hero-copy" id="profileLead">资料加载中……</p>
-        <div class="cta-row"><a class="btn primary" href="#music">▶ 直接听代表曲</a><a class="btn secondary" href="#gallery">✦ 查看本地图片素材</a></div>
+    <section class="hero" aria-label="首页介绍">
+      <div class="hero-copy-col">
+        <span class="eyebrow reveal">创作型音乐人 / 唱见 / Bilibili 音乐 UP 主</span>
+        <h1 class="reveal"><span class="gradient-text">封茗囧菌</span><br><span style="font-size:.58em;letter-spacing:-.04em">Mandy Sa</span></h1>
+        <p class="subtitle reveal">音乐资料页：把个人信息、热门歌曲、平台入口、图片素材和网页内嵌播放器整理在一起。</p>
+        <p class="hero-copy reveal" id="profileLead">资料加载中……</p>
+        <div class="cta-row reveal"><a class="btn primary" href="#music">▶ 直接听代表曲</a><a class="btn secondary" href="#gallery">✦ 查看本地图片素材</a></div>
         <div class="hero-meta"><div class="mini-card reveal"><b>06·07</b><span>公开生日 / 双子座</span></div><div class="mini-card reveal"><b>3+</b><span>核心代表作：芳华慢、桃花庵、安娜的橱窗</span></div><div class="mini-card reveal"><b>多平台</b><span>微博、B站、5sing、Apple、Spotify、YouTube Music 等</span></div></div>
       </div>
-      <div class="visual-card">
+      <div class="visual-card reveal">
         <div class="portrait-stack">
           <div class="portrait-main card-floatable"><img src="assets/images/gallery/bili_fengxiangshuangzi_cover.webp" alt="来源页标注为封茗囧菌收藏集的资料图"></div>
           <div class="music-note n1">♪</div><div class="music-note n2">♫</div><div class="music-note n3">✧</div>
@@ -49,7 +49,7 @@
       <div class="section-head"><div><div class="section-kicker">Profile</div><h2>个人信息与风格关键词</h2></div></div>
       <div class="facts-grid">
         <div class="panel fact-list" id="factList"></div>
-        <div class="panel source-note card-floatable"><h3>风格关键词</h3><div class="pill-row" id="stylePills"></div><h3>整理原则</h3><p class="lead" style="margin:0">保留淡黄、淡粉、薄荷青的彩色版风格；音乐和平台接口优先使用原版本已有 iframe 与公开入口，网易云候选 ID 只进核对表，避免错播。</p></div>
+        <div class="panel source-note card-floatable"><h3>风格关键词</h3><div class="pill-row" id="stylePills"></div><h3>一句话介绍</h3><p class="lead" style="margin:0">只愿菌心似我心，定不负相思意！活跃于 B 站与各大音乐平台的创作型唱见，从翻唱、原创到唱跳 MV 都有代表作。</p></div>
       </div>
     </section>
 
@@ -70,7 +70,6 @@
           </div>
           <div class="netease-player" id="neteasePlayer"></div>
           <div class="player-actions" id="playerActions"></div>
-          <p class="player-note">说明：本包不下载、不缓存、不重新分发受版权保护的曲目音频；播放器依赖第三方平台 iframe 或搜索入口。</p>
         </article>
       </div>
     </section>

@@ -144,7 +144,7 @@
     const p = data.profile || {};
     const items = p.profile_keywords || [
       {label:'艺名', value:p.name || '封茗囧菌'},
-      {label:'英文名', value:p.english_name || 'Mandi Sa'},
+      {label:'英文名', value:p.english_name || 'Mandy Sa'},
       {label:'公开生日', value:p.birthday_public || '06·07'},
       {label:'星座', value:p.zodiac || '双子座'},
       {label:'代表作', value:(p.representative_works || []).slice(0,3).join(' / ')},
@@ -161,7 +161,7 @@
     const profileLead = $('#profileLead');
     if(profileLead){
       const identity = (p.primary_identity || []).join('、');
-      profileLead.textContent = `${p.name || '封茗囧菌'}（${p.english_name || 'Mandi Sa'}）的资料页：重点整理${identity || '音乐人身份'}、代表曲目、公开平台入口、风格关键词与本地相册素材。`;
+      profileLead.textContent = `${p.name || '封茗囧菌'}（${p.english_name || 'Mandy Sa'}）的资料页：重点整理${identity || '音乐人身份'}、代表曲目、公开平台入口、风格关键词与本地相册素材。`;
     }
     const pills = $('#stylePills');
     if(pills){
@@ -176,7 +176,7 @@
     const keywords = [
       ...(p.style_keywords || []),
       ...(p.representative_works || []).slice(0,8),
-      'Apple Music', 'Spotify', 'Bilibili', 'YouTube Music', '5sing', '网易云搜索入口', '背景音乐', '双模式相册'
+      'Apple Music', 'Spotify', 'Bilibili', 'YouTube Music', '5sing', '网易云搜索入口', '双模式相册'
     ].filter(Boolean);
     const repeated = [...keywords, ...keywords];
     target.innerHTML = repeated.map(x => `<span>${esc(x)}</span>`).join('');
@@ -679,39 +679,126 @@
     });
   }
 
+  const HERO_REVEAL_SEL = '.hero .eyebrow, .hero h1, .hero .subtitle, .hero .hero-copy, .hero .cta-row, .hero .mini-card, .hero .visual-card, .hero .music-note, .hero .wave-notes';
+
+  function revealHeroFallback(){
+    $$(HERO_REVEAL_SEL).forEach(el => {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
+    const portrait = $('.portrait-main');
+    if(portrait){
+      portrait.style.opacity = '1';
+      portrait.style.transform = 'none';
+    }
+    document.body.classList.add('hero-revealed');
+  }
+
   function initAnimations(){
+    document.body.classList.add('site-ready');
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if(reduce){
       $$('.reveal').forEach(el => { el.style.opacity = 1; el.style.transform = 'none'; });
+      revealHeroFallback();
       return;
     }
 
     if(window.gsap && window.ScrollTrigger){
       gsap.registerPlugin(ScrollTrigger);
-      gsap.fromTo('.hero .eyebrow, .hero h1, .hero .subtitle, .hero .hero-copy, .hero .cta-row',
-        {y:28, opacity:0}, {y:0, opacity:1, duration:0.9, stagger:0.08, ease:'power3.out'});
-      gsap.fromTo('.portrait-main', {rotate:6, y:42, opacity:0}, {rotate:2, y:0, opacity:1, duration:1.1, ease:'elastic.out(1,.6)'});
-      gsap.fromTo('.hero .mini-card', {y:44, opacity:0, scale:0.96}, {
-        scrollTrigger:{trigger:'.hero-meta', start:'top 72%', once:true},
-        y:0, opacity:1, scale:1, duration:0.82, stagger:0.12, ease:'elastic.out(1,.65)'
+      gsap.set(HERO_REVEAL_SEL, {autoAlpha:0, y:42, scale:0.985});
+      gsap.set('.portrait-main', {autoAlpha:0, y:42, rotate:6, scale:0.985});
+
+      const heroReveal = gsap.timeline({
+        paused:true,
+        onComplete:() => {
+          document.body.classList.add('hero-revealed');
+          gsap.to('.music-note', {y:-14, rotate:8, repeat:-1, yoyo:true, duration:2.4, stagger:0.35, ease:'sine.inOut'});
+        }
       });
+      heroReveal.to('.hero .eyebrow, .hero h1, .hero .subtitle, .hero .hero-copy, .hero .cta-row, .hero .visual-card', {
+        autoAlpha:1, y:0, scale:1, duration:0.75, stagger:0.04, ease:'power3.out'
+      });
+      heroReveal.to('.portrait-main', {
+        autoAlpha:1, y:0, rotate:2, scale:1, duration:0.75, ease:'power3.out'
+      }, 0);
+      heroReveal.to('.hero .mini-card', {
+        autoAlpha:1, y:0, scale:1, duration:0.82, stagger:0.12, ease:'elastic.out(1,.65)'
+      }, '-=0.42');
+      heroReveal.to('.hero .music-note, .hero .wave-notes', {
+        autoAlpha:1, y:0, scale:1, duration:0.75, stagger:0.04, ease:'power3.out'
+      }, '-=0.55');
+
+      let heroPlayed = false;
+      const playHeroReveal = (force = false) => {
+        if(heroPlayed) return;
+        if(!force && window.scrollY < 48) return;
+        heroPlayed = true;
+        heroReveal.play();
+        window.removeEventListener('scroll', onHeroScroll);
+        window.removeEventListener('wheel', onHeroWheel);
+        window.removeEventListener('touchstart', onHeroTouch);
+        window.removeEventListener('touchmove', onHeroTouch);
+      };
+      const onHeroScroll = () => playHeroReveal();
+      const onHeroWheel = event => {
+        if(event.deltaY > 0) playHeroReveal(true);
+      };
+      let touchStartY = 0;
+      const onHeroTouch = event => {
+        if(event.type === 'touchstart'){
+          touchStartY = event.touches[0]?.clientY || 0;
+          return;
+        }
+        const currentY = event.touches[0]?.clientY || 0;
+        if(touchStartY - currentY > 18) playHeroReveal(true);
+      };
+      window.addEventListener('scroll', onHeroScroll, {passive:true});
+      window.addEventListener('wheel', onHeroWheel, {passive:true});
+      window.addEventListener('touchstart', onHeroTouch, {passive:true});
+      window.addEventListener('touchmove', onHeroTouch, {passive:true});
+
       gsap.utils.toArray('.reveal').forEach(el => {
         if(el.closest('.hero')) return;
-        gsap.fromTo(el, {y:32, opacity:0}, {
-          scrollTrigger:{trigger:el, start:'top 88%', once:true},
-          y:0,
-          opacity:1,
-          duration:0.74,
-          ease:'power3.out'
+        gsap.fromTo(el, {autoAlpha:0, y:42, scale:0.985}, {
+          autoAlpha:1, y:0, scale:1, duration:0.85, ease:'power3.out',
+          scrollTrigger:{trigger:el, start:'top 86%', once:true}
         });
       });
-      gsap.to('.music-note', {y:-14, rotate:8, repeat:-1, yoyo:true, duration:2.4, stagger:0.35, ease:'sine.inOut'});
       gsap.to('.marquee', {
         scrollTrigger:{trigger:'#music', start:'top bottom', end:'bottom top', scrub:true},
         x:-24,
         ease:'none'
       });
     } else {
+      let heroShown = false;
+      const showHeroOnScroll = (force = false) => {
+        if(heroShown) return;
+        if(!force && window.scrollY < 48) return;
+        heroShown = true;
+        revealHeroFallback();
+        window.removeEventListener('scroll', onFallbackScroll);
+        window.removeEventListener('wheel', onFallbackWheel);
+        window.removeEventListener('touchstart', onFallbackTouch);
+        window.removeEventListener('touchmove', onFallbackTouch);
+      };
+      const onFallbackScroll = () => showHeroOnScroll();
+      const onFallbackWheel = event => {
+        if(event.deltaY > 0) showHeroOnScroll(true);
+      };
+      let touchStartY = 0;
+      const onFallbackTouch = event => {
+        if(event.type === 'touchstart'){
+          touchStartY = event.touches[0]?.clientY || 0;
+          return;
+        }
+        const currentY = event.touches[0]?.clientY || 0;
+        if(touchStartY - currentY > 18) showHeroOnScroll(true);
+      };
+      window.addEventListener('scroll', onFallbackScroll, {passive:true});
+      window.addEventListener('wheel', onFallbackWheel, {passive:true});
+      window.addEventListener('touchstart', onFallbackTouch, {passive:true});
+      window.addEventListener('touchmove', onFallbackTouch, {passive:true});
+
       const io = new IntersectionObserver(entries => {
         entries.forEach(entry => {
           if(entry.isIntersecting){
@@ -721,7 +808,9 @@
           }
         });
       }, {threshold:0.12});
-      $$('.reveal').forEach(el => io.observe(el));
+      $$('.reveal').forEach(el => {
+        if(!el.closest('.hero')) io.observe(el);
+      });
     }
   }
 

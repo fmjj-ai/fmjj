@@ -1,0 +1,132 @@
+[
+  {
+    "name": "微博",
+    "handle": "封茗囧菌",
+    "url": "https://weibo.com/n/%E5%B0%81%E8%8C%97%E5%9B%A7%E8%8F%8C",
+    "type": "社交/动态",
+    "verified_by": "weibo_info_station"
+  },
+  {
+    "name": "Bilibili",
+    "handle": "封茗囧菌",
+    "url": "https://space.bilibili.com/1467772",
+    "type": "视频/投稿/直播相关",
+    "verified_by": "bilibili_space"
+  },
+  {
+    "name": "抖音",
+    "handle": "mandisasa / 封茗囧菌",
+    "url": "https://www.douyin.com/user/MS4wLjABAAAA0Wk4gxp3AYFnqoqo-IBF6lbdLnrxgjy__DdhPBNBkws",
+    "type": "短视频",
+    "verified_by": "douyin_profile"
+  },
+  {
+    "name": "5sing原创音乐",
+    "handle": "封茗囧菌 / mondai",
+    "url": "https://5sing.kugou.com/mondai/default.html",
+    "type": "原创/翻唱音乐",
+    "verified_by": "5sing_home"
+  },
+  {
+    "name": "网易云音乐",
+    "handle": "封茗囧菌",
+    "url": "https://music.163.com/#/search/m/?s=%E5%B0%81%E8%8C%97%E5%9B%A7%E8%8F%8C&type=100",
+    "type": "音乐平台搜索入口",
+    "verified_by": "weibo_info_station",
+    "note": "各版本对歌手/歌曲 ID 可信度不一致，本整合包默认只放搜索入口；候选歌曲 ID 见 data/audio_interface_audit.json。"
+  },
+  {
+    "name": "QQ音乐",
+    "handle": "封茗囧菌",
+    "url": "https://y.qq.com/n/ryqq/search?w=%E5%B0%81%E8%8C%97%E5%9B%A7%E8%8F%8C",
+    "type": "音乐平台搜索入口",
+    "verified_by": "qq_music_mv"
+  },
+  {
+    "name": "酷狗音乐",
+    "handle": "封茗囧菌",
+    "url": "https://www.kugou.com/singer/info/5NQUK0F36CC0A",
+    "type": "音乐平台",
+    "verified_by": "kugou_artist"
+  },
+  {
+    "name": "酷我音乐",
+    "handle": "封茗囧菌",
+    "url": "https://www.kuwo.cn/singer_detail/260226",
+    "type": "音乐平台",
+    "verified_by": "kuwo_artist"
+  },
+  {
+    "name": "Apple Music",
+    "handle": "封茗囧菌",
+    "url": "https://music.apple.com/cn/artist/%E5%B0%81%E8%8C%97%E5%9B%A7%E8%8F%8C/1146504168",
+    "type": "音乐平台",
+    "verified_by": "apple_music_artist"
+  },
+  {
+    "name": "Spotify",
+    "handle": "封茗囧菌",
+    "url": "https://open.spotify.com/artist/2m07aN6r33ypqUFpJYvTrv",
+    "type": "音乐平台",
+    "verified_by": "spotify_artist"
+  },
+  {
+    "name": "YouTube Music",
+    "handle": "封茗囧菌",
+    "url": "https://music.youtube.com/channel/UC_1otkScsiWiJCM5BvWp-Jw",
+    "type": "音乐平台",
+    "verified_by": "youtube_music_artist"
+  },
+  {
+    "name": "YouTube",
+    "handle": "Mandy Sa / 封茗囧菌",
+    "url": "https://www.youtube.com/%40%E5%B0%81%E8%8C%97%E5%9B%A7%E8%8F%8C-w7d",
+    "type": "视频/海外平台",
+    "verified_by": "weibo_info_station"
+  },
+  {
+    "name": "小红书",
+    "handle": "封茗囧菌",
+    "url": "https://www.xiaohongshu.com/search_result?keyword=%E5%B0%81%E8%8C%97%E5%9B%A7%E8%8F%8C",
+    "type": "社交平台搜索入口",
+    "verified_by": "weibo_info_station"
+  },
+  {
+    "name": "快手",
+    "handle": "封茗囧菌",
+    "url": "https://www.kuaishou.com/search/video?searchKey=%E5%B0%81%E8%8C%97%E5%9B%A7%E8%8F%8C",
+    "type": "短视频搜索入口",
+    "verified_by": "weibo_info_station"
+  },
+  {
+    "name": "全民K歌",
+    "handle": "封茗囧菌",
+    "url": "https://kg.qq.com/index-pc.html#/search?keyword=%E5%B0%81%E8%8C%97%E5%9B%A7%E8%8F%8C",
+    "type": "K歌平台搜索入口",
+    "verified_by": "weibo_info_station"
+  },
+  {
+    "name": "微信公众号",
+    "handle": "封茗囧菌",
+    "url": "#wechat-official-account",
+    "type": "公众号名称",
+    "verified_by": "weibo_info_station",
+    "note": "网页不能直接打开微信公众号主页，请在微信内搜索“封茗囧菌”。"
+  },
+  {
+    "name": "Amazon Music",
+    "handle": "封茗囧菌",
+    "url": "https://music.amazon.co.jp/artists/B01KV3U04G/%E5%B0%81%E8%8C%97%E5%9B%A7%E8%8F%8C",
+    "type": "音乐平台 / 封面与热门曲目线索",
+    "verified_by": "amazon_music_artist",
+    "note": "来自风象双子封面版资料线索，外链可用于核对封面图。"
+  },
+  {
+    "name": "猫耳FM",
+    "handle": "封茗囧菌",
+    "url": "https://m.missevan.com/127026",
+    "type": "广播剧 / 有声内容入口",
+    "verified_by": "missevan_profile",
+    "note": "来自 solo 版本平台区。"
+  }
+]

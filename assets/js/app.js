@@ -210,10 +210,34 @@
     }
   }
 
+  // 默认播放源优先级：Bilibili 优先，其次 Apple Music，再退回其他可嵌入源
+  const PLAYER_PRIORITY = ['bilibili', 'apple'];
+
+  function playerRank(player){
+    const kind = String(player.kind || '').toLowerCase();
+    const label = String(player.label || '').toLowerCase();
+    for(let i = 0; i < PLAYER_PRIORITY.length; i++){
+      const key = PLAYER_PRIORITY[i];
+      if(kind.includes(key) || label.includes(key)) return i;
+    }
+    return PLAYER_PRIORITY.length;
+  }
+
   function firstPlayableIndex(track){
     const players = embeddablePlayers(track);
-    const preferred = players.findIndex(isEmbeddable);
-    return preferred >= 0 ? preferred : 0;
+    let bestIndex = -1;
+    let bestRank = Infinity;
+    players.forEach((player, index) => {
+      if(!isEmbeddable(player)) return;
+      const rank = playerRank(player);
+      if(rank < bestRank){
+        bestRank = rank;
+        bestIndex = index;
+      }
+    });
+    if(bestIndex >= 0) return bestIndex;
+    const fallback = players.findIndex(isEmbeddable);
+    return fallback >= 0 ? fallback : 0;
   }
 
   function selectTrack(trackIndex, opts={}){

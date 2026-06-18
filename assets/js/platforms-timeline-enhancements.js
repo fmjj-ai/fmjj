@@ -1,6 +1,20 @@
 (function(){
   'use strict';
 
+  function bindHoverTimeline(target, timeline){
+    target.addEventListener('mouseenter', () => timeline.play());
+    target.addEventListener('mouseleave', () => timeline.reverse());
+  }
+
+  function startAfterReady(task, delay){
+    const run = () => setTimeout(task, delay);
+    if(document.readyState === 'loading'){
+      document.addEventListener('DOMContentLoaded', run);
+    } else {
+      run();
+    }
+  }
+
   function enhancePlatformsAndTimeline(){
     if(!window.gsap || !window.ScrollTrigger) return;
 
@@ -57,8 +71,7 @@
           duration: 0.3
         }, 0);
 
-        card.addEventListener('mouseenter', () => hoverTl.play());
-        card.addEventListener('mouseleave', () => hoverTl.reverse());
+        bindHoverTimeline(card, hoverTl);
 
         // 图标呼吸动画
         if(icon){
@@ -147,8 +160,7 @@
             ease: 'power2.out'
           });
 
-          card.addEventListener('mouseenter', () => cardHoverTl.play());
-          card.addEventListener('mouseleave', () => cardHoverTl.reverse());
+          bindHoverTimeline(card, cardHoverTl);
 
           // 连接线动画
           if(i < timeItems.length - 1){
@@ -274,11 +286,5 @@
     });
   }
 
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', () => {
-      setTimeout(enhancePlatformsAndTimeline, 400);
-    });
-  } else {
-    setTimeout(enhancePlatformsAndTimeline, 400);
-  }
+  startAfterReady(enhancePlatformsAndTimeline, 400);
 })();

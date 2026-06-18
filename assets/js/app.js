@@ -4,6 +4,19 @@
   const data = window.FMJJ_DATA || {};
   const $ = (sel, root=document) => root.querySelector(sel);
   const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+  const sourceMap = new Map((data.sources || []).map(item => [item.id, item]));
+
+  function renderList(target, items, renderItem){
+    if(!target) return;
+    target.innerHTML = (items || []).map(renderItem).join('');
+  }
+
+  function setActive(nodes, matcher){
+    nodes.forEach((node, index) => {
+      const active = typeof matcher === 'function' ? matcher(node, index) : node === matcher;
+      node.classList.toggle('active', active);
+    });
+  }
 
   function esc(value){
     return String(value ?? '').replace(/[&<>'"]/g, ch => ({
@@ -12,15 +25,8 @@
   }
 
   function sourceName(id){
-    const list = data.sources || [];
-    const s = list.find(x => x.id === id);
+    const s = sourceMap.get(id);
     return s ? s.name : (id || '未标注来源');
-  }
-
-  function sourceUrl(id){
-    const list = data.sources || [];
-    const s = list.find(x => x.id === id);
-    return s ? s.url : '#';
   }
 
   function sourceIcon(item){
@@ -76,10 +82,6 @@
       if(text.includes(key)) return {icon, color, fg};
     }
     return {icon, color:'#bd7c9a', fg:'#fff'};
-  }
-
-  function platformIcon(item){
-    return sourceIcon({name:item.name, type:item.type});
   }
 
   function playerSourceUrl(player){
@@ -150,23 +152,20 @@
       {label:'代表作', value:(p.representative_works || []).slice(0,3).join(' / ')},
       {label:'商务邮箱', value:p.contact && p.contact.email}
     ];
-    const factList = $('#factList');
-    if(factList){
-      factList.innerHTML = items.map(item => `
+    renderList($('#factList'), items, item => `
         <div class="fact reveal card-floatable">
           <small>${esc(item.label)}</small>
           <strong>${esc(item.value)}</strong>
-        </div>`).join('');
-    }
+        </div>`);
+
     const profileLead = $('#profileLead');
     if(profileLead){
       const identity = (p.primary_identity || []).join('、');
       profileLead.textContent = `${p.name || '封茗囧菌'}（${p.english_name || 'Mandy Sa'}）的资料页：重点整理${identity || '音乐人身份'}、代表曲目、公开平台入口、风格关键词与本地相册素材。`;
     }
-    const pills = $('#stylePills');
-    if(pills){
-      pills.innerHTML = (p.style_keywords || []).map(x => `<span class="pill reveal card-floatable">${esc(x)}</span>`).join('');
-    }
+    renderList($('#stylePills'), p.style_keywords || [], x =>
+      `<span class="pill reveal card-floatable">${esc(x)}</span>`
+    );
   }
 
   function initMarquee(){
@@ -186,7 +185,7 @@
     const list = $('#trackList');
     if(!list) return;
     const tracks = data.tracks || [];
-    list.innerHTML = tracks.map((track, index) => {
+    renderList(list, tracks, (track, index) => {
       const sourceText = readableSourceList(track.sources).split(' / ')[0];
       return `<button class="track-option reveal card-floatable ${index === 0 ? 'active' : ''}" type="button" data-track-index="${index}">
         <img src="${esc(track.cover || fallbackImage())}" alt="${esc(track.title)}封面" loading="lazy">
@@ -196,7 +195,7 @@
           <em>${esc(sourceText)}</em>
         </span>
       </button>`;
-    }).join('');
+    });
 
     list.addEventListener('click', event => {
       const btn = event.target.closest('.track-option');
@@ -244,10 +243,11 @@
     const tracks = data.tracks || [];
     const track = tracks[trackIndex];
     if(!track) return;
-    $$('.track-option').forEach((el, i) => el.classList.toggle('active', i === trackIndex));
+    setActive($$('.track-option'), (el, i) => i === trackIndex);
+    const playerIndex = firstPlayableIndex(track);
     renderTrackHeader(track);
-    renderPlayerTabs(track, trackIndex, firstPlayableIndex(track));
-    renderPlayer(track, trackIndex, firstPlayableIndex(track));
+    renderPlayerTabs(track, trackIndex, playerIndex);
+    renderPlayer(track, playerIndex);
     if(opts.scroll){
       const panel = $('#playerPanel');
       if(panel) panel.scrollIntoView({behavior:'smooth', block:'nearest'});
@@ -278,19 +278,11 @@
       const nextTrack = (data.tracks || [])[Number(btn.dataset.trackIndex)];
       const nextIndex = Number(btn.dataset.playerIndex);
       renderPlayerTabs(nextTrack, Number(btn.dataset.trackIndex), nextIndex);
-      renderPlayer(nextTrack, Number(btn.dataset.trackIndex), nextIndex);
+      renderPlayer(nextTrack, nextIndex);
     };
   }
 
-  function renderPlayer(track, trackIndex, playerIndex){
-    const players = embeddablePlayers(track);
-    const player = players[playerIndex] || players[0];
-    const frame = $('#musicFrame');
-    const placeholder = $('#playerPlaceholder');
-    const actions = $('#playerActions');
-    if(!player || !frame || !placeholder) return;
-
-    $$('.player-tab').forEach((el, index) => el.classList.toggle('active', index === playerIndex));
+  function setPlayerFrame(frame, placeholder, track, player){
     const canEmbed = isEmbeddable(player);
     if(canEmbed){
       frame.title = `${track.title} - ${player.label} 网页内播放`;
@@ -299,34 +291,47 @@
       placeholder.classList.add('hidden');
       placeholder.classList.remove('no-embed');
       placeholder.innerHTML = `<span>♪</span><p>正在加载 ${esc(player.label)} 播放器；部分平台可能需要允许第三方 Cookie 或在新窗口打开。</p>`;
-    } else {
-      frame.title = `${track.title} - 外部平台入口`;
+      return;
+    }
+
+    frame.title = `${track.title} - 外部平台入口`;
+    frame.src = 'about:blank';
+    frame.classList.add('is-empty');
+    placeholder.classList.remove('hidden');
+    placeholder.classList.add('no-embed');
+    placeholder.innerHTML = `<span>↗</span><p>${esc(player.label || '外部入口')} 不直接嵌入网页播放器。已保留搜索 / 平台入口，避免未核验接口错播。</p><a class="btn secondary" href="${esc(playerSourceUrl(player))}" target="_blank" rel="noreferrer">打开外部入口</a>`;
+  }
+
+  function renderPlayerActions(actions, players, playerIndex, frame){
+    if(!actions) return;
+    const links = players.map((item, index) => {
+      const label = index === playerIndex ? `当前：${item.label}` : item.label;
+      return `<a class="player-link ${index === playerIndex ? 'active' : ''}" href="${esc(playerSourceUrl(item))}" target="_blank" rel="noreferrer">${esc(label)}</a>`;
+    }).join('');
+    actions.innerHTML = `${links}<button class="player-link" type="button" id="reloadPlayer">重载当前播放器</button>`;
+
+    const reload = $('#reloadPlayer');
+    if(!reload) return;
+    reload.onclick = () => {
+      const current = frame.src;
+      if(current === 'about:blank') return;
       frame.src = 'about:blank';
-      frame.classList.add('is-empty');
-      placeholder.classList.remove('hidden');
-      placeholder.classList.add('no-embed');
-      placeholder.innerHTML = `<span>↗</span><p>${esc(player.label || '外部入口')} 不直接嵌入网页播放器。已保留搜索 / 平台入口，避免未核验接口错播。</p><a class="btn secondary" href="${esc(playerSourceUrl(player))}" target="_blank" rel="noreferrer">打开外部入口</a>`;
-    }
+      window.setTimeout(() => { frame.src = current; }, 120);
+    };
+  }
 
+  function renderPlayer(track, playerIndex){
+    const players = embeddablePlayers(track);
+    const player = players[playerIndex] || players[0];
+    const frame = $('#musicFrame');
+    const placeholder = $('#playerPlaceholder');
+    const actions = $('#playerActions');
+    if(!player || !frame || !placeholder) return;
+
+    setActive($$('.player-tab'), (el, index) => index === playerIndex);
+    setPlayerFrame(frame, placeholder, track, player);
     renderNeteasePlayer(track);
-
-    if(actions){
-      const links = players.map((item, index) => {
-        const label = index === playerIndex ? `当前：${item.label}` : item.label;
-        return `<a class="player-link ${index === playerIndex ? 'active' : ''}" href="${esc(playerSourceUrl(item))}" target="_blank" rel="noreferrer">${esc(label)}</a>`;
-      }).join('');
-      actions.innerHTML = `${links}<button class="player-link" type="button" id="reloadPlayer">重载当前播放器</button>`;
-      const reload = $('#reloadPlayer');
-      if(reload){
-        reload.onclick = () => {
-          if(isEmbeddable(player)){
-            const current = frame.src;
-            frame.src = 'about:blank';
-            window.setTimeout(() => { frame.src = current; }, 120);
-          }
-        };
-      }
-    }
+    renderPlayerActions(actions, players, playerIndex, frame);
   }
 
   function initPlatforms(){
@@ -419,27 +424,16 @@
     return items;
   }
 
-  function initGallery(){
-    const color = $('#galleryGrid');
-    const carousel = $('#scrollCarousel');
-    const galleryImages = allGalleryImages();
-    const classes = ['wide', '', 'tall', '', '', '', 'wide', '', '', ''];
-
-    if(color){
-      color.innerHTML = galleryImages.map((img, index) => `
-        <figure class="gallery-item ${classes[index % classes.length] || ''} reveal card-floatable" data-img="${esc(img.src)}" data-fallback="${esc(img.fallback)}" data-title="${esc(img.title)}" data-desc="${esc(img.desc)}" data-source="${esc(img.source)}">
+  function galleryFigure(img, className=''){
+    return `
+        <figure class="gallery-item ${className} reveal card-floatable" data-img="${esc(img.src)}" data-fallback="${esc(img.fallback)}" data-title="${esc(img.title)}" data-desc="${esc(img.desc)}" data-source="${esc(img.source)}">
           <img src="${esc(img.thumb || img.src)}" alt="${esc(img.title)}" loading="lazy" onerror="this.onerror=null;this.src='${esc(img.fallback)}';">
           <figcaption>${esc(img.desc || img.title)}<br>来源：${esc(img.source)}</figcaption>
-        </figure>`).join('');
-      color.addEventListener('click', event => {
-        const fig = event.target.closest('.gallery-item');
-        if(!fig) return;
-        openLightbox(fig.dataset.img, fig.dataset.title, fig.dataset.desc, fig.dataset.source, fig.dataset.fallback);
-      });
-    }
+        </figure>`;
+  }
 
-    if(carousel){
-      carousel.innerHTML = galleryImages.map((img, index) => `
+  function scrollGalleryItem(img, index){
+    return `
         <div class="scroll-item" style="--i:${index}" data-img="${esc(img.src)}" data-title="${esc(img.title)}" data-desc="${esc(img.subtitle || img.desc)}" data-source="${esc(img.source)}">
           <div class="scroll-rod scroll-rod-top"></div>
           <div class="scroll-paper">
@@ -447,21 +441,46 @@
             <div class="scroll-label"><span>${esc(img.title)}</span><small>${esc(img.subtitle || img.desc)}</small></div>
           </div>
           <div class="scroll-rod scroll-rod-bottom"></div>
-        </div>`).join('');
+        </div>`;
+  }
+
+  function openLightboxFromDataset(el, withFallback=false){
+    if(!el) return;
+    openLightbox(
+      el.dataset.img,
+      el.dataset.title,
+      el.dataset.desc,
+      el.dataset.source,
+      withFallback ? el.dataset.fallback : undefined
+    );
+  }
+
+  function initGallery(){
+    const color = $('#galleryGrid');
+    const carousel = $('#scrollCarousel');
+    const galleryImages = allGalleryImages();
+    const classes = ['wide', '', 'tall', '', '', '', 'wide', '', '', ''];
+
+    if(color){
+      color.innerHTML = galleryImages.map((img, index) => galleryFigure(img, classes[index % classes.length] || '')).join('');
+      color.addEventListener('click', event => {
+        openLightboxFromDataset(event.target.closest('.gallery-item'), true);
+      });
+    }
+
+    if(carousel){
+      carousel.innerHTML = galleryImages.map(scrollGalleryItem).join('');
       carousel.addEventListener('click', event => {
-        const fig = event.target.closest('.scroll-item');
-        if(!fig) return;
-        openLightbox(fig.dataset.img, fig.dataset.title, fig.dataset.desc, fig.dataset.source);
+        openLightboxFromDataset(event.target.closest('.scroll-item'));
       });
     }
 
     $$('.gallery-mode').forEach(btn => {
       btn.addEventListener('click', () => {
         const mode = btn.dataset.galleryMode;
+        setActive($$('.gallery-mode'), btn);
         $$('.gallery-mode').forEach(x => {
-          const active = x === btn;
-          x.classList.toggle('active', active);
-          x.setAttribute('aria-selected', active ? 'true' : 'false');
+          x.setAttribute('aria-selected', x === btn ? 'true' : 'false');
         });
         $$('.gallery-pane').forEach(pane => pane.classList.toggle('active', pane.dataset.galleryPane === mode));
         if(mode === 'scroll' && !scrollGalleryReady){

@@ -1,6 +1,34 @@
 (function(){
   'use strict';
 
+  function bindHoverTimeline(target, timeline, onEnter, onLeave){
+    target.addEventListener('mouseenter', () => {
+      timeline.play();
+      onEnter?.();
+    });
+    target.addEventListener('mouseleave', () => {
+      timeline.reverse();
+      onLeave?.();
+    });
+  }
+
+  function setTimeCardShadow(card, boxShadow){
+    gsap.to(card, {
+      boxShadow,
+      duration: 0.5,
+      ease: 'power2.out'
+    });
+  }
+
+  function startAfterReady(task, delay){
+    const start = () => setTimeout(task, delay);
+    if(document.readyState === 'loading'){
+      document.addEventListener('DOMContentLoaded', start);
+    } else {
+      start();
+    }
+  }
+
   function initEnhancedAnimations(){
     if(!window.gsap || !window.ScrollTrigger) return;
 
@@ -94,8 +122,7 @@
           ease: 'power2.out'
         });
 
-        card.addEventListener('mouseenter', () => hoverTl.play());
-        card.addEventListener('mouseleave', () => hoverTl.reverse());
+        bindHoverTimeline(card, hoverTl);
       });
 
       const trackOptions = document.querySelectorAll('.track-option');
@@ -110,8 +137,7 @@
             ease: 'back.out(1.7)'
           });
 
-          track.addEventListener('mouseenter', () => hoverTl.play());
-          track.addEventListener('mouseleave', () => hoverTl.reverse());
+          bindHoverTimeline(track, hoverTl);
         }
       });
 
@@ -127,8 +153,7 @@
             ease: 'back.out(2)'
           });
 
-          card.addEventListener('mouseenter', () => hoverTl.play());
-          card.addEventListener('mouseleave', () => hoverTl.reverse());
+          bindHoverTimeline(card, hoverTl);
         }
       });
 
@@ -140,32 +165,16 @@
             start: 'top 60%',
             end: 'bottom 40%',
             onEnter: () => {
-              gsap.to(card, {
-                boxShadow: '0 15px 35px rgba(189, 124, 154, 0.25)',
-                duration: 0.5,
-                ease: 'power2.out'
-              });
+              setTimeCardShadow(card, '0 15px 35px rgba(189, 124, 154, 0.25)');
             },
             onLeave: () => {
-              gsap.to(card, {
-                boxShadow: '0 8px 20px rgba(189, 124, 154, 0.15)',
-                duration: 0.5,
-                ease: 'power2.out'
-              });
+              setTimeCardShadow(card, '0 8px 20px rgba(189, 124, 154, 0.15)');
             },
             onEnterBack: () => {
-              gsap.to(card, {
-                boxShadow: '0 15px 35px rgba(189, 124, 154, 0.25)',
-                duration: 0.5,
-                ease: 'power2.out'
-              });
+              setTimeCardShadow(card, '0 15px 35px rgba(189, 124, 154, 0.25)');
             },
             onLeaveBack: () => {
-              gsap.to(card, {
-                boxShadow: '0 8px 20px rgba(189, 124, 154, 0.15)',
-                duration: 0.5,
-                ease: 'power2.out'
-              });
+              setTimeCardShadow(card, '0 8px 20px rgba(189, 124, 154, 0.15)');
             }
           }
         });
@@ -179,15 +188,12 @@
           y: -4
         });
 
-        btn.addEventListener('mouseenter', () => {
-          hoverTl.play();
+        bindHoverTimeline(btn, hoverTl, () => {
           gsap.to(btn, {
             boxShadow: '0 12px 30px rgba(189, 124, 154, 0.4)',
             duration: 0.3
           });
-        });
-        btn.addEventListener('mouseleave', () => {
-          hoverTl.reverse();
+        }, () => {
           gsap.to(btn, {
             boxShadow: '0 6px 15px rgba(189, 124, 154, 0.2)',
             duration: 0.3
@@ -254,8 +260,7 @@
           ease: 'power2.out'
         });
 
-        li.addEventListener('mouseenter', () => hoverTl.play());
-        li.addEventListener('mouseleave', () => hoverTl.reverse());
+        bindHoverTimeline(li, hoverTl);
       });
 
       const gradientText = document.querySelector('.gradient-text');
@@ -297,11 +302,5 @@
     });
   }
 
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', () => {
-      setTimeout(initEnhancedAnimations, 100);
-    });
-  } else {
-    setTimeout(initEnhancedAnimations, 100);
-  }
+  startAfterReady(initEnhancedAnimations, 100);
 })();

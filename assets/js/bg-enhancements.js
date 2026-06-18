@@ -1,6 +1,32 @@
 (function(){
   'use strict';
 
+  function startAfterReady(task, delay){
+    const run = () => setTimeout(task, delay);
+    if(document.readyState === 'loading'){
+      document.addEventListener('DOMContentLoaded', run);
+    } else {
+      run();
+    }
+  }
+
+  function createCanvas(){
+    const canvas = document.createElement('canvas');
+    canvas.className = 'music-particles-canvas';
+    canvas.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.6;
+    `;
+    document.body.insertBefore(canvas, document.body.firstChild);
+    return canvas;
+  }
+
   function initEnhancedBackground(){
     if(!window.gsap || !window.ScrollTrigger) return;
 
@@ -18,20 +44,7 @@
 
         if(reduceMotion) return;
 
-        // 创建音乐粒子 Canvas
-        const canvas = document.createElement('canvas');
-        canvas.className = 'music-particles-canvas';
-        canvas.style.cssText = `
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          pointer-events: none;
-          z-index: 1;
-          opacity: 0.6;
-        `;
-        document.body.insertBefore(canvas, document.body.firstChild);
+        const canvas = createCanvas();
 
         const ctx = canvas.getContext('2d');
         let width = canvas.width = window.innerWidth;
@@ -44,7 +57,6 @@
           width = canvas.width = window.innerWidth;
           height = canvas.height = window.innerHeight;
         });
-
         window.addEventListener('mousemove', (e) => {
           mouse.x = e.clientX;
           mouse.y = e.clientY;
@@ -225,11 +237,5 @@
     );
   }
 
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', () => {
-      setTimeout(initEnhancedBackground, 300);
-    });
-  } else {
-    setTimeout(initEnhancedBackground, 300);
-  }
+  startAfterReady(initEnhancedBackground, 300);
 })();

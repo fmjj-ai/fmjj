@@ -24,7 +24,9 @@
 
     mm.add('(min-width: 768px)', () => {
       // ========== 平台卡片增强 ==========
-      const platformCards = document.querySelectorAll('.platform-card');
+      // 跳过两行循环滚动里的卡片：GSAP 的 transform/入场动画会与 CSS translateX 冲突
+      const platformCards = Array.from(document.querySelectorAll('.platform-card'))
+        .filter(card => !card.closest('.platform-marquee'));
 
       platformCards.forEach((card, i) => {
         const icon = card.querySelector('.platform-icon');
@@ -246,7 +248,8 @@
 
     // 移动端优化
     mm.add('(max-width: 767px)', () => {
-      const platformCards = document.querySelectorAll('.platform-card');
+      const platformCards = Array.from(document.querySelectorAll('.platform-card'))
+        .filter(card => !card.closest('.platform-marquee'));
 
       platformCards.forEach((card, i) => {
         gsap.fromTo(card,

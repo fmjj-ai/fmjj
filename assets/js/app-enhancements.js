@@ -63,18 +63,7 @@
         });
       }
 
-      const siteHeader = document.querySelector('.site-header');
-      if(siteHeader){
-        gsap.to(siteHeader, {
-          boxShadow: '0 4px 30px rgba(189, 124, 154, 0.15)',
-          scrollTrigger: {
-            trigger: 'body',
-            start: 'top -50',
-            end: 'top -51',
-            toggleActions: 'play none none reverse'
-          }
-        });
-      }
+      // 不再给 .site-header 叠加滚动阴影，避免在透明浮动导航条下方出现第二层
 
       const musicPlayer = document.querySelector('#playerPanel');
       if(musicPlayer){
@@ -141,7 +130,9 @@
         }
       });
 
-      const platformCards = document.querySelectorAll('.platform-card');
+      // 循环滚动行内的平台卡片不加 GSAP 悬停动画（与 CSS 滚动冲突；悬停效果交给 CSS）
+      const platformCards = Array.from(document.querySelectorAll('.platform-card'))
+        .filter(card => !card.closest('.platform-marquee'));
       platformCards.forEach((card) => {
         const icon = card.querySelector('.platform-icon');
         if(icon){

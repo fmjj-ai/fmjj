@@ -200,21 +200,7 @@
           ease: 'sine.inOut'
         });
 
-        // 导航栏
-        const siteHeader = document.querySelector('.site-header');
-        if(siteHeader){
-          gsap.to(siteHeader, {
-            backgroundColor: 'rgba(255, 249, 240, 0.88)',
-            backdropFilter: 'blur(16px) saturate(1.2)',
-            boxShadow: '0 4px 24px rgba(189, 124, 154, 0.12)',
-            scrollTrigger: {
-              trigger: 'body',
-              start: 'top -50',
-              end: 'top -51',
-              toggleActions: 'play none none reverse'
-            }
-          });
-        }
+        // 导航栏背景改由 .nav-bar（浮动玻璃条）承担，保持半透明；此处不再给 .site-header 叠加背景/阴影，避免出现第二层
 
         // 鼠标跟随光晕
         const cursorGlow = document.querySelector('.cursor-glow');

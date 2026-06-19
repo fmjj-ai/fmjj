@@ -1272,6 +1272,62 @@ window.FMJJ_DATA = {
       "subtitle": "演出记录",
       "src": "assets/images/solo_gallery/gallery-2.png",
       "source": "solo 囧菌相册"
+    },
+    {
+      "title": "2026 生日会返图",
+      "subtitle": "生日会现场",
+      "src": "assets/images/kimi/gallery-1.jpg",
+      "thumb_file": "assets/images/kimi/gallery-1_thumb.jpg",
+      "source": "kimi 相册素材"
+    },
+    {
+      "title": "生日会舞台",
+      "subtitle": "舞台现场",
+      "src": "assets/images/kimi/gallery-2.jpg",
+      "thumb_file": "assets/images/kimi/gallery-2_thumb.jpg",
+      "source": "kimi 相册素材"
+    },
+    {
+      "title": "舞台照",
+      "subtitle": "演出舞台",
+      "src": "assets/images/kimi/gallery-3.jpg",
+      "thumb_file": "assets/images/kimi/gallery-3_thumb.jpg",
+      "source": "kimi 相册素材"
+    },
+    {
+      "title": "竖版舞台照",
+      "subtitle": "舞台特写",
+      "src": "assets/images/kimi/gallery-4.jpg",
+      "thumb_file": "assets/images/kimi/gallery-4_thumb.jpg",
+      "source": "kimi 相册素材"
+    },
+    {
+      "title": "演出照",
+      "subtitle": "现场演出",
+      "src": "assets/images/kimi/gallery-5.jpg",
+      "thumb_file": "assets/images/kimi/gallery-5_thumb.jpg",
+      "source": "kimi 相册素材"
+    },
+    {
+      "title": "舞台全景",
+      "subtitle": "演出全景",
+      "src": "assets/images/kimi/gallery-6.jpg",
+      "thumb_file": "assets/images/kimi/gallery-6_thumb.jpg",
+      "source": "kimi 相册素材"
+    },
+    {
+      "title": "赣州舞台",
+      "subtitle": "赣州站现场",
+      "src": "assets/images/kimi/gallery-7.jpg",
+      "thumb_file": "assets/images/kimi/gallery-7_thumb.jpg",
+      "source": "kimi 相册素材"
+    },
+    {
+      "title": "赣州演出",
+      "subtitle": "赣州站舞台",
+      "src": "assets/images/kimi/gallery-8.jpg",
+      "thumb_file": "assets/images/kimi/gallery-8_thumb.jpg",
+      "source": "kimi 相册素材"
     }
   ],
   "file_structure": [

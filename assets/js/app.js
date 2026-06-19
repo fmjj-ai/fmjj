@@ -143,29 +143,13 @@
   }
 
   function initFacts(){
+    // 个人信息区已改为 kimi 版式（静态结构），此处仅维护首屏的引导文案
     const p = data.profile || {};
-    const items = p.profile_keywords || [
-      {label:'艺名', value:p.name || '封茗囧菌'},
-      {label:'英文名', value:p.english_name || 'Mandy Sa'},
-      {label:'公开生日', value:p.birthday_public || '06·07'},
-      {label:'星座', value:p.zodiac || '双子座'},
-      {label:'代表作', value:(p.representative_works || []).slice(0,3).join(' / ')},
-      {label:'商务邮箱', value:p.contact && p.contact.email}
-    ];
-    renderList($('#factList'), items, item => `
-        <div class="fact reveal card-floatable">
-          <small>${esc(item.label)}</small>
-          <strong>${esc(item.value)}</strong>
-        </div>`);
-
     const profileLead = $('#profileLead');
     if(profileLead){
       const identity = (p.primary_identity || []).join('、');
       profileLead.textContent = `${p.name || '封茗囧菌'}（${p.english_name || 'Mandy Sa'}）的资料页：重点整理${identity || '音乐人身份'}、代表曲目、公开平台入口、风格关键词与本地相册素材。`;
     }
-    renderList($('#stylePills'), p.style_keywords || [], x =>
-      `<span class="pill reveal card-floatable">${esc(x)}</span>`
-    );
   }
 
   function initMarquee(){
@@ -179,6 +163,44 @@
     ].filter(Boolean);
     const repeated = [...keywords, ...keywords];
     target.innerHTML = repeated.map(x => `<span>${esc(x)}</span>`).join('');
+  }
+
+  // 首页封面彩色气泡（移植自 kimi，配 fmjj 调色板；仅首页）
+  function initHeroBubbles(){
+    const box = $('#heroBubbles');
+    if(!box) return;
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const colors = ['#fff0a8', '#ffd8e7', '#c8fff1', '#ede4ff', '#f18ab4', '#84e7d4'];
+    const count = window.innerWidth < 768 ? 16 : 30;
+    const frag = document.createDocumentFragment();
+    const bubbles = [];
+    for(let i = 0; i < count; i++){
+      const b = document.createElement('span');
+      b.className = 'bubble';
+      const size = Math.random() * 22 + 8;
+      b.style.width = `${size}px`;
+      b.style.height = `${size}px`;
+      b.style.background = colors[Math.floor(Math.random() * colors.length)];
+      b.style.left = `${Math.random() * 100}%`;
+      b.style.top = `${Math.random() * 100}%`;
+      frag.appendChild(b);
+      bubbles.push(b);
+    }
+    box.appendChild(frag);
+
+    if(window.gsap){
+      bubbles.forEach(b => {
+        gsap.to(b, {
+          y: `-=${Math.random() * 200 + 100}`,
+          x: `+=${Math.random() * 100 - 50}`,
+          opacity: Math.random() * 0.5 + 0.2,
+          duration: Math.random() * 10 + 10,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut'
+        });
+      });
+    }
   }
 
   function initTracks(){
@@ -334,13 +356,12 @@
     renderPlayerActions(actions, players, playerIndex, frame);
   }
 
-  function initPlatforms(){
-    const grid = $('#platformGrid');
-    if(!grid) return;
-    grid.innerHTML = (data.platforms || []).map(item => {
-      const brand = platformBrand(item);
-      return `
-      <a class="platform-card reveal" href="${esc(item.url)}" target="_blank" rel="noreferrer">
+  // 单张平台卡片 HTML；dup 为 true 时为循环复制副本（对辅助技术隐藏，不参与 Tab 聚焦）
+  function platformCardHTML(item, dup){
+    const brand = platformBrand(item);
+    const dupAttr = dup ? ' aria-hidden="true" tabindex="-1"' : '';
+    return `
+      <a class="platform-card${dup ? ' is-clone' : ''}" href="${esc(item.url)}" target="_blank" rel="noreferrer"${dupAttr}>
         <div class="platform-card-header">
           <span class="platform-icon" style="--platform-color:${brand.color};--platform-fg:${brand.fg}">${esc(brand.icon)}</span>
           <div class="platform-card-title">
@@ -357,7 +378,24 @@
           <span>→</span>
         </div>
       </a>`;
-    }).join('');
+  }
+
+  // 平台区：两行横向无缝循环滚动（每行内容复制一份，translateX 到 -50% 即可无缝衔接）
+  function initPlatforms(){
+    const rowA = $('#platformRowA');
+    const rowB = $('#platformRowB');
+    if(!rowA || !rowB) return;
+    const list = data.platforms || [];
+    // 交错分到两行，使两行数量与视觉宽度尽量均衡
+    const top = list.filter((_, i) => i % 2 === 0);
+    const bottom = list.filter((_, i) => i % 2 === 1);
+    const fill = (row, items) => {
+      const once = items.map(item => platformCardHTML(item, false)).join('');
+      const clone = items.map(item => platformCardHTML(item, true)).join('');
+      row.innerHTML = once + clone; // 原件 + 复制件：滚动到一半即可循环
+    };
+    fill(rowA, top);
+    fill(rowB, bottom);
   }
 
   function initMusicMaps(){
@@ -599,7 +637,9 @@
       if(!reduceMotion) requestAnimationFrame(updateCarousel);
     }
 
+    // 仅在按住 Ctrl / Cmd 时滚轮缩放球；否则放行页面正常上下滚动
     gallery.addEventListener('wheel', event => {
+      if(!event.ctrlKey && !event.metaKey) return; // 未按修饰键：不拦截，页面照常滚动
       event.preventDefault();
       zoomLevel = event.deltaY < 0
         ? Math.min(zoomMax, zoomLevel + zoomStep)
@@ -607,9 +647,8 @@
       carousel.style.transform = `scale(${zoomLevel})`;
     }, {passive:false});
 
-    gallery.addEventListener('mouseenter', () => { isPaused = true; });
+    // 已去掉悬停暂停：鼠标移入不再暂停旋转。鼠标移出时仍清理残留的单卡放大态
     gallery.addEventListener('mouseleave', () => {
-      isPaused = false;
       scrollItems.forEach(item => item.classList.remove('zoomed'));
       hoverTimers.forEach(timer => clearTimeout(timer));
       hoverTimers.clear();
@@ -709,8 +748,28 @@
     });
   }
 
+  // 导航栏滚动才出现：首屏隐藏，向下滚动超过约一屏后滑入（与 *-enhancements.js 中改背景/阴影的 ScrollTrigger 互不干扰，二者作用于不同属性）
+  function initHeaderScroll(){
+    const header = $('.site-header');
+    if(!header) return;
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const threshold = window.innerHeight * 0.85;
+      header.classList.toggle('nav-visible', window.scrollY > threshold);
+    };
+    window.addEventListener('scroll', () => {
+      if(ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(update);
+    }, {passive:true});
+    update(); // 初始判断一次（刷新时若已不在顶部也能正确显示）
+  }
+
   let unlockBgm = null;
   let bgmUnlocked = false;
+  // loader 揭示首屏 hero 的回调；由 initAnimations 赋值
+  let triggerHeroReveal = null;
 
   function initBgm(){
     const btn = $('#musicBtn');
@@ -867,6 +926,7 @@
 
     if(!window.gsap || !window.ScrollTrigger){
       $$('.reveal').forEach(el => { el.style.opacity = 1; el.style.transform = 'none'; });
+      triggerHeroReveal = revealHeroFallback;
       revealHeroFallback();
       return;
     }
@@ -889,6 +949,7 @@
 
         if(reduceMotion){
           $$('.reveal').forEach(el => { el.style.opacity = 1; el.style.transform = 'none'; });
+          triggerHeroReveal = revealHeroFallback;
           revealHeroFallback();
           return;
         }
@@ -972,6 +1033,8 @@
         window.addEventListener('wheel', onHeroWheel, {passive: true});
         window.addEventListener('touchstart', onHeroTouch, {passive: true});
         window.addEventListener('touchmove', onHeroTouch, {passive: true});
+        // loader 揭示完毕后自动播放首屏入场（不再依赖用户滚动）
+        triggerHeroReveal = () => playHeroReveal(true);
 
         ScrollTrigger.batch('.reveal:not(.hero .reveal)', {
           onEnter: (elements) => {
@@ -1144,6 +1207,45 @@
     );
   }
 
+
+  // 加载页：在遮罩下渲染内容，窗口就绪（或最短时长）后揭示首页
+  function initLoader(onReady){
+    const loader = $('#loader');
+    document.body.classList.add('loading');
+
+    // 先渲染页面内容（仍被 loader 遮挡），避免揭示瞬间空白
+    try{ onReady(); }catch(err){ console.error('[fmjj] boot failed:', err); }
+
+    const minShow = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 300 : 1100;
+    const startAt = performance.now();
+
+    function hide(){
+      document.body.classList.remove('loading');
+      if(loader){
+        loader.classList.add('hidden');
+        loader.addEventListener('transitionend', () => loader.remove(), {once:true});
+        // 兜底：过渡未触发时也移除
+        setTimeout(() => { if(loader.isConnected) loader.remove(); }, 1200);
+      }
+      // 揭示首屏 hero（无需用户先滚动）
+      triggerHeroReveal?.();
+    }
+
+    function scheduleHide(){
+      const wait = Math.max(0, minShow - (performance.now() - startAt));
+      setTimeout(hide, wait);
+    }
+
+    if(document.readyState === 'complete'){
+      scheduleHide();
+    } else {
+      window.addEventListener('load', scheduleHide, {once:true});
+      // 兜底：load 长时间不触发（如个别图片卡住）时也揭示
+      setTimeout(scheduleHide, 4000);
+    }
+  }
+
+  // 开始动画用图：相册与 solo 相册的图片，做螺旋飞入
   function collectIntroImages(){
     const seen = new Set();
     const imgs = [];
@@ -1157,6 +1259,7 @@
     return imgs;
   }
 
+  // 开始动画：丝线从四周汇聚 + 图片沿阿基米德螺线扩散，结束后显示「开始体验」按钮；点击后回调 onDone（揭示首页入场动画）
   function initIntro(onDone){
     const overlay = $('#introOverlay');
     const spiral = $('#introSpiral');
@@ -1409,6 +1512,7 @@
   function boot(){
     initFacts();
     initMarquee();
+    initHeroBubbles();
     initTracks();
     initPlatforms();
     initMusicMaps();
@@ -1416,6 +1520,7 @@
     initGallery();
     initSources();
     initCursor();
+    initHeaderScroll();
     initFloatingCards();
     initAnimations();
     setTimeout(() => {
@@ -1430,6 +1535,8 @@
     initIntro(() => {
       unlockBgm?.();
       boot();
+      // 首页为满屏 hero，点击「开始体验」后直接揭示入场动画（不再等用户滚动）
+      triggerHeroReveal?.();
     });
   }
 

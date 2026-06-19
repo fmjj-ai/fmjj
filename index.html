@@ -19,12 +19,16 @@
 <body>
   <div class="soft-bg"><div class="orb orb-a"></div><div class="orb orb-b"></div><div class="orb orb-c"></div></div><div class="grain"></div><div class="cursor-glow"></div>
   <header class="site-header">
-    <a class="brand magnetic" href="#top"><img src="assets/images/brand/mandi-badge.svg" alt="封茗囧菌视觉徽章"><span>封茗囧菌 · Mandy Sa</span></a>
-    <nav class="nav" aria-label="页面导航"><a href="#profile">信息</a><a href="#music">曲目播放</a><a href="#platforms">平台</a><a href="#music-map">热度线索</a><a href="#timeline-section">历程</a><a href="#gallery">相册</a></nav>
-    <button class="bgm-toggle" id="musicBtn" type="button" aria-label="播放或暂停背景音乐" title="背景音乐：solo 版 mp3">
-      <span class="music-icon" aria-hidden="true"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span></span>
-    </button>
+    <div class="nav-bar">
+      <div class="nav-inner">
+        <a class="brand magnetic" href="#top"><img src="assets/images/brand/mandi-badge.svg" alt="封茗囧菌视觉徽章"><span>封茗囧菌 · Mandy Sa</span></a>
+        <nav class="nav" aria-label="页面导航"><a href="#profile">信息</a><a href="#music">曲目播放</a><a href="#platforms">平台</a><a href="#music-map">热度线索</a><a href="#timeline-section">历程</a><a href="#gallery">相册</a></nav>
+      </div>
+    </div>
   </header>
+  <button class="bgm-toggle bgm-toggle-fixed" id="musicBtn" type="button" aria-label="播放或暂停背景音乐" title="背景音乐：solo 版 mp3">
+    <span class="music-icon" aria-hidden="true"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span></span>
+  </button>
   <audio id="bgm" loop preload="auto" playsinline src="audio/bgm.mp3"></audio>
   <div class="intro-overlay" id="introOverlay">
     <canvas class="intro-canvas" id="introCanvas"></canvas>
@@ -43,7 +47,12 @@
     </div>
   </div>
   <main id="top">
-    <section class="hero" aria-label="首页介绍">
+    <section class="hero has-cover" aria-label="首页介绍">
+      <div class="hero-cover" aria-hidden="true">
+        <img class="hero-cover-img" id="heroCoverImg" src="assets/images/kimi/hero-bg.jpg" alt="">
+        <div class="hero-cover-mask"></div>
+        <div class="hero-bubbles" id="heroBubbles"></div>
+      </div>
       <div class="hero-copy-col">
         <span class="eyebrow reveal">创作型音乐人 / 唱见 / Bilibili 音乐 UP 主</span>
         <h1 class="reveal"><span class="gradient-text">封茗囧菌</span><br><span style="font-size:.58em;letter-spacing:-.04em">Mandy Sa</span></h1>
@@ -52,13 +61,6 @@
         <div class="cta-row reveal"><a class="btn primary" href="#music">▶ 直接听代表曲</a><a class="btn secondary" href="#gallery">✦ 查看本地图片素材</a></div>
         <div class="hero-meta"><div class="mini-card reveal"><b>06·07</b><span>公开生日 / 双子座</span></div><div class="mini-card reveal"><b>3+</b><span>核心代表作：芳华慢、桃花庵、安娜的橱窗</span></div><div class="mini-card reveal"><b>多平台</b><span>微博、B站、5sing、Apple、Spotify、YouTube Music 等</span></div></div>
       </div>
-      <div class="visual-card reveal">
-        <div class="portrait-stack">
-          <div class="portrait-main card-floatable"><img src="assets/images/gallery/bili_fengxiangshuangzi_cover.webp" alt="来源页标注为封茗囧菌收藏集的资料图"></div>
-          <div class="music-note n1">♪</div><div class="music-note n2">♫</div><div class="music-note n3">✧</div>
-          <div class="wave-notes"><img src="assets/images/brand/wave-notes.svg" alt="装饰音符曲线"></div>
-        </div>
-      </div>  
     </section>
 
     <section class="marquee" aria-label="关键词滚动">
@@ -66,10 +68,34 @@
     </section>
 
     <section class="section" id="profile">
-      <div class="section-head"><div><div class="section-kicker">Profile</div><h2>个人信息与风格关键词</h2></div></div>
-      <div class="facts-grid">
-        <div class="panel fact-list" id="factList"></div>
-        <div class="panel source-note card-floatable"><h3>风格关键词</h3><div class="pill-row" id="stylePills"></div><h3>一句话介绍</h3><p class="lead" style="margin:0">只愿菌心似我心，定不负相思意！活跃于 B 站与各大音乐平台的创作型唱见，从翻唱、原创到唱跳 MV 都有代表作。</p></div>
+      <div class="section-head"><div><div class="section-kicker">Profile</div><h2>关于她</h2></div></div>
+      <div class="profile-layout">
+        <div class="profile-figure reveal">
+          <div class="profile-glow" aria-hidden="true"></div>
+          <img class="profile-photo" src="assets/images/kimi/profile.jpg" alt="封茗囧菌 / Mandy Sa">
+          <div class="profile-badge">
+            <span class="profile-badge-icon" aria-hidden="true">✦</span>
+            <div><b>月老馒不懂</b><small>首张个人实体专辑</small></div>
+          </div>
+        </div>
+        <div class="profile-text reveal">
+          <span class="profile-tag">慵懒少女音 · 编织音乐梦境</span>
+          <div class="profile-bio">
+            <p>封茗囧菌，1998 年 6 月 7 日出生，中国内地创作型女歌手、Bilibili 知名音乐 UP 主。2013 年 8 月发布首支英文翻唱作品，由此开启长达十余年的音乐旅程。</p>
+            <p>她的嗓音被粉丝称为「慵懒少女音」，中英双语切换自如，既能演绎甜美清新的流行曲，也能驾驭韵味悠长的国风作品。从《东京不太热》《干物女》等翻唱热单，到《安娜的橱窗》《桃花庵》《芳华慢》等原创作品，她持续用音乐与粉丝「乳酸菌」们建立连接。</p>
+            <p>2024 年，她举办「十年之约」个人演唱会；其后陆续举办生日会与音乐会，继续书写属于她的音乐故事。</p>
+          </div>
+          <div class="profile-cards">
+            <div class="profile-card"><span class="profile-card-key">粉丝名</span><b class="profile-card-val">乳酸菌</b></div>
+            <div class="profile-card"><span class="profile-card-key">应援色</span><b class="profile-card-val">淡黄色</b></div>
+            <div class="profile-card"><span class="profile-card-key">星座</span><b class="profile-card-val">双子座</b></div>
+            <div class="profile-card"><span class="profile-card-key">活跃年份</span><b class="profile-card-val">2013 — 至今</b></div>
+          </div>
+          <div class="profile-slogan">
+            <p class="profile-slogan-text">「只愿菌心似我心，定不负相思意」</p>
+            <p class="profile-slogan-by">— 乳酸菌应援口号</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -96,7 +122,10 @@
 
     <section class="section" id="platforms">
       <div class="section-head"><div><div class="section-kicker">Platforms</div><h2>各大平台主页</h2></div></div>
-      <div class="platform-grid" id="platformGrid"></div>
+      <div class="platform-marquee" id="platformMarquee" aria-label="各大平台主页（循环滚动）">
+        <div class="platform-row" id="platformRowA"></div>
+        <div class="platform-row platform-row-rev" id="platformRowB"></div>
+      </div>
     </section>
 
     <section class="section" id="music-map">
@@ -122,7 +151,7 @@
         <div class="scroll-gallery" id="scrollGallery">
           <div class="scroll-carousel" id="scrollCarousel"></div>
         </div>
-        <p class="gallery-note reveal">卷轴相册支持自动旋转、悬停暂停和滚轮缩放。</p>
+        <p class="gallery-note reveal">卷轴相册自动旋转；按住 Ctrl（Mac 为 ⌘）+ 滚轮可缩放。</p>
       </div>
     </section>
 

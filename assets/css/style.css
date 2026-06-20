@@ -60,17 +60,20 @@ body.loading{overflow:hidden}
 /* ===== 首页封面（来自 kimi：背景图 + 蒙版 + 彩色气泡）。仅作用于首页 hero，不改其它区块背景 ===== */
 .hero.has-cover{position:relative;isolation:isolate}
 /* 封面层突破 main 宽度限制，铺满视口宽；仅覆盖 hero 区域 */
-.hero-cover{position:absolute;top:0;left:calc(50% - 50vw);width:100vw;bottom:0;z-index:-1;overflow:hidden;pointer-events:none}
-.hero-cover-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 28%;transform:scale(1.08);will-change:transform}
+.hero-cover{position:absolute;top:0;left:calc(50% - 50vw);width:100vw;bottom:0;z-index:-1;overflow:hidden;pointer-events:none;--hero-reveal-x:50%;--hero-reveal-y:50%;--hero-reveal-radius:0px;--hero-reveal-inner:0px;--hero-reveal-soft:0px;--hero-reveal-opacity:0}
+.hero-cover::after{content:"";position:absolute;left:var(--hero-reveal-x);top:var(--hero-reveal-y);z-index:5;width:calc(var(--hero-reveal-radius) * 2);height:calc(var(--hero-reveal-radius) * 2);border-radius:50%;box-shadow:inset 0 0 46px rgba(255,255,255,.16),0 12px 34px rgba(80,59,90,.08);opacity:var(--hero-reveal-opacity);transform:translate(-50%,-50%);transition:opacity .1s ease;pointer-events:none}
+.hero-cover-img{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;object-position:center 28%;transform:scale(1.08);will-change:transform}
+.hero-cover-reveal-img{inset:0;z-index:3;width:100vw;height:100%;opacity:var(--hero-reveal-opacity);transform:none;object-fit:cover;object-position:center center;clip-path:circle(var(--hero-reveal-radius) at var(--hero-reveal-x) var(--hero-reveal-y));-webkit-mask-image:radial-gradient(circle at var(--hero-reveal-x) var(--hero-reveal-y),#000 0 var(--hero-reveal-inner),rgba(0,0,0,.7) var(--hero-reveal-soft),transparent var(--hero-reveal-radius));mask-image:radial-gradient(circle at var(--hero-reveal-x) var(--hero-reveal-y),#000 0 var(--hero-reveal-inner),rgba(0,0,0,.7) var(--hero-reveal-soft),transparent var(--hero-reveal-radius));transition:opacity .1s ease;will-change:clip-path,mask-image,opacity}
 /* 双向渐变蒙版：底部融入页面奶油色背景，左侧加深保证文字可读 */
-.hero-cover-mask{position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,250,242,.34) 0%,rgba(255,250,242,.12) 30%,rgba(255,250,242,.62) 78%,#fffaf2 100%),linear-gradient(100deg,rgba(255,250,242,.72) 0%,rgba(255,250,242,.28) 42%,rgba(255,250,242,.06) 72%,transparent 100%)}
+.hero-cover-mask{position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(255,250,242,.34) 0%,rgba(255,250,242,.12) 30%,rgba(255,250,242,.62) 78%,#fffaf2 100%),linear-gradient(100deg,rgba(255,250,242,.72) 0%,rgba(255,250,242,.28) 42%,rgba(255,250,242,.06) 72%,transparent 100%)}
 /* 彩色气泡容器 */
-.hero-bubbles{position:absolute;inset:0;overflow:hidden}
+.hero-bubbles{position:absolute;inset:0;z-index:4;overflow:hidden}
 .hero-bubbles .bubble{position:absolute;border-radius:50%;opacity:.6;filter:blur(1px);pointer-events:none;will-change:transform,opacity}
 /* hero 内容浮在封面之上 */
 .hero.has-cover .hero-copy-col{position:relative;z-index:1;margin-left:clamp(-72px,-5vw,-42px)}
 @media (max-width:780px){.hero.has-cover .hero-copy-col{margin-left:0}}
-@media (prefers-reduced-motion:reduce){.hero-cover-img{transform:none}}
+@media (prefers-reduced-motion:reduce){.hero-cover-img{transform:none}.hero-cover::after,.hero-cover-reveal-img{transition:none}}
+@media (hover:none){.hero-cover::after,.hero-cover-reveal-img{display:none}}
 
 /* ===== 个人信息区（移植自 kimi 版式，配 fmjj 玻璃拟态调色）===== */
 .profile-layout{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.25fr) minmax(0,.95fr);gap:clamp(24px,3.6vw,64px);align-items:stretch;max-width:min(1900px,calc(100vw - 28px));margin:0 auto;padding:0 clamp(14px,2.6vw,48px)}

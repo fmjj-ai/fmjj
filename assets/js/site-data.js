@@ -1328,6 +1328,41 @@ window.FMJJ_DATA = {
       "src": "assets/images/kimi/gallery-8.jpg",
       "thumb_file": "assets/images/kimi/gallery-8_thumb.jpg",
       "source": "kimi 相册素材"
+    },
+    {
+      "title": "日常照片 01",
+      "subtitle": "日常影像",
+      "src": "assets/images/kimi/h-daily-01.jpg",
+      "thumb_file": "assets/images/kimi/h-daily-01_thumb.jpg",
+      "source": "kimi 相册素材"
+    },
+    {
+      "title": "日常照片 02",
+      "subtitle": "日常影像",
+      "src": "assets/images/kimi/h-daily-02.jpg",
+      "thumb_file": "assets/images/kimi/h-daily-02_thumb.jpg",
+      "source": "kimi 相册素材"
+    },
+    {
+      "title": "日常照片 04",
+      "subtitle": "日常影像",
+      "src": "assets/images/kimi/h-daily-04.jpg",
+      "thumb_file": "assets/images/kimi/h-daily-04_thumb.jpg",
+      "source": "kimi 相册素材"
+    },
+    {
+      "title": "赣州舞台 08",
+      "subtitle": "赣州舞台影像",
+      "src": "assets/images/kimi/weibo-gz-08.jpg",
+      "thumb_file": "assets/images/kimi/weibo-gz-08_thumb.jpg",
+      "source": "kimi 相册素材"
+    },
+    {
+      "title": "赣州舞台 04",
+      "subtitle": "赣州舞台影像",
+      "src": "assets/images/kimi/weibo-gz-04.jpg",
+      "thumb_file": "assets/images/kimi/weibo-gz-04_thumb.jpg",
+      "source": "kimi 相册素材"
     }
   ],
   "file_structure": [

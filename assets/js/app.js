@@ -203,6 +203,68 @@
     }
   }
 
+  function initHeroCoverReveal(){
+    const hero = $('.hero.has-cover');
+    const cover = $('.hero-cover');
+    const revealImg = $('#heroCoverRevealImg');
+    if(!hero || !cover || !revealImg) return;
+
+    const revealSrc = 'assets/images/kimi/Image_1781963974205_856.png';
+    const fallbackSrc = 'assets/images/gallery/bili_fengxiangshuangzi_cover.webp';
+    if(revealImg.getAttribute('src') !== revealSrc) revealImg.src = revealSrc;
+    revealImg.onerror = () => {
+      revealImg.onerror = null;
+      revealImg.src = fallbackSrc;
+    };
+
+    const finePointer = window.matchMedia('(pointer: fine)');
+    if(!finePointer.matches) return;
+
+    let coverRect = null;
+    const getRadius = () => Math.max(236, Math.min(380, window.innerWidth * 0.24));
+    const updateCoverRect = () => {
+      coverRect = cover.getBoundingClientRect();
+      const radius = getRadius();
+      cover.style.setProperty('--hero-reveal-radius', `${radius}px`);
+      cover.style.setProperty('--hero-reveal-inner', `${Math.round(radius * 0.72)}px`);
+      cover.style.setProperty('--hero-reveal-soft', `${Math.round(radius * 0.9)}px`);
+    };
+    const hideReveal = () => {
+      cover.style.setProperty('--hero-reveal-radius', '0px');
+      cover.style.setProperty('--hero-reveal-inner', '0px');
+      cover.style.setProperty('--hero-reveal-soft', '0px');
+      cover.style.setProperty('--hero-reveal-opacity', '0');
+      coverRect = null;
+    };
+    const showReveal = event => {
+      if(!coverRect) updateCoverRect();
+      if(
+        event.clientX < coverRect.left ||
+        event.clientX > coverRect.right ||
+        event.clientY < coverRect.top ||
+        event.clientY > coverRect.bottom
+      ){
+        hideReveal();
+        return;
+      }
+      const x = event.clientX - coverRect.left;
+      const y = event.clientY - coverRect.top;
+      cover.style.setProperty('--hero-reveal-x', `${x}px`);
+      cover.style.setProperty('--hero-reveal-y', `${y}px`);
+      cover.style.setProperty('--hero-reveal-opacity', '1');
+    };
+
+    window.addEventListener('pointerenter', event => {
+      updateCoverRect();
+      showReveal(event);
+    });
+    window.addEventListener('pointermove', showReveal);
+    window.addEventListener('pointerleave', hideReveal);
+    window.addEventListener('resize', updateCoverRect);
+    window.addEventListener('scroll', hideReveal, {passive: true});
+    window.addEventListener('blur', hideReveal);
+  }
+
   function initTracks(){
     const list = $('#trackList');
     if(!list) return;
@@ -1532,6 +1594,7 @@
     initFacts();
     initMarquee();
     initHeroBubbles();
+    initHeroCoverReveal();
     initTracks();
     initPlatforms();
     initMusicMaps();

@@ -403,14 +403,24 @@
     if(!box) return;
     const m = data.popular_music || {};
     const cards = [
-      ['Apple Music Top Songs', m.apple_music_top_sample || [], ''],
-      ['5sing 热门歌曲采样', m.five_sing_hot_sample || [], '5'],
-      ['YouTube Music Top Songs', m.youtube_music_top_sample || [], 'YT']
+      {title: 'Apple Music 热门', items: m.apple_music_top_sample || [], icon: '', color: 'linear-gradient(135deg, #F56565, #F472B6)', fg: '#fff'},
+      {title: '5sing 热门歌曲', items: m.five_sing_hot_sample || [], icon: '5', color: 'linear-gradient(135deg, #F59E0B, #FCD34D)', fg: '#78350F'},
+      {title: 'YouTube Music', items: m.youtube_music_top_sample || [], icon: 'YT', color: 'linear-gradient(135deg, #EF4444, #F87171)', fg: '#fff'}
     ];
-    box.innerHTML = cards.map(([title, items, icon]) => `
-      <article class="list-card panel reveal card-floatable">
-        <h3><span class="source-icon small">${esc(icon)}</span>${esc(title)}</h3>
-        <ol>${items.map(x => `<li>${esc(x)}</li>`).join('')}</ol>
+    box.innerHTML = cards.map(({title, items, icon, color, fg}) => `
+      <article class="music-map-card reveal card-floatable" style="--platform-color:${color};--platform-fg:${fg}">
+        <div class="music-map-header">
+          <span class="music-map-icon">${esc(icon)}</span>
+          <h3>${esc(title)}</h3>
+        </div>
+        <ol class="music-map-list">${items.map((x, i) => {
+          const [name, stat] = x.split(' · ');
+          return `<li class="music-map-item">
+            <span class="music-rank">${i + 1}</span>
+            <span class="music-name">${esc(name)}</span>
+            ${stat ? `<span class="music-stat">${esc(stat)}</span>` : ''}
+          </li>`;
+        }).join('')}</ol>
       </article>`).join('');
   }
 
@@ -466,7 +476,7 @@
     return `
         <figure class="gallery-item ${className} reveal card-floatable" data-img="${esc(img.src)}" data-fallback="${esc(img.fallback)}" data-title="${esc(img.title)}" data-desc="${esc(img.desc)}" data-source="${esc(img.source)}">
           <img src="${esc(img.thumb || img.src)}" alt="${esc(img.title)}" loading="lazy" onerror="this.onerror=null;this.src='${esc(img.fallback)}';">
-          <figcaption>${esc(img.desc || img.title)}<br>来源：${esc(img.source)}</figcaption>
+          <figcaption>${esc(img.desc || img.title)}</figcaption>
         </figure>`;
   }
 

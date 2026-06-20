@@ -192,17 +192,7 @@
         });
       });
 
-      const visualCard = document.querySelector('.visual-card');
-      if(visualCard){
-        gsap.to(visualCard, {
-          y: -20,
-          rotation: 1,
-          duration: 3,
-          repeat: -1,
-          yoyo: true,
-          ease: 'sine.inOut'
-        });
-      }
+      // 个人信息区两侧图卡的上下浮动交给 CSS，避免与入场动画同时改 transform。
 
       const waveNotes = document.querySelector('.wave-notes');
       if(waveNotes){

@@ -870,7 +870,7 @@
   }
 
   function initFloatingCards(){
-    const selector = '.card-floatable, .mini-card, .platform-card, .gallery-item, .source-card, .list-card, .track-option, .btn, .brand, .portrait-main';
+    const selector = '.card-floatable, .mini-card, .platform-card, .gallery-item, .source-card, .list-card, .track-option, .btn, .brand, .profile-figure, .portrait-main';
     const cards = $$(selector).filter(card => {
       return !card.hasAttribute('data-no-gsap') &&
              !card.classList.contains('scroll-item') &&
@@ -882,7 +882,7 @@
 
     cards.forEach(card => {
       card.classList.add('card-floatable');
-      const baseRotation = card.classList.contains('portrait-main') ? 2 : 0;
+      const baseRotation = card.classList.contains('portrait-main') ? 2 : (card.classList.contains('profile-figure') ? -1 : 0);
 
       if(window.gsap){
         const rotYTo = gsap.quickTo(card, 'rotationY', {duration: 0.45, ease: 'power2.out'});
@@ -1255,7 +1255,7 @@
     }
   }
 
-  // 开始动画用图：相册与 solo 相册的图片，做螺旋飞入
+  // 开始动画用图：与相册使用同一份完整图片集合，做螺旋飞入
   function collectIntroImages(){
     const seen = new Set();
     const imgs = [];
@@ -1264,8 +1264,7 @@
       seen.add(src);
       imgs.push(src);
     };
-    (data.images || []).forEach(img => push(img.thumb_file || img.web_file));
-    (data.solo_gallery || []).forEach(img => push(img.src));
+    allGalleryImages().forEach(img => push(img.thumb || img.src || img.fallback));
     return imgs;
   }
 
@@ -1293,11 +1292,19 @@
     const H = window.innerHeight;
     const cx = W / 2;
     const cy = H / 2;
+    const smallScreen = W < 720;
 
     // canvas 丝线
     const ctx = canvas ? canvas.getContext('2d') : null;
     let canvasRunning = true;
-    if(canvas){ canvas.width = W; canvas.height = H; }
+    if(canvas){
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      canvas.width = Math.round(W * dpr);
+      canvas.height = Math.round(H * dpr);
+      canvas.style.width = `${W}px`;
+      canvas.style.height = `${H}px`;
+      if(ctx) ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
     const threadColors = [
       '#f18ab4', '#84e7d4', '#ffe985', '#ede4ff',
       '#bd7c9a', '#c8fff1', '#ffd8e7', '#6b4a78'
@@ -1305,16 +1312,16 @@
     const threads = [];
     let converging = false;
     let convergeStart = 0;
-    const convergeDuration = 1200;
+    const convergeDuration = smallScreen ? 900 : 1050;
 
     function spawnThreads(){
-      const count = 36 + Math.floor(Math.random() * 18);
+      const count = smallScreen ? 20 : 30;
       for(let i = 0; i < count; i++){
         const angle = Math.random() * Math.PI * 2;
         const dist = Math.max(cx, cy) * (0.7 + Math.random() * 0.55);
         const sx = cx + Math.cos(angle) * dist;
         const sy = cy + Math.sin(angle) * dist;
-        const segments = 80 + Math.floor(Math.random() * 40);
+        const segments = smallScreen ? 42 : 58;
         const pts = [];
         // 用正弦波叠加生成丝滑曲线
         const freqA = 1.5 + Math.random() * 2;
@@ -1339,13 +1346,13 @@
         threads.push({
           pts,
           color: threadColors[Math.floor(Math.random() * threadColors.length)],
-          width: 0.5 + Math.random() * 2.2,
+          width: 0.5 + Math.random() * 1.6,
           progress: 0,
-          speed: 0.008 + Math.random() * 0.012,
+          speed: 0.012 + Math.random() * 0.014,
           delay: Math.random() * 0.4,
           perpAngle,
           windFreq: 0.8 + Math.random() * 1.2,
-          windAmp: 15 + Math.random() * 30,
+          windAmp: (smallScreen ? 9 : 13) + Math.random() * (smallScreen ? 14 : 22),
           windPhase: Math.random() * Math.PI * 2
         });
       }
@@ -1415,10 +1422,11 @@
     const maxRadius = Math.hypot(cx, cy) * 0.92;
     const spiralTurns = 2.5;
     const maxTheta = spiralTurns * 2 * Math.PI;
-    const baseSize = Math.min(380, Math.max(cx, cy) * 0.55);
+    const baseSize = smallScreen ? Math.min(180, Math.max(cx, cy) * 0.42) : Math.min(300, Math.max(cx, cy) * 0.48);
 
     const els = [];
     const imgStates = [];
+    const fragment = document.createDocumentFragment();
 
     // 阿基米德螺线位置计算
     function spiralPos(theta){
@@ -1435,14 +1443,15 @@
       img.className = 'spiral-img';
       img.src = src;
       img.alt = '';
-      img.loading = 'eager';
+      img.loading = i < 6 ? 'eager' : 'lazy';
+      img.decoding = 'async';
 
       const progress = i / (total - 1 || 1);
       const size = baseSize * (0.6 + Math.random() * 0.4);
       img.style.width = `${size}px`;
       img.style.height = `${size}px`;
 
-      spiral.appendChild(img);
+      fragment.appendChild(img);
       els.push(img);
 
       // 起始位置：螺线外圈
@@ -1460,19 +1469,20 @@
 
       // 初始位置在螺线外圈
       img.style.opacity = '0';
-      img.style.transform = `translate(calc(-50% + ${startPos.x}px), calc(-50% + ${startPos.y}px)) scale(0.3) rotate(${rotate}deg)`;
+      img.style.transform = `translate3d(calc(-50% + ${startPos.x}px), calc(-50% + ${startPos.y}px), 0) scale(0.3) rotate(${rotate}deg)`;
     });
+    spiral.appendChild(fragment);
 
     // 阶段1：沿螺线向中心聚集
-    const gatherDuration = 1500;
-    const gatherDelay = 40;
+    const gatherDuration = smallScreen ? 1050 : 1250;
+    const gatherDelay = smallScreen ? 28 : 34;
 
     els.forEach((img, i) => {
       setTimeout(() => {
-        img.style.transition = `all ${gatherDuration}ms cubic-bezier(0.34, 1.56, 0.64, 1)`;
+        img.style.transition = `transform ${gatherDuration}ms cubic-bezier(.22, 1, .36, 1), opacity ${gatherDuration * 0.72}ms ease`;
         img.style.opacity = '1';
         // 目标：中心点
-        img.style.transform = `translate(-50%, -50%) scale(1) rotate(${imgStates[i].rotate * 0.3}deg)`;
+        img.style.transform = `translate3d(-50%, -50%, 0) scale(1) rotate(${imgStates[i].rotate * 0.3}deg)`;
       }, i * gatherDelay);
     });
 
@@ -1480,11 +1490,10 @@
     const explodeStartTime = total * gatherDelay + gatherDuration + 200;
 
     setTimeout(() => {
-      // 同时显示按钮
       enterBtn.style.display = 'flex';
       enterBtn.style.opacity = '0';
       enterBtn.style.transform = 'scale(0.5)';
-      enterBtn.style.transition = 'opacity 500ms ease, transform 500ms cubic-bezier(.34, 1.56, .64, 1)';
+      enterBtn.style.transition = 'opacity 460ms ease, transform 560ms cubic-bezier(.22, 1, .36, 1)';
       requestAnimationFrame(() => {
         enterBtn.style.opacity = '1';
         enterBtn.style.transform = 'scale(1)';
@@ -1497,9 +1506,9 @@
         const explodeY = Math.sin(st.explodeAngle) * st.explodeSpeed;
 
         setTimeout(() => {
-          img.style.transition = `all 800ms cubic-bezier(0.4, 0, 0.6, 1)`;
+          img.style.transition = `transform 680ms cubic-bezier(.4, 0, .2, 1), opacity 520ms ease`;
           img.style.opacity = '0';
-          img.style.transform = `translate(calc(-50% + ${explodeX}px), calc(-50% + ${explodeY}px)) scale(0.2) rotate(${st.rotate * 3}deg)`;
+          img.style.transform = `translate3d(calc(-50% + ${explodeX}px), calc(-50% + ${explodeY}px), 0) scale(0.2) rotate(${st.rotate * 3}deg)`;
         }, i * 15);
       });
     }, explodeStartTime);

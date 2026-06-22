@@ -1,0 +1,47 @@
+name: Deploy to Qiniu CDN
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup QShell
+        run: |
+          wget https://devtools.qiniu.com/qiniu-devtools-linux-amd64.tgz -O /tmp/qshell.tgz
+          tar -xzf /tmp/qshell.tgz -C /tmp
+          chmod +x /tmp/qshell
+          sudo mv /tmp/qshell /usr/local/bin/qshell
+
+      - name: Configure QShell
+        env:
+          QINIU_ACCESS_KEY: ${{ secrets.QINIU_ACCESS_KEY }}
+          QINIU_SECRET_KEY: ${{ secrets.QINIU_SECRET_KEY }}
+        run: |
+          qshell account $QINIU_ACCESS_KEY $QINIU_SECRET_KEY
+
+      - name: Upload to Qiniu
+        env:
+          QINIU_BUCKET: ${{ secrets.QINIU_BUCKET }}
+        run: |
+          qshell rput fmjj ${{ secrets.QINIU_BUCKET }} index.html index.html
+          qshell rput fmjj ${{ secrets.QINIU_BUCKET }} assets/css/style.css assets/css/style.css
+          qshell rput fmjj ${{ secrets.QINIU_BUCKET }} assets/css/platforms-timeline-redesign.css assets/css/platforms-timeline-redesign.css
+          qshell rput fmjj ${{ secrets.QINIU_BUCKET }} assets/js/app.js assets/js/app.js
+          qshell rput fmjj ${{ secrets.QINIU_BUCKET }} assets/js/app-enhancements.js assets/js/app-enhancements.js
+          qshell rput fmjj ${{ secrets.QINIU_BUCKET }} assets/js/bg-enhancements.js assets/js/bg-enhancements.js
+          qshell rput fmjj ${{ secrets.QINIU_BUCKET }} assets/js/platforms-timeline-enhancements.js assets/js/platforms-timeline-enhancements.js
+          qshell rput fmjj ${{ secrets.QINIU_BUCKET }} assets/js/site-data.js assets/js/site-data.js
+          qshell rput fmjj ${{ secrets.QINIU_BUCKET }} audio/bgm.mp3 audio/bgm.mp3
+          qshell batchupload fmjj ${{ secrets.QINIU_BUCKET }} 'assets/images/**' -overwrite
+
+      - name: Sync deleted files
+        run: |
+          qshell sync fmjj ${{ secrets.QINIU_BUCKET }} index.html

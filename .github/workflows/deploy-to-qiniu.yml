@@ -31,17 +31,22 @@ jobs:
         env:
           QINIU_BUCKET: ${{ secrets.QINIU_BUCKET }}
         run: |
-          qshell rput fmjj ${{ secrets.QINIU_BUCKET }} index.html index.html
-          qshell rput fmjj ${{ secrets.QINIU_BUCKET }} assets/css/style.css assets/css/style.css
-          qshell rput fmjj ${{ secrets.QINIU_BUCKET }} assets/css/platforms-timeline-redesign.css assets/css/platforms-timeline-redesign.css
-          qshell rput fmjj ${{ secrets.QINIU_BUCKET }} assets/js/app.js assets/js/app.js
-          qshell rput fmjj ${{ secrets.QINIU_BUCKET }} assets/js/app-enhancements.js assets/js/app-enhancements.js
-          qshell rput fmjj ${{ secrets.QINIU_BUCKET }} assets/js/bg-enhancements.js assets/js/bg-enhancements.js
-          qshell rput fmjj ${{ secrets.QINIU_BUCKET }} assets/js/platforms-timeline-enhancements.js assets/js/platforms-timeline-enhancements.js
-          qshell rput fmjj ${{ secrets.QINIU_BUCKET }} assets/js/site-data.js assets/js/site-data.js
-          qshell rput fmjj ${{ secrets.QINIU_BUCKET }} audio/bgm.mp3 audio/bgm.mp3
-          qshell batchupload fmjj ${{ secrets.QINIU_BUCKET }} 'assets/images/**' -overwrite
+          # 上传主文件和CSS/JS
+          qshell rput $QINIU_BUCKET index.html index.html
+          qshell rput $QINIU_BUCKET assets/css/style.css assets/css/style.css
+          qshell rput $QINIU_BUCKET assets/css/platforms-timeline-redesign.css assets/css/platforms-timeline-redesign.css
+          qshell rput $QINIU_BUCKET assets/js/app.js assets/js/app.js
+          qshell rput $QINIU_BUCKET assets/js/app-enhancements.js assets/js/app-enhancements.js
+          qshell rput $QINIU_BUCKET assets/js/bg-enhancements.js assets/js/bg-enhancements.js
+          qshell rput $QINIU_BUCKET assets/js/platforms-timeline-enhancements.js assets/js/platforms-timeline-enhancements.js
+          qshell rput $QINIU_BUCKET assets/js/site-data.js assets/js/site-data.js
+          qshell rput $QINIU_BUCKET audio/bgm.mp3 audio/bgm.mp3
 
-      - name: Sync deleted files
+          # 遍历上传图片目录
+          for f in $(find assets/images -type f); do
+            qshell rput $QINIU_BUCKET "$f" "$f"
+          done
+
+      - name: Verify deployment
         run: |
-          qshell sync fmjj ${{ secrets.QINIU_BUCKET }} index.html
+          echo "Deployment completed. Check your Qiniu bucket for files."

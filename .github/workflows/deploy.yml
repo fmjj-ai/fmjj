@@ -1,0 +1,40 @@
+name: Deploy to PinMe
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - 'index.html'
+      - 'assets/**'
+      - 'audio/**'
+      - 'data/**'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install PinMe CLI
+        run: npm install -g pinme
+
+      - name: Prepare static files
+        run: |
+          mkdir -p dist
+          cp -r index.html assets audio data dist/
+
+      - name: Deploy to PinMe
+        env:
+          PINME_APPKEY: ${{ secrets.PINME_APPKEY }}
+        run: |
+          pinme set-appkey "$PINME_APPKEY"
+          pinme upload "dist" --domain "fmjj.pinme.dev"

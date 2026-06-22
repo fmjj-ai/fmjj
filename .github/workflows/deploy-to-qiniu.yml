@@ -15,23 +15,33 @@ jobs:
 
       - name: Setup QShell
         run: |
-          wget https://devtools.qiniu.com/qiniu-devtools-linux-amd64.tgz -O /tmp/qshell.tgz
-          tar -xzf /tmp/qshell.tgz -C /tmp
-          chmod +x /tmp/qshell
-          sudo mv /tmp/qshell /usr/local/bin/qshell
+          # 下载并安装qshell
+          cd /tmp
+          wget -q https://github.com/qiniu/qshell/releases/download/v2.14.2/qshell-linux-x64-v2.14.2.zip
+          unzip -o qshell-linux-x64-v2.14.2.zip
+          chmod +x qshell
+          sudo mv qshell /usr/local/bin/
+          qshell --version
 
       - name: Configure QShell
         env:
           QINIU_ACCESS_KEY: ${{ secrets.QINIU_ACCESS_KEY }}
           QINIU_SECRET_KEY: ${{ secrets.QINIU_SECRET_KEY }}
         run: |
+          echo "Access Key starts with: ${QINIU_ACCESS_KEY:0:5}..."
+          echo "Secret Key starts with: ${QINIU_SECRET_KEY:0:5}..."
           qshell account $QINIU_ACCESS_KEY $QINIU_SECRET_KEY
+          qshell user ls
 
       - name: Upload to Qiniu
         env:
           QINIU_BUCKET: ${{ secrets.QINIU_BUCKET }}
         run: |
-          # 上传主文件和CSS/JS
+          echo "Bucket: $QINIU_BUCKET"
+          # 列出bucket内容确认连接成功
+          qshell listbucket2 $QINIU_BUCKET | head -20 || echo "Bucket is empty or new"
+
+          # 上传主文件
           qshell rput $QINIU_BUCKET index.html index.html
           qshell rput $QINIU_BUCKET assets/css/style.css assets/css/style.css
           qshell rput $QINIU_BUCKET assets/css/platforms-timeline-redesign.css assets/css/platforms-timeline-redesign.css
@@ -42,11 +52,13 @@ jobs:
           qshell rput $QINIU_BUCKET assets/js/site-data.js assets/js/site-data.js
           qshell rput $QINIU_BUCKET audio/bgm.mp3 audio/bgm.mp3
 
-          # 遍历上传图片目录
-          for f in $(find assets/images -type f); do
-            qshell rput $QINIU_BUCKET "$f" "$f"
-          done
+          # 批量上传图片
+          find assets/images -type f -exec qshell rput $QINIU_BUCKET {} {} \;
 
       - name: Verify deployment
+        env:
+          QINIU_BUCKET: ${{ secrets.QINIU_BUCKET }}
         run: |
-          echo "Deployment completed. Check your Qiniu bucket for files."
+          echo "=== Deployment completed ==="
+          qshell listbucket2 $QINIU_BUCKET | wc -l
+          echo "Total files uploaded"

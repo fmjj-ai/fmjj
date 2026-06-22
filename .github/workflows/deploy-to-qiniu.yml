@@ -13,52 +13,25 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup QShell
+      - name: Install qshell
         run: |
-          # 下载并安装qshell
-          cd /tmp
-          wget -q https://github.com/qiniu/qshell/releases/download/v2.14.2/qshell-linux-x64-v2.14.2.zip
-          unzip -o qshell-linux-x64-v2.14.2.zip
-          chmod +x qshell
-          sudo mv qshell /usr/local/bin/
+          wget -q https://github.com/qiniu/qshell/releases/download/v2.14.2/qshell-linux-x64-v2.14.2.zip -O /tmp/qshell.zip
+          unzip -o /tmp/qshell.zip -d /tmp/
+          sudo mv /tmp/qshell /usr/local/bin/
           qshell --version
 
-      - name: Configure QShell
+      - name: Configure and upload
         env:
           QINIU_ACCESS_KEY: ${{ secrets.QINIU_ACCESS_KEY }}
           QINIU_SECRET_KEY: ${{ secrets.QINIU_SECRET_KEY }}
+          QINIU_BUCKET: ${{ secrets.QINIU_BUCKET }}
         run: |
-          echo "Access Key starts with: ${QINIU_ACCESS_KEY:0:5}..."
-          echo "Secret Key starts with: ${QINIU_SECRET_KEY:0:5}..."
           qshell account $QINIU_ACCESS_KEY $QINIU_SECRET_KEY
-          qshell user ls
+          # 第一次同步（删除远端不存在于本地的文件）
+          qshell sync / index.html $QINIU_BUCKET
 
-      - name: Upload to Qiniu
+      - name: Verify
         env:
           QINIU_BUCKET: ${{ secrets.QINIU_BUCKET }}
         run: |
-          echo "Bucket: $QINIU_BUCKET"
-          # 列出bucket内容确认连接成功
-          qshell listbucket2 $QINIU_BUCKET | head -20 || echo "Bucket is empty or new"
-
-          # 上传主文件
-          qshell rput $QINIU_BUCKET index.html index.html
-          qshell rput $QINIU_BUCKET assets/css/style.css assets/css/style.css
-          qshell rput $QINIU_BUCKET assets/css/platforms-timeline-redesign.css assets/css/platforms-timeline-redesign.css
-          qshell rput $QINIU_BUCKET assets/js/app.js assets/js/app.js
-          qshell rput $QINIU_BUCKET assets/js/app-enhancements.js assets/js/app-enhancements.js
-          qshell rput $QINIU_BUCKET assets/js/bg-enhancements.js assets/js/bg-enhancements.js
-          qshell rput $QINIU_BUCKET assets/js/platforms-timeline-enhancements.js assets/js/platforms-timeline-enhancements.js
-          qshell rput $QINIU_BUCKET assets/js/site-data.js assets/js/site-data.js
-          qshell rput $QINIU_BUCKET audio/bgm.mp3 audio/bgm.mp3
-
-          # 批量上传图片
-          find assets/images -type f -exec qshell rput $QINIU_BUCKET {} {} \;
-
-      - name: Verify deployment
-        env:
-          QINIU_BUCKET: ${{ secrets.QINIU_BUCKET }}
-        run: |
-          echo "=== Deployment completed ==="
-          qshell listbucket2 $QINIU_BUCKET | wc -l
-          echo "Total files uploaded"
+          qshell listbucket2 $QINIU_BUCKET | head -20
